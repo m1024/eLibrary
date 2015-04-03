@@ -1,0 +1,61 @@
+﻿@model eLibrary.Models.Author
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Редактирование</h2>
+@using (Html.BeginForm("Create", "Author", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <form class="">
+        @Html.ValidationSummary(true)
+
+        <div class="row">
+
+            <div class="col-sm-7 col-sm-offset-1">
+                <div class="form-group">
+                    <label>Изображение</label>
+                    <input type="file" name="uploadImage" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <label>Фамилия</label>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Family)
+                        @Html.ValidationMessageFor(model => model.Family)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Имя</label>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Name)
+                        @Html.ValidationMessageFor(model => model.Name)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Отчество</label>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Patronymic)
+                        @Html.ValidationMessageFor(model => model.Patronymic)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Описание</label>
+                    <div class="editor-field">
+                        @Html.TextAreaFor(m => m.Information, new {@class = "form-control input-sm"})
+                        @Html.ValidationMessageFor(model => model.Information)
+                    </div>
+                </div>
+
+                <input type="submit" value="Сохранить" class="btn btn-success btn-xs form-control"/>
+
+            </div>
+
+            <div class="col-sm-2">
+            </div>
+        </div>
+    </form>
+}

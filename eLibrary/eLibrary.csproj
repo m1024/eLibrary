@@ -129,6 +129,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuthorController.cs" />
     <Compile Include="Controllers\BookController.cs" />
+    <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -152,13 +153,9 @@
     <Compile Include="Providers\eLibraryRoleProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\eLib.mdf" />
     <Content Include="App_Data\eLib2.mdf" />
     <Content Include="App_Data\eLib2_log.ldf">
       <DependentUpon>eLib2.mdf</DependentUpon>
-    </Content>
-    <Content Include="App_Data\eLib_log.ldf">
-      <DependentUpon>eLib.mdf</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -259,6 +256,7 @@
     <Content Include="Views\Author\Edit.cshtml" />
     <Content Include="Views\Author\Create.cshtml" />
     <Content Include="Views\Author\Delete.cshtml" />
+    <Content Include="Views\Book\ShowBook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

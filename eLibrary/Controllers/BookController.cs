@@ -24,6 +24,19 @@ namespace eLibrary.Controllers
             return View(books);
         }
 
+        [AllowAnonymous]
+        public ActionResult ShowBook(int? id)
+        {
+            if (id != null)
+            {
+                Book book = db.book.Find(id);
+                return View(book);
+            }
+            else
+                return View();
+
+        }
+
         public FileContentResult GetFile_fb2(int id = 0)
         {
             Book book = db.book.Find(id);

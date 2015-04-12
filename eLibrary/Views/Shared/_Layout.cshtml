@@ -6,31 +6,36 @@
     <title>@ViewBag.Title</title>
     @*@Styles.Render("~/Content/css")*@
     @Scripts.Render("~/bundles/modernizr")
-    <link rel='stylesheet' href='../../Content/bootstrap.css' type='text/css' media='all'>
+    <link rel='stylesheet' href='~/Content/bootstrap.css' type='text/css' media='all'>
 </head>
 <body>
-    <nav>
-        @if (!(ViewContext.HttpContext.User.IsInRole("Администратор") || ViewContext.HttpContext.User.IsInRole("Модератор")
-    || ViewContext.HttpContext.User.IsInRole("Пользователь")))
-        {
-            @Html.ActionLink("Войти", "../Account/Login")
-            @Html.ActionLink("Регистрация", "../User/CreateUser")
-        }
-        @Html.ActionLink("Поиск", "../Home/FindBook")
-        @if (ViewContext.HttpContext.User.IsInRole("Администратор") || ViewContext.HttpContext.User.IsInRole("Модератор")
-         || ViewContext.HttpContext.User.IsInRole("Пользователь"))
-        {
-            @Html.ActionLink("Выйти", "../Account/LogOff")
-        }
 
-        @Html.ActionLink("Авторы", "../Author/Index")
-        @Html.ActionLink("Книги", "../Book/Index")
+    <header></header>
 
-        @if (ViewContext.HttpContext.User.IsInRole("Администратор"))
-        {
-            @Html.ActionLink("Список пользователей", "../User/Index")
-        }
+    <nav class="navbar navbar-default">
+        <ul class="nav navbar-nav">
+            @if (!(ViewContext.HttpContext.User.IsInRole("Администратор") || ViewContext.HttpContext.User.IsInRole("Модератор")
+                 || ViewContext.HttpContext.User.IsInRole("Пользователь")))
+            {
+                 <li><a href="~/Account/Login">Войти</a></li>
+                 <li><a href="~/User/CreateUser">Регистрация</a></li>
+            }
+            <li><a href="~/Home/FindBook">Поиск</a></li>
 
+            @if (ViewContext.HttpContext.User.IsInRole("Администратор") || ViewContext.HttpContext.User.IsInRole("Модератор")
+                     || ViewContext.HttpContext.User.IsInRole("Пользователь"))
+            {
+                <li><a href="~/Account/LogOff">Выйти</a></li>
+            }
+
+            <li><a href="~/Author/Index">Авторы</a></li>
+            <li><a href="~/Book/Index">Книги</a></li>
+
+            @if (ViewContext.HttpContext.User.IsInRole("Администратор"))
+            {
+                <li><a href="~/User/Index">Список пользователей</a></li>
+            }
+        </ul>
     </nav>
 
 @RenderBody()

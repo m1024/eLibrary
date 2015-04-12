@@ -1,0 +1,29 @@
+﻿@model eLibrary.Models.Book
+
+@{
+    ViewBag.Title = "ShowBook";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        @if (Model != null)
+        {
+            if (Model.Image != null)
+             {
+                 @Html.Raw("<img style='width:80%' src=\"data:image/jpeg;base64,"
+                           + Convert.ToBase64String(Model.Image) + "\" />")
+             }
+        }
+    </div>
+    <div class="col-md-6">
+        <div class="">
+            <label for="Name">Наименование</label>
+            @if (Model != null)
+            {
+                @Model.Name
+            }
+        </div>
+    </div>
+</div>
+
+<h2>ShowBook</h2>

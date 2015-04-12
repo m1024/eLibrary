@@ -2,61 +2,35 @@
 @model eLibrary.Models.LogViewModel
 
 @{
-    Layout = null;
+    ViewBag.Title = "Login";
 }
+    <div class="col-sm-offset-1 col-sm-10">
 
-<!DOCTYPE html>
+    <form method="post" action="" class="form-horizontal" role="form">
+        <legend>Введите свой логин и пароль для входа в систему</legend>
+        <div class="form-group">
+            <label for="UserName" class="col-sm-1 control-label">Логин</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" name="UserName" id="UserName">
+                @Html.ValidationMessageFor(model => model.UserName)
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Password" class="col-sm-1 control-label">Пароль</label>
+            <div class="col-sm-4">
+                <input type="password" class="form-control" name="Password" id="Password">
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="RememberMe" class="col-sm-1 control-label ">Запомнить</label>
+            <div class="col-sm-1">
+                <input type="checkbox" class="checkbox" name="RememberMe" id="RememberMe">
+            </div>
+            <div class="col-sm-2">
+                <input type="submit" class="form-control btn btn-success btn-xs" value="Войти">
+            </div>
+        </div>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    @*<link href="~/Content/Site.css" rel="stylesheet" type="text/css"/>*@
-    <link rel='stylesheet' href='../../Content/bootstrap.css' type='text/css' media='all'>
-    <title>Вход в систему</title>
-</head>
-<body>
-    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-
-    <div class="col-sm-offset-1">
-        <p>Введите свой логин и пароль для входа в систему</p>
-
-        @using (Html.BeginForm())
-        {
-            @Html.ValidationSummary(true)
-
-            <fieldset>
-                <legend>Войти в систему</legend>
-
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.UserName)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.UserName)
-                    @Html.ValidationMessageFor(model => model.UserName)
-                </div>
-
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.Password)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.Password)
-                    @Html.ValidationMessageFor(model => model.Password)
-                </div>
-
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.RememberMe)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.RememberMe)
-                </div>
-
-                <p>
-                    <input type="submit" value="Войти" />
-                </p>
-            </fieldset>
-        }
-    </div>
-</body>
-</html>
+    </form>
+</div>

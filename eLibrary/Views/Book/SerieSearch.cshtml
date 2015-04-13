@@ -1,0 +1,15 @@
+﻿@model IEnumerable<eLibrary.Models.Series>
+
+<div id="searchresultsSerie">
+
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <input type="radio" name="selectSerie" value="@item.Id" />
+            <label>@item.Name</label>
+        }
+    }
+
+
+</div>

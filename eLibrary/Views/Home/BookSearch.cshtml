@@ -1,0 +1,16 @@
+﻿@model IEnumerable<eLibrary.Models.Book>
+
+<div id="searchresults">
+
+    <h3>Найденные книги: </h3>
+    <ul>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <li>@item.Name</li>
+            }
+        }
+    </ul>
+
+</div>

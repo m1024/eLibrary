@@ -42,5 +42,23 @@ namespace eLibrary.Controllers
 
             return View(findBook.ToList());
         }
+
+        public ActionResult BookSearch(string bookName)
+        {
+            IEnumerable<Book> findBook = null;
+            if (bookName != null)
+            {
+                findBook = from book in db.book
+                           where book.Name == bookName
+                           select book;
+            }
+            if (findBook == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(findBook.ToList());
+        }
+
+
     }
 }

@@ -129,7 +129,7 @@ namespace eLibrary.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Администратор, Модератор")]
-        public ActionResult Create(Book book, string[] selectedAuthors, HttpPostedFileBase uploadImage, HttpPostedFileBase uploadText_fb2)
+        public ActionResult Create(Book book, string[] selectedAuthors, int[] selectAuthor, HttpPostedFileBase uploadImage, HttpPostedFileBase uploadText_fb2, int? selectSerie)
         {
             //if (ModelState.IsValid) //почему-то не проходит когда все хорошо
             if (book.Name!=null && book.GenreId >= 1)
@@ -142,6 +142,20 @@ namespace eLibrary.Controllers
                         book.Authors.Add(c);
                     }
                 }
+
+                if (selectAuthor != null)
+                {
+                    foreach (var c in db.author.Where(co => selectAuthor.Contains(co.Id)))
+                    {
+                        book.Authors.Add(c);
+                    }
+                }
+
+                if (selectSerie != null)
+                {
+                    book.SerieId = (int) selectSerie;
+                }
+
 
                 db.book.Add(book);
                 db.SaveChanges();
@@ -192,6 +206,38 @@ namespace eLibrary.Controllers
             db.book.Remove(b);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult AuthorSearch(string authorName)
+        {
+            IEnumerable<Author> findAuthor = null;
+            if (authorName != null)
+            {
+                findAuthor = from author in db.author
+                             where author.Family == authorName
+                             select author;
+            }
+            if (findAuthor == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(findAuthor.ToList());
+        }
+
+        public ActionResult SerieSearch(string serieName)
+        {
+            IEnumerable<Series> findSerie = null;
+            if (serieName != null)
+            {
+                findSerie = from series in db.serie
+                             where series.Name == serieName
+                             select series;
+            }
+            if (findSerie == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(findSerie.ToList());
         }
     }
 }

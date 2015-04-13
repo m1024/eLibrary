@@ -257,6 +257,9 @@
     <Content Include="Views\Author\Create.cshtml" />
     <Content Include="Views\Author\Delete.cshtml" />
     <Content Include="Views\Book\ShowBook.cshtml" />
+    <Content Include="Views\Home\BookSearch.cshtml" />
+    <Content Include="Views\Book\AuthorSearch.cshtml" />
+    <Content Include="Views\Book\SerieSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

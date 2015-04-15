@@ -2,15 +2,20 @@
 
 <div id="searchResultComments">
     @if (Model != null)
+{
+    foreach (var item in Model)
     {
-        foreach (var item in Model)
-        {
-            <label>@item.UserId</label> 
-            <label>@item.Time</label>
+        <div class="comment">
+            @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
+            {
+            @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+            }
+            <label class="bold">@item.UserId</label>
+            <label class="bold">@item.Time</label>
             <div>
                 @item.Text
             </div>
-            @*<textarea name="Annotation" readonly="readonly" style="width: 100%;">@item.Text</textarea>*@
-        }
+        </div>
+    }
     }
 </div>

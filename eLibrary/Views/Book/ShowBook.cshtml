@@ -17,10 +17,17 @@
             {
 
                 @Html.ActionLink("Загрузить fb2", "GetFile_fb2", new {id = Model.Id}, new {@class = "label label-primary"})
-
+            }
+            if (Model.Text_txt != null)
+            {
+                @Html.ActionLink("Загрузить txt", "GetFile_txt", new {id = Model.Id}, new {@class = "label label-primary"})
+            }
+            if (Model.Text_epub != null)
+            {
+                @Html.ActionLink("Загрузить epub", "GetFile_epub", new {id = Model.Id}, new {@class = "label label-primary"})
             }
         }
-
+        
         <div>
             <label class="bold">Автор:</label>
             <div>
@@ -66,7 +73,7 @@
     </div>
 
 
-    <div class="col-md-3">
+    <div class="col-md-3 col-md-offset-1">
         @if (Model != null)
         {
             if (Model.Image != null)
@@ -86,13 +93,14 @@
         <div id="comments"></div>
 
         @*<a href="~/Comments/ShowComments/@Model.Id">Войти</a>*@
-        @using (Ajax.BeginForm("addComment", "Comments", new AjaxOptions {UpdateTargetId = "comments"}))
+        @using (Ajax.BeginForm("addComment", "Comments", new AjaxOptions { UpdateTargetId = "comments" }))
         {
-            <legend>Комментировать</legend>
-            <input type="hidden" name="bookId" value="@Model.Id"/>         
-            @*<input type="hidden" name="userId" value="@HttpContext.User.Identity.Name"/>*@  
-            <textarea name="Text" placeholder="Введите текст…" style="width: 100%;"></textarea>
-            <button type="submit" class="btn btn-success">Отправить</button>
+            <div class="comment">
+                <input type="hidden" name="bookId" value="@Model.Id" />
+                @*<input type="hidden" name="userId" value="@HttpContext.User.Identity.Name"/>*@
+                <textarea name="Text" placeholder="Оставьте комментарий" style="width: 100%;"></textarea>
+                <button type="submit" class="btn btn-success">Отправить</button>
+            </div>
         }
     </div>
 </div>

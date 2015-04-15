@@ -48,7 +48,7 @@ namespace eLibrary.Controllers
             IEnumerable<Book> findBook = null;
             if (bookName != null)
             {
-                findBook = from book in db.book
+                findBook = from book in db.book.Include(u => u.Serie).Include(u => u.Genre)
                            where book.Name == bookName
                            select book;
             }

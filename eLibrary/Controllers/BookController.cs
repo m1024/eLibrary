@@ -41,10 +41,25 @@ namespace eLibrary.Controllers
 
         }
 
+        [Authorize]
         public FileContentResult GetFile_fb2(int id = 0)
         {
             Book book = db.book.Find(id);
             return new FileContentResult(book.Text_fb2,"text");
+        }
+
+        [Authorize]
+        public FileContentResult GetFile_txt(int id = 0)
+        {
+            Book book = db.book.Find(id);
+            return new FileContentResult(book.Text_txt, "text");
+        }
+
+        [Authorize]
+        public FileContentResult GetFile_epub(int id = 0)
+        {
+            Book book = db.book.Find(id);
+            return new FileContentResult(book.Text_epub, "text");
         }
 
         [Authorize(Roles = "Администратор, Модератор")]
@@ -133,7 +148,8 @@ namespace eLibrary.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Администратор, Модератор")]
-        public ActionResult Create(Book book,  int[] selectAuthor, HttpPostedFileBase uploadImage, HttpPostedFileBase uploadText_fb2, int? selectSerie)
+        public ActionResult Create(Book book,  int[] selectAuthor, HttpPostedFileBase uploadImage, HttpPostedFileBase uploadText_fb2,
+            HttpPostedFileBase uploadText_txt, HttpPostedFileBase uploadText_epub, int? selectSerie)
         {
             //if (ModelState.IsValid) //почему-то не проходит когда все хорошо
             if (book.Name!=null && book.GenreId >= 1)
@@ -146,6 +162,44 @@ namespace eLibrary.Controllers
                     {
                         book.Authors.Add(c);
                     }
+                }
+
+                if (uploadText_fb2 != null)
+                {
+                    byte[] uploadTextFb2 = null;
+                    // считываем переданный файл в массив байтов
+                    using (var binaryReader = new BinaryReader(uploadText_fb2.InputStream))
+                    {
+                        uploadTextFb2 = binaryReader.ReadBytes(uploadText_fb2.ContentLength);
+                    }
+                    // установка массива байтов
+                    book.Text_fb2 = uploadTextFb2;
+                }
+
+
+                if (uploadText_txt != null)
+                {
+                    byte[] uploadTextTxt = null;
+                    // считываем переданный файл в массив байтов
+                    using (var binaryReader = new BinaryReader(uploadText_txt.InputStream))
+                    {
+                        uploadTextTxt = binaryReader.ReadBytes(uploadText_txt.ContentLength);
+                    }
+                    // установка массива байтов
+                    book.Text_txt = uploadTextTxt;
+                }
+
+
+                if (uploadText_epub != null)
+                {
+                    byte[] uploadTextEpub = null;
+                    // считываем переданный файл в массив байтов
+                    using (var binaryReader = new BinaryReader(uploadText_epub.InputStream))
+                    {
+                        uploadTextEpub = binaryReader.ReadBytes(uploadText_epub.ContentLength);
+                    }
+                    // установка массива байтов
+                    book.Text_epub = uploadTextEpub;
                 }
 
                 if (selectSerie != null)

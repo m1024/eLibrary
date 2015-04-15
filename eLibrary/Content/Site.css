@@ -9,7 +9,6 @@ header, footer, nav, section {
     display: block;
 }
 
-
 /* Styles for basic forms
 -----------------------------------------------------------*/
 fieldset {
@@ -61,4 +60,15 @@ textarea {
 }
 .bold {
     font-weight: bold;
+}
+.comment {
+    background-color: #ddd;
+    margin: 20px;
+    padding: 20px;
+}
+.table {
+    margin-top: 20px;
+}
+.label-primary {
+    margin-right: 10px;
 }

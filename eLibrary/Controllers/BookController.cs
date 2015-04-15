@@ -30,6 +30,10 @@ namespace eLibrary.Controllers
             if (id != null)
             {
                 Book book = db.book.Find(id);
+                if (book == null) return HttpNotFound();
+                //также надо передать наименование жанра и серии, а не ID
+                book.Genre = db.genre.Find(book.GenreId);
+                book.Serie = db.serie.Find(book.SerieId);
                 return View(book);
             }
             else
@@ -129,19 +133,12 @@ namespace eLibrary.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Администратор, Модератор")]
-        public ActionResult Create(Book book, string[] selectedAuthors, int[] selectAuthor, HttpPostedFileBase uploadImage, HttpPostedFileBase uploadText_fb2, int? selectSerie)
+        public ActionResult Create(Book book,  int[] selectAuthor, HttpPostedFileBase uploadImage, HttpPostedFileBase uploadText_fb2, int? selectSerie)
         {
             //if (ModelState.IsValid) //почему-то не проходит когда все хорошо
             if (book.Name!=null && book.GenreId >= 1)
             {
                 book.Authors.Clear();
-                if (selectedAuthors != null)
-                {
-                    foreach (var c in db.author.Where(co => selectedAuthors.Contains(co.Family)))
-                    {
-                        book.Authors.Add(c);
-                    }
-                }
 
                 if (selectAuthor != null)
                 {
@@ -155,6 +152,7 @@ namespace eLibrary.Controllers
                 {
                     book.SerieId = (int) selectSerie;
                 }
+                else book.SerieId = 1;
 
 
                 db.book.Add(book);

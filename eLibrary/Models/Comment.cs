@@ -22,12 +22,12 @@ namespace eLibrary.Models
 
         [Required]
         [Display(Name = "К книге")]
-        public string BookId { get; set; }
+        public int BookId { get; set; }
         public Book Book { get; set; }
 
         [Required]
         [Display(Name = "Пользователь")]
-        public string UserId { get; set; }
+        public int UserId { get; set; }
         public User User { get; set; }
 
     }

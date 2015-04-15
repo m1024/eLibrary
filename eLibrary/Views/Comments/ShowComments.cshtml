@@ -1,0 +1,16 @@
+﻿@model IEnumerable<eLibrary.Models.Comment>
+
+<div id="searchResultComments">
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <label>@item.UserId</label> 
+            <label>@item.Time</label>
+            <div>
+                @item.Text
+            </div>
+            @*<textarea name="Annotation" readonly="readonly" style="width: 100%;">@item.Text</textarea>*@
+        }
+    }
+</div>

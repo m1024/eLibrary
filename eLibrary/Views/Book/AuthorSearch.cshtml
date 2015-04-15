@@ -6,7 +6,7 @@
         {
             foreach (var item in Model)
             {
-                <input type="checkbox" name="selectAuthor" value="@item.Id"/>
+                <input type="checkbox" name="selectAuthor" value="@item.Id" form="addBookForm"/>
                 <label>@item.Name @item.Family @item.Patronymic</label>
             }
         }

@@ -135,11 +135,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201503291510497_mdb.cs" />
-    <Compile Include="Migrations\201503291510497_mdb.Designer.cs">
-      <DependentUpon>201503291510497_mdb.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Comment.cs" />
@@ -260,14 +255,10 @@
     <Content Include="Views\Home\BookSearch.cshtml" />
     <Content Include="Views\Book\AuthorSearch.cshtml" />
     <Content Include="Views\Book\SerieSearch.cshtml" />
+    <Content Include="Views\Comments\ShowComments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201503291510497_mdb.resx">
-      <DependentUpon>201503291510497_mdb.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

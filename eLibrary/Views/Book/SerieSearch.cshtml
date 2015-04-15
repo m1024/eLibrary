@@ -3,10 +3,10 @@
 <div id="searchresultsSerie">
 
     @if (Model != null)
+{
+    foreach (var item in Model)
     {
-        foreach (var item in Model)
-        {
-            <input type="radio" name="selectSerie" value="@item.Id" />
+        <input type="radio" name="selectSerie" value="@item.Id" form="addBookForm" />
             <label>@item.Name</label>
         }
     }

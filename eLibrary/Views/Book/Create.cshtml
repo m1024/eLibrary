@@ -7,7 +7,7 @@
 <div class="col-sm-offset-1 col-sm-10">
     <div class="row">
         <div class="col-sm-8">
-            <form method="post" action="" class="form-horizontal" role="form">
+            <form method="post" action="" class="form-horizontal" role="form" id="addBookForm">
                 <legend>Добавление книги</legend>
 
                 <div class="form-group">
@@ -34,37 +34,14 @@
                 <div class="form-group">
                     <label for="annotation" class="col-sm-3 control-label">Аннотация</label>
                     <div class="col-sm-8">
-                        <textarea cols="36" id="annotation" name="Annotation" rows="4" class="form-control input-sm"></textarea>
+                        <textarea cols="36" id="annotation" name="Annotation" rows="9" class="form-control input-sm"></textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="genres" class="col-sm-3 control-label">Жанр</label>
                     <div class="col-sm-8">
-                        @Html.DropDownListFor(model => model.GenreId, ViewBag.Genres as SelectList, new { @id = "genres" })
-                    </div>
-                </div>
-
-                @*<div class="form-group">
-                    <label for="serie" class="col-sm-3 control-label">Серия</label>
-                    <div class="col-sm-8">
-                        @Html.DropDownListFor(model => model.SerieId, ViewBag.Series as SelectList, new { @id = "serie" })
-                    </div>
-                </div>*@
-
-
-                <div class="form-group">
-                    <label for="searchresults" class="col-sm-3 control-label">Автор</label>
-                    <div class="col-sm-8">
-                        <div id="searchresults"></div>
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    <label for="searchresultsSerie" class="col-sm-3 control-label">Серия</label>
-                    <div class="col-sm-8">
-                        <div id="searchresultsSerie"></div>
+                        @Html.DropDownListFor(model => model.GenreId, ViewBag.Genres as SelectList, new {@id = "genres"})
                     </div>
                 </div>
                 
@@ -89,7 +66,13 @@
                 </div>
             </div>
         }
-        <div id="searchresults"></div>
+
+        <div class="form-group">
+            @*<label for="searchresults" class="col-sm-3 control-label">Автор</label>*@
+            <div class="col-sm-8">
+                <div id="searchresults"></div>
+            </div>
+        </div>
 
         @using (Ajax.BeginForm("SerieSearch", null, new AjaxOptions { UpdateTargetId = "searchresultsSerie"}, new { @class = "form-horizontal" }))
         {
@@ -101,108 +84,13 @@
                 </div>
             </div>
         }
-    </div>
-    </div>
 
-
-</div>
-
-@*<div class="row">*@
-    @*@using (Html.BeginForm("Create", "Book", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-
-            <div class="col-sm-5 col-sm-offset-1">
-                <form>
-                    <div class="form-group">
-                        <label>Обложка</label>
-                        <input type="file" name="uploadImage" class="form-control" />
-                    </div>
-
-                    <div class="form-group">
-                        <label>Книга Fb2</label>
-                        <input type="file" name="uploadText_fb2" class="form-control" />
-                    </div>
-
-                    <div class="form-group">
-                        <label>Наименование</label>
-                        <div class="editor-field">
-                            @Html.EditorFor(model => model.Name)
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Год издания</label>
-                        <div class="editor-field">
-                            @Html.EditorFor(model => model.ImprintYear)
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Аннотация</label>
-                        <div class="editor-field">
-                            @Html.TextAreaFor(m => m.Annotation, new { @class = "form-control input-sm" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="editor-field">
-                            @Html.LabelFor(model => model.Genre.Name)
-                        </div>
-                        <div class="editor-field">
-                            @Html.DropDownListFor(model => model.GenreId, ViewBag.Genres as SelectList)
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="editor-field">
-                            @Html.LabelFor(model => model.Serie.Name)
-                        </div>
-                        <div class="editor-field">
-                            @Html.DropDownListFor(model => model.SerieId, ViewBag.Series as SelectList)
-                        </div>
-                    </div>*@
-
-                    @*@Html.Partial("AuthorSearch")*@
-                    
-
-                    @*<div class="form-group">
-                            <label>Автор</label>
-                            <input type="text" name="selectedAuthors" class="form-control input-sm" style="margin-bottom: 20px;" />
-                            <script>
-                                function addAuthor() {
-                                    var input = document.createElement('input');
-                                    input.type = 'text';
-                                    input.name = 'selectedAuthors';
-                                    input.className = 'form-control input-sm';
-                                    input.style = 'margin-bottom: 20px';
-                                    var elem = document.getElementById('AuthorButton');
-                                    elem.parentNode.insertBefore(input, elem);
-                                }
-                            </script>
-                            <input id="AuthorButton" type="button" onclick=" addAuthor() " value="еще автор" class="btn btn-success btn-xs form-control" />
-                        </div>*@
-
-                    @*<div class="form-group">
-                        <input type="submit" value="Сохранить" class="btn btn-success btn-xs form-control" />
-                    </div>
-
-
-                </form>
+        <div class="form-group">
+            @*<label for="searchresultsSerie" class="col-sm-3 control-label">Серия</label>*@
+            <div class="col-sm-8">
+                <div id="searchresultsSerie"></div>
             </div>
-    }*@
-
-    @*<form action="~/Book/AuthorSearch" data-ajax="true" data-ajax-update="#searchresults" data-ajax-mode="InsertionMode.InsertAfter" id="form0" method="post">
-        <input type="text" name="authorName" />
-        <input type="submit" value="Поиск" />
-    </form>*@
-
-    @*@using (Ajax.BeginForm("AuthorSearch", null, new AjaxOptions { UpdateTargetId = "searchresults", InsertionMode = InsertionMode.InsertAfter }, new { @class = "col-sm-2" }))
-    {
-        <legend>Автор</legend>
-        <input type="text" name="authorName" />
-        <input type="submit" value="Поиск" />
-    }
-    <div id="searchresults"></div>
-    @Scripts.Render("~/scripts/jquery-1.8.2.min.js")
-    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
-</div>*@
+        </div>
+    </div>
+    </div>
+</div>

@@ -291,5 +291,22 @@ namespace eLibrary.Controllers
             }
             return PartialView(findSerie.ToList());
         }
+
+        public ActionResult Read(int id, int? pageNumber) //pageNumber с нуля
+        {
+            Book book = db.book.Find(id);
+
+            if (pageNumber == null) pageNumber = 0;
+
+            byte[] page = new byte[10000]; //считываем по 10 Кбайт
+            int startIndex = (int)pageNumber*10000;
+            Array.Copy(book.Text_txt, startIndex, page, 0, 10000);
+
+            ViewBag.page = new byte[10000];
+            ViewBag.page = page;
+            ViewBag.currentPage = pageNumber;
+
+            return View(book);
+        }
     }
 }

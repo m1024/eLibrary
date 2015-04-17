@@ -1,0 +1,16 @@
+﻿@using System.Text
+@model eLibrary.Models.Book
+
+@if (Model.Text_txt != null)
+{
+    <div class="row">
+        <div class="col-md-9 col-md-offset-1">
+            <p style="word-wrap: break-word; white-space: pre; text-align: justify;">
+                @Encoding.UTF8.GetString(ViewBag.page);
+            </p>
+
+            @Html.ActionLink("Следующая", "Read", new { id = Model.Id, pageNumber = ViewBag.currentPage + 1 }, new { @class = "label label-primary" })
+
+        </div>
+    </div>
+}

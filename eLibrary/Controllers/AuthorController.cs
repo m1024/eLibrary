@@ -17,9 +17,6 @@ namespace eLibrary.Controllers
 
         private eLibraryContext db = new eLibraryContext();
 
-        //
-        // GET: /Author/
-
         [AllowAnonymous]
         public ActionResult Index()
         {

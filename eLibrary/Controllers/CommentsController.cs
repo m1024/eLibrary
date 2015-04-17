@@ -25,11 +25,11 @@ namespace eLibrary.Controllers
                                select comments;
             }
 
-            //не работает!
-            //foreach (var c in findComments)
-            //{
-            //    c.User = db.user.Find(c.UserId);
-            //}
+            //находим пользователей для комментариев чтобы отобразить их имен во view
+            if (findComments != null)
+            for (int i = 0; i < findComments.Count(); i++)
+                findComments.ElementAt(i).User = db.user.Find(findComments.ElementAt(i).UserId);
+
 
             if (findComments == null)
             {
@@ -43,20 +43,23 @@ namespace eLibrary.Controllers
         [Authorize]
         public ActionResult addComment(Comment comment)
         {
-            foreach (var c in db.user)
+            if (comment.Text != null)
             {
-                if (HttpContext.User.Identity.Name == c.Name)
-                    comment.UserId = c.Id;
+                foreach (var c in db.user)
+                {
+                    if (HttpContext.User.Identity.Name == c.Name)
+                        comment.UserId = c.Id;
+                }
+                comment.Time = System.DateTime.Now;
+                db.comments.Add(comment);
+                db.SaveChanges();
             }
-            comment.Time = System.DateTime.Now;
-            db.comments.Add(comment);
-            db.SaveChanges();
             return RedirectToAction("ShowComments");
         }
 
 
         [HttpGet]
-        [Authorize(Roles = "Администратор, Модератор")]
+        [Authorize(Roles = "Администратор, Модератор, Пользователь")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -65,17 +68,9 @@ namespace eLibrary.Controllers
             }
 
             Comment b = db.comments.Find(id);
-            Book book = db.book.Find(b.BookId);
             db.comments.Remove(b);
             db.SaveChanges();
 
-            //if (b == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            //if (book != null)
-            //    return RedirectToAction("ShowBook", "Book", book);
-            //else
             return RedirectToAction("Index", "Home");
         }
 

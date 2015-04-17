@@ -130,6 +130,7 @@
     <Compile Include="Controllers\AuthorController.cs" />
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
+    <Compile Include="Controllers\GenresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -257,6 +258,8 @@
     <Content Include="Views\Book\SerieSearch.cshtml" />
     <Content Include="Views\Comments\ShowComments.cshtml" />
     <Content Include="Views\Comments\Delete.cshtml" />
+    <Content Include="Views\Book\Read.cshtml" />
+    <Content Include="Views\Genres\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

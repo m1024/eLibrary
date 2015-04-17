@@ -1,4 +1,5 @@
-﻿@model IEnumerable<eLibrary.Models.Comment>
+﻿@using System.Web.Http.Tracing
+@model IEnumerable<eLibrary.Models.Comment>
 
 <div id="searchResultComments">
     @if (Model != null)
@@ -6,12 +7,21 @@
     foreach (var item in Model)
     {
         <div class="comment">
-            @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
-            {
-            @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
-            }
-            <label class="bold">@item.UserId</label>
+            <label class="bold">@item.User.Name</label>
             <label class="bold">@item.Time</label>
+            @HttpContext.Current.User.Identity.Name
+            @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор")
+                || HttpContext.Current.User.Identity.Name == @item.User.Name)
+            {
+                @Html.ActionLink("Удалить", "Delete", new { id = item.Id }, new { @class = "right" })
+            }
+            @*@if (item.User != null)
+            {
+                if (HttpContext.Current.User.Identity.Name == @item.User.Name)
+                {
+                    @Html.ActionLink("Удалить", "Delete", new { id = item.Id }, new { @class = "right" })
+                }
+            }*@
             <div>
                 @item.Text
             </div>

@@ -49,7 +49,7 @@ namespace eLibrary.Controllers
             if (bookName != null)
             {
                 findBook = from book in db.book.Include(u => u.Serie).Include(u => u.Genre)
-                           where book.Name == bookName
+                           where book.Name.Contains(bookName)
                            select book;
             }
             if (findBook == null)

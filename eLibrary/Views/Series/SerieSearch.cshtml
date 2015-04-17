@@ -4,10 +4,21 @@
 
     @if (Model != null)
     {
-        foreach (var item in Model)
+        <table class="table">
+        @foreach (var item in Model)
         {
-            <label class="col-md-2">@item.Name</label>
-            @Html.ActionLink("Удалить", "Delete", new { id = item.Id }, new { @class = "col-md-2 col-md-offset-1" })
+            <tr>
+                <td class="col-md-4">@item.Name</td>
+                <td>
+                    @Html.ActionLink("Удалить", "Delete", new {id = item.Id}, new {@class = "col-md-2 col-md-offset-1"})
+                </td>
+                <td>
+                    @*@Html.ActionLink("Редактировать", "Edit", new { id = @item.Id })*@
+                    @Ajax.ActionLink("Редактировать", "Edit", "Series", new {id = @item.Id},
+                        new AjaxOptions {UpdateTargetId = "editForm"}, new {@class = "col-md-2 col-md-offset-1"})
+                </td>
+            </tr>
         }
+        </table>
     }
 </div>

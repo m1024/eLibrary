@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.Mvc;
 using eLibrary.Models;
@@ -18,16 +20,49 @@ namespace eLibrary.Controllers
             return View(series);
         }
 
+        [HttpGet]
+        [Authorize(Roles = "Администратор, Модератор")]
+        public ActionResult Create()
+        {
+            return PartialView();
+        }
+
         [HttpPost]
         [Authorize(Roles = "Администратор, Модератор")]
-        public ActionResult Create(string serieName, string serieDescription)
+        public ActionResult Create(Series serie)
         {
-            if (serieName != "")
+            if (serie.Name != "")
             {
-                Series serie = new Series();
-                serie.Name = serieName;
-                serie.Description = serieDescription;
                 db.serie.Add(serie);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Администратор, Модератор")]
+        public ActionResult Edit(int id = 0)
+        {
+            Series serie = db.serie.Find(id);
+            if (serie == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(serie);
+        }
+
+
+        [HttpPost]
+        [Authorize(Roles = "Администратор, Модератор")]
+        public ActionResult Edit(Series serie)
+        {
+            if (serie == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                db.Entry(serie).State = EntityState.Modified;
                 db.SaveChanges();
             }
             return RedirectToAction("Index");
@@ -52,10 +87,15 @@ namespace eLibrary.Controllers
         public ActionResult SerieSearch(string serieName)
         {
             IEnumerable<Series> findSerie = null;
-            if (serieName != null)
+            if (serieName != "")
             {
+                if (serieName == "all")
+                {
+                    findSerie = db.serie.ToList();
+                }
+                else
                 findSerie = from series in db.serie
-                            where series.Name == serieName
+                            where series.Name.Contains(serieName)
                             select series;
             }
             if (findSerie == null)

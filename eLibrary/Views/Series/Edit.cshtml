@@ -1,0 +1,31 @@
+﻿@model eLibrary.Models.Series
+
+<form method="post" action="Edit" class="form-horizontal" role="form" enctype="multipart/form-data">
+    <legend>Редактирование серии</legend>
+    <div class="form-group" hidden="true">
+        <label class="control-label col-sm-2" for="id">Id:</label>
+        <div class="col-sm-7">
+            <input type="text" class="form-control" id="id" name="Id" value="@Model.Id">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="name">Наименование серии:</label>
+        <div class="col-sm-7">
+            <input type="text" class="form-control" id="name" name="Name" value="@Model.Name">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="description">Описание:</label>
+        <div class="col-sm-7">
+            <textarea cols="36" id="description" name="Description" rows="7" class="form-control input-sm">
+                @Model.Description
+            </textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-7">
+            <button type="submit" class="btn btn-default">Сохранить</button>
+        </div>
+    </div>
+</form>

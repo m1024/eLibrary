@@ -1,0 +1,13 @@
+﻿@model IEnumerable<eLibrary.Models.Series>
+
+<div id="">
+
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <label class="col-md-2">@item.Name</label>
+            @Html.ActionLink("Удалить", "Delete", new { id = item.Id }, new { @class = "col-md-2 col-md-offset-1" })
+        }
+    }
+</div>

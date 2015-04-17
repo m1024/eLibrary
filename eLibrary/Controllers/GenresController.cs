@@ -11,7 +11,7 @@ namespace eLibrary.Controllers
     {
         private eLibraryContext db = new eLibraryContext();
 
-        [AllowAnonymous]
+        [Authorize(Roles = "Администратор")]
         public ActionResult Index()
         {
             var genres = db.genre.ToList();

@@ -156,6 +156,11 @@
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\1.png" />
+    <Content Include="Content\images\2.png" />
+    <Content Include="Content\images\5.png" />
+    <Content Include="Content\images\dragon-black.png" />
+    <Content Include="Content\images\dragon.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -261,10 +266,11 @@
     <Content Include="Views\Comments\Delete.cshtml" />
     <Content Include="Views\Book\Read.cshtml" />
     <Content Include="Views\Genres\Index.cshtml" />
-    <Content Include="Views\Series\Index.cshtml" />
+    <Content Include="Views\Series\Main.cshtml" />
     <Content Include="Views\Series\SerieSearch.cshtml" />
     <Content Include="Views\Series\Create.cshtml" />
     <Content Include="Views\Series\Edit.cshtml" />
+    <Content Include="Views\Home\Genres.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

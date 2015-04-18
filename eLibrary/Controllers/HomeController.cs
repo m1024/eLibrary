@@ -59,6 +59,11 @@ namespace eLibrary.Controllers
             return PartialView(findBook.ToList());
         }
 
-
+        [AllowAnonymous]
+        public ActionResult Genres()
+        {
+            var genres = db.genre.ToList();
+            return PartialView(genres);
+        }
     }
 }

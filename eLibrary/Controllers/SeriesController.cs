@@ -14,7 +14,7 @@ namespace eLibrary.Controllers
         private eLibraryContext db = new eLibraryContext();
 
         [Authorize(Roles = "Администратор, Модератор")]
-        public ActionResult Index()
+        public ActionResult Main()
         {
             var series = db.serie.ToList();
             return View(series);
@@ -36,7 +36,7 @@ namespace eLibrary.Controllers
                 db.serie.Add(serie);
                 db.SaveChanges();
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Main");
         }
 
         [HttpGet]
@@ -65,7 +65,7 @@ namespace eLibrary.Controllers
                 db.Entry(serie).State = EntityState.Modified;
                 db.SaveChanges();
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Main");
         }
 
         [HttpGet]
@@ -81,7 +81,7 @@ namespace eLibrary.Controllers
             db.serie.Remove(s);
             db.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Main");
         }
 
         public ActionResult SerieSearch(string serieName)

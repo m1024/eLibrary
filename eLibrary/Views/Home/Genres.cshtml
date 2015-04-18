@@ -1,0 +1,12 @@
+﻿@model  IEnumerable<eLibrary.Models.Genre>
+
+<ul class="list-unstyled">
+    @foreach (var item in Model)
+    {
+        <li>
+            <div class="btn btn-default genre-list">
+                <a class="">@item.Name</a>
+            </div>
+        </li>
+    }
+</ul>

@@ -5,6 +5,8 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <table class="table">
+                @if (Model != null)
+{
                 <tr>
                     <th>
                         @Html.DisplayNameFor(model => model.Name)
@@ -25,53 +27,51 @@
                     <th></th>
                     <th></th>
                 </tr>
-                @if (Model != null)
+                foreach (var item in Model)
                 {
-                    foreach (var item in Model)
-                     {
-                         <tr>
-                             <td>
-                                 @Html.DisplayFor(modelItem => item.Name)
-                             </td>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
 
-                             <td>
-                                 @Html.DisplayFor(modelItem => item.Serie.Name)
-                             </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Serie.Name)
+                    </td>
 
-                             <td>
-                                 @Html.DisplayFor(modelItem => item.Genre.Name)
-                             </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Genre.Name)
+                    </td>
 
-                             <td>
-                                 @foreach (Author c in item.Authors)
-                                 {
-                                     @c.Name
-                                     @c.Family
-                                     @c.Patronymic
-                                 }
+                    <td>
+                        @foreach (Author c in item.Authors)
+                        {
+                            @c.Name
+                            @c.Family
+                            @c.Patronymic
+                        }
 
-                             </td>
+                    </td>
 
-                             @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор") ||
-                             HttpContext.Current.User.IsInRole("Пользователь"))
-                             {
-                             <td>
-                                 @Html.ActionLink("Загрузить fb2", "../Book/GetFile_fb2", new {id = item.Id}) |
-                             </td>
-                             }
+                    @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор") ||
+                         HttpContext.Current.User.IsInRole("Пользователь"))
+                    {
+                        <td>
+                            @Html.ActionLink("Загрузить fb2", "../Book/GetFile_fb2", new {id = item.Id}) |
+                        </td>
+                    }
 
-                             @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
-                             {
-                             <td>
-                                 @Html.ActionLink("Редактировать", "../Book/Edit", new {id = item.Id}) |
-                                 @Html.ActionLink("Удалить", "../Book/Delete", new {id = item.Id})
-                             </td>
-                             }
-                             <td>
-                                 @Html.ActionLink("Подробнее", "../Book/ShowBook", new {id = item.Id})
-                             </td>
-                         </tr>
-                     }
+                    @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
+                    {
+                        <td>
+                            @Html.ActionLink("Редактировать", "../Book/Edit", new {id = item.Id}) |
+                            @Html.ActionLink("Удалить", "../Book/Delete", new {id = item.Id})
+                        </td>
+                    }
+                    <td>
+                        @Html.ActionLink("Подробнее", "../Book/ShowBook", new {id = item.Id})
+                    </td>
+                </tr>
+                }
                 }
 
             </table>

@@ -164,6 +164,18 @@ namespace eLibrary.Controllers
                     }
                 }
 
+                if (uploadImage != null)
+                {
+                    byte[] uploadImageNew = null;
+                    // считываем переданный файл в массив байтов
+                    using (var binaryReader = new BinaryReader(uploadImage.InputStream))
+                    {
+                        uploadImageNew = binaryReader.ReadBytes(uploadImage.ContentLength);
+                    }
+                    // установка массива байтов
+                    book.Image = uploadImageNew;
+                }
+
                 if (uploadText_fb2 != null)
                 {
                     byte[] uploadTextFb2 = null;

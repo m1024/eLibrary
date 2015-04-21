@@ -4,65 +4,69 @@
     ViewBag.Title = "Создание пользователя";
 }
 
-<h2>Создание нового пользователя</h2>
+<div class="col-sm-offset-1 col-sm-10">
+    <div class="row">
+        <div class="col-sm-8">
+                <form action="/User/Create" method="post" class="form-horizontal">
+                    @Html.ValidationSummary(true)
 
-@using (Html.BeginForm())
-{
-    @Html.ValidationSummary(true)
+                    <legend>Новый пользователь</legend>
 
-    <fieldset>
-        <legend>Новый пользователь</legend>
+                    <div class="form-group">
+                        <label for="userName" class="col-sm-3 control-label">ФИО</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="Name" id="userName">
+                        </div>
+                    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Name)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
-            @Html.ValidationMessageFor(model => model.Name)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Login)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Login)
-            @Html.ValidationMessageFor(model => model.Login)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Password)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Password)
-            @Html.ValidationMessageFor(model => model.Password)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Information)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Information)
-            @Html.ValidationMessageFor(model => model.Information)
-        </div>
+                    <div class="form-group">
+                        <label for="userLogin" class="col-sm-3 control-label">Логин</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="Login" id="userLogin">
+                            @Html.ValidationMessageFor(model => model.Login)
+                        </div>
+                    </div>
 
 
-        @if (HttpContext.Current.User.IsInRole("Администратор"))
-        {
-            <div class="editor-label">
-                @Html.LabelFor(model => model.RoleId)
-            </div>
-            <div class="editor-field">
-                @Html.DropDownListFor(model => model.RoleId, ViewBag.Roles as SelectList)
-                @Html.ValidationMessageFor(model => model.RoleId)
-            </div>
+                    <div class="form-group">
+                        <label for="userPassword" class="col-sm-3 control-label">Пароль</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="Password" id="userPassword">
+                            @Html.ValidationMessageFor(model => model.Password)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userInformation" class="col-sm-3 control-label">Информация</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="Information" id="userInformation">
+                            @Html.ValidationMessageFor(model => model.Information)
+                        </div>
+                    </div>
+
+
+                    @if (HttpContext.Current.User.IsInRole("Администратор"))
+                    {
+
+                        <div class="form-group">
+                            <label for="userRole" class="col-sm-3 control-label">Статус</label>
+                            <div class="col-sm-8">
+                                @Html.DropDownListFor(model => model.RoleId, ViewBag.Roles as SelectList, new { @id = "userRole" })
+                                @Html.ValidationMessageFor(model => model.RoleId)
+                            </div>
+                        </div>
+                    }
+
+                    <div class="form-group">
+                        <label for="submit" class="col-sm-3 control-label"></label>
+                        <div class="col-sm-8">
+                            <input type="submit" value="Сохранить" class="btn btn-success btn-xs form-control" id="submit" />
+                        </div>
+                    </div>
+                </form>
+        </div>
+    </div>
+</div>
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
         }
-
-        <p>
-            <input type="submit" value="Добавить" />
-        </p>
-    </fieldset>
-}
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

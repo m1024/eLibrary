@@ -10,7 +10,7 @@
         
         @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
         {
-            <a href="Create" class="">Добавить книгу</a>
+            <a href="Create" class="btn btn-primary btn-sm">Добавить книгу</a>
         }
         <table class="table">
             <tr>

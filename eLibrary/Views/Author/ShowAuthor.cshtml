@@ -1,0 +1,51 @@
+﻿@model eLibrary.Models.Author
+
+@{
+    ViewBag.Title = "ShowAuthor";
+}
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор")
+            || HttpContext.Current.User.IsInRole("Пользователь"))
+        {
+
+            @Html.ActionLink("Добавить автора", "Create", new { id = Model.Id }, new { @class = "label label-primary" })
+
+            @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }, new { @class = "label label-primary" })
+
+            @Html.ActionLink("Удалить", "Delete", new { id = Model.Id }, new { @class = "label label-primary" })
+
+        }
+    </div>
+</div>
+<div class="row">
+    @if (Model != null)
+    {
+        <div class="col-md-6 col-md-offset-1">
+            <div class="">
+                <h2>@Model.Name <label> </label> @Model.Family</h2>
+            </div>
+            @if (@Model.Information != "")
+            {
+            <div>
+                <label class="bold">Информация:</label>
+                <div>
+                    <p>@Model.Information</p>
+                </div>
+            </div>
+            }
+        </div>
+        <div class="col-md-3 col-md-offset-1">
+            @if (Model != null)
+            {
+                if (Model.Image != null)
+                {
+                    @Html.Raw("<img style='width:100%' src=\"data:image/jpeg;base64,"
+                              + Convert.ToBase64String(Model.Image) + "\" />")
+                }
+            }
+        </div>
+        
+    }
+</div>
+

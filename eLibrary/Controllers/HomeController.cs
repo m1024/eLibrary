@@ -59,6 +59,22 @@ namespace eLibrary.Controllers
             return PartialView(findBook.ToList());
         }
 
+        public ActionResult SelectGenre(int? genreId)
+        {
+            IEnumerable<Book> findBook = null;
+            if (genreId != null)
+            {
+                findBook = from book in db.book.Include(u => u.Serie).Include(u => u.Genre)
+                           where book.GenreId == (int)genreId
+                           select book;
+            }
+            if (findBook == null)
+            {
+                return HttpNotFound();
+            }
+            return View(findBook.ToList());
+        }
+
         [AllowAnonymous]
         public ActionResult Genres()
         {

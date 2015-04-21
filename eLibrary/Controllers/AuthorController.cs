@@ -126,6 +126,21 @@ namespace eLibrary.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        [AllowAnonymous]
+        public ActionResult ShowAuthor(int? id)
+        {
+            if (id != null)
+            {
+                Author author = db.author.Find(id);
+                if (author == null) return HttpNotFound();
+
+                return View(author);
+            }
+            else
+                return View();
+
+        }
     }
 
 }

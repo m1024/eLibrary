@@ -60,18 +60,19 @@ namespace eLibrary.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Администратор, Модератор, Пользователь")]
-        public ActionResult Delete(int? id)
+        public RedirectToRouteResult Delete(int? id)
         {
             if (id == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Index", "Book");
             }
 
             Comment b = db.comments.Find(id);
+            int bookId = b.BookId;
             db.comments.Remove(b);
             db.SaveChanges();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("ShowBook", "Book", new { id = bookId });
         }
 
         //[HttpPost, ActionName("Delete")]

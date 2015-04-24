@@ -3,20 +3,11 @@
 }
 @*@Html.Partial("Genres")*@
 
-<div class="row">
     <div class="header">
-        <img src="~/content/images/2.png" height="60" alt="dragon">
-        <div class="header-text"></div>
+        <img src="~/content/images/2.png" height="60" alt="dragon" >
     </div>
-</div>
-@*<div class="row">
-    <nav class="navbar navbar-default my-navbar-2">
-        <ul class="nav navbar-nav my-navbar-2"></ul>
-    </nav>
 
-</div>*@
 
-<div class="row">
 
     <div class="wrapper col-md-offset-1">
         <h4 class="bold">Жанры</h4>
@@ -48,37 +39,9 @@
     <div class="col-md-7 col-md-offset-0">
         @Html.Partial("AuthorSearch")
     </div>
-</div>
+
 
 
 <script>
     $('#genresButton').click();
-
-    //$('#find').click(function() {
-    //    $('#inputAuthor').val($('#searchedText').val());
-    //    $('#submitAuthor').click();
-    //});
-
-    //$('#searchSubmit').click(function () {
-    //    //alert("/Home/FindBook?general=" + $('#searchText').val());
-    //    //window.location.href = "/Home/FindBook?general=" + $('#searchText').val();
-    //    var url = "google.com";
-    //    $(location).attr('href', url);
-    //});
-
-    //$('#find').submit(function() {
-    //    $.post('JsonSearch', { 'bookName': $('#searchedText').val() },
-    //        function(data) {
-    //            $('#results').html(data);
-    //        });
-    //});
-    //надо попробовать отправить в json
-    //$("#loginForm").submit(function (event) {
-    //    // Предотвращаем обычную отправку формы
-    //    event.preventDefault();
-    //    $.post('ajax.php', { 'login': $('#login').val(), 'password': $('#password').val() },
-    //            function (data) {
-    //                $('#result').html(data);
-    //            });
-    //});
 </script>

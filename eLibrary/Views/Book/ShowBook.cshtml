@@ -9,6 +9,14 @@
                 <h2>@Model.Name</h2>
             </div>
 
+            @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
+            {
+                <td>
+                    @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }, new { @class = "label label-primary" })
+                    @Html.ActionLink("Удалить", "Delete", new { id = Model.Id }, new { @class = "label label-primary" })
+                </td>
+            }
+            
             @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор")
              || HttpContext.Current.User.IsInRole("Пользователь"))
             {
@@ -25,8 +33,12 @@
                 {
                     @Html.ActionLink("Загрузить epub", "GetFile_epub", new { id = Model.Id }, new { @class = "label label-primary" })
                 }
-                @Html.ActionLink("Читать", "Read", new { id = Model.Id });
+                if (Model.Text_txt != null)
+                {
+                    @Html.ActionLink("Читать", "Read", new {id = Model.Id}, new {@class = "label label-primary"})
+                }
             }
+
 
             <div>
                 <label class="bold">Автор:</label>
@@ -85,28 +97,51 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-7 col-md-offset-1">
+<div class="row">
+    <div class="col-md-7 col-md-offset-1">
 
 
-                <div id="comments">
-                    @Ajax.ActionLink("Комментарии", "ShowComments", "Comments", new { bookId = @Model.Id }, new AjaxOptions { UpdateTargetId = "comments" })
-                </div>
-
-            @*<a href="~/Comments/ShowComments/@Model.Id">Войти</a>*@
-
-            @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор")
-             || HttpContext.Current.User.IsInRole("Пользователь"))
-            {
-                using (Ajax.BeginForm("addComment", "Comments", new AjaxOptions { UpdateTargetId = "comments" }))
-                {
-                    <div class="comment">
-                        <input type="hidden" name="bookId" value="@Model.Id" />
-                        @*<input type="hidden" name="userId" value="@HttpContext.User.Identity.Name"/>*@
-                        <textarea name="Text" placeholder="Оставьте комментарий" style="width: 100%;"></textarea>
-                        <button type="submit" class="btn btn-success">Отправить</button>
-                    </div>
-                }
-            }
+        <div id="comments">
+            @Ajax.ActionLink("Комментарии", "ShowComments", "Comments", new { bookId = @Model.Id }, new AjaxOptions { UpdateTargetId = "comments" }, new { id = "showComments" })
         </div>
+
+        @*<a href="~/Comments/ShowComments/@Model.Id">Войти</a>*@
+
+        @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор")
+             || HttpContext.Current.User.IsInRole("Пользователь"))
+        {
+            using (Ajax.BeginForm("addComment", "Comments", new AjaxOptions {UpdateTargetId = "comments"}))
+            {
+                <div class="comment">
+                    <input type="hidden" name="bookId" value="@Model.Id"/>
+                    @*<input type="hidden" name="userId" value="@HttpContext.User.Identity.Name"/>*@
+                    <textarea name="Text" placeholder="Оставьте комментарий" style="width: 100%;"></textarea>
+                    <button id="sendComment" type="submit" class="btn btn-success">Отправить</button>
+                </div>
+            }
+        }
     </div>
+</div>
+
+<script>
+    //$('#showComments').click(function () {
+    //    $(this).attr("hidden", "hidden");
+    //});
+    $('#showComments').click();
+    $('#sendComment').click(function () {
+        window.location.reload();
+
+        //alert.delay(1000)("1");
+        //$('#showComments').delay(1000).click();
+    });
+    //setTimeout(function () {
+    //    // Ваш скрипт
+    //}, 1000); // время в мс
+
+
+    //$('#sendComment').click(function () {
+    //    alert("1");
+    //    $('#showComments').click();
+    //    alert("1");
+    //});
+</script>

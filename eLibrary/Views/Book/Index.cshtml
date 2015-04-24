@@ -5,97 +5,104 @@
     ViewBag.Title = "Список книг";
 }
 
-<div class="row">
-    <div class="col-md-10 col-md-offset-1">
-        
-        @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
+
+<div class="col-md-10 col-md-offset-1">
+
+    @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
+    {
+        <a href="Create" class="btn btn-primary btn-sm">Добавить книгу</a>
+    }
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.SerieId)
+            </th>
+
+            @*<th>
+                @Html.DisplayNameFor(model => model.Annotation)
+            </th>*@
+
+            <th>
+                @Html.DisplayNameFor(model => model.GenreId)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Authors)
+            </th>
+            <th></th>
+            <th></th>
+
+        </tr>
+
+        @foreach (var item in Model)
         {
-            <a href="Create" class="btn btn-primary btn-sm">Добавить книгу</a>
-        }
-        <table class="table">
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
 
-                <th>
-                    @Html.DisplayNameFor(model => model.SerieId)
-                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Serie.Name)
+                </td>
 
-                <th>
-                    @Html.DisplayNameFor(model => model.Annotation)
-                </th>
+                @*<td>
+                    @if (item.Annotation != null && item.Annotation.Length > 100)
+                    {
+                        <label for="Annotation">
+                            @item.Annotation.Remove(100)
+                            ...
+                        </label>
+                    }
+                </td>*@
 
-                <th>
-                    @Html.DisplayNameFor(model => model.GenreId)
-                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genre.Name)
+                </td>
 
-                <th>
-                    @Html.DisplayNameFor(model => model.Authors)
-                </th>
-                <th></th>
-                <th></th>
+                <td>
+                    @foreach (Author c in item.Authors)
+                    {
+                        @c.Name
+                        @c.Family
+                        @c.Patronymic
+                    }
 
+                </td>
+                @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор")
+                     || HttpContext.Current.User.IsInRole("Пользователь"))
+                {
+                    <td>
+                        @if (item.Text_fb2 != null)
+                        {
+
+                            @Html.ActionLink("Загрузить fb2", "GetFile_fb2", new {id = item.Id})
+
+                        }
+                    </td>
+                }
+                @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
+                {
+                    <td>
+                        @Html.ActionLink("Редактировать", "Edit", new {id = item.Id})
+                        @Html.ActionLink("Удалить", "Delete", new {id = item.Id})
+                    </td>
+                }
+                <td>
+                    @Html.ActionLink("Подробнее", "ShowBook", new {id = item.Id})
+                </td>
             </tr>
-
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Serie.Name)
-                    </td>
-
-                    <td>
-                        @if (item.Annotation != null && item.Annotation.Length > 100)
-                        {
-                            <label for="Annotation">
-                                @item.Annotation.Remove(100)
-                                ...
-                            </label>
-                        }
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Genre.Name)
-                    </td>
-
-                    <td>
-                        @foreach (Author c in item.Authors)
-                        {
-                            @c.Name
-                            @c.Family
-                            @c.Patronymic
-                        }
-
-                    </td>
-                    @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор")
-                         || HttpContext.Current.User.IsInRole("Пользователь"))
-                    {
-                        <td>
-                            @if (item.Text_fb2 != null)
-                            {
-
-                                @Html.ActionLink("Загрузить fb2", "GetFile_fb2", new {id = item.Id})
-
-                            }
-                        </td>
-                    }
-                    @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
-                    {
-                        <td>
-                            @Html.ActionLink("Редактировать", "Edit", new {id = item.Id})
-                            @Html.ActionLink("Удалить", "Delete", new {id = item.Id})
-                        </td>
-                    }
-                    <td>
-                        @Html.ActionLink("Подробнее", "ShowBook", new {id = item.Id})
-                    </td>
-                </tr>
-            }
-        </table>
-    </div>
+        }
+    </table>
 </div>
+<div class="col-md-10 col-md-offset-1">
+    @Html.ActionLink("Первая", "Index", new { id = 0 }, new { @class = "btn btn-default btn-sm pages" })
+    @Html.ActionLink("Предыдущая", "Index", new { id = ViewBag.page - 1 }, new { @class = "btn btn-default btn-sm pages" })
+    @Html.ActionLink("Следующая", "Index", new {id = ViewBag.page + 1}, new {@class = "btn btn-default btn-sm pages"})
+    @Html.ActionLink("Последняя", "Index", new { id = ViewBag.lastPage +1 }, new { @class = "btn btn-default btn-sm pages" })
+
+</div>
+

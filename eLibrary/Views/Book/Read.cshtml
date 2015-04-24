@@ -3,14 +3,23 @@
 
 @if (Model.Text_txt != null)
 {
-    <div class="row">
-        <div class="col-md-9 col-md-offset-1">
-            <p style="word-wrap: break-word; white-space: pre; text-align: justify;">
-                @Encoding.UTF8.GetString(ViewBag.page);
-            </p>
+    @*<div class="row">*@
+        
+        <div class="col-md-9 col-md-offset-1" style="margin-bottom: 30px;">
 
+            @foreach (var p in @ViewBag.split)
+            {
+                <p align=" justify">
+            @p
+            </p>
+            }
+
+            @Html.ActionLink("Первая", "Read", new { id = Model.Id, pageNumber = 0}, new { @class = "label label-primary" })
+            @Html.ActionLink("Предыдущая", "Read", new { id = Model.Id, pageNumber = ViewBag.currentPage - 1 }, new { @class = "label label-primary" })
             @Html.ActionLink("Следующая", "Read", new { id = Model.Id, pageNumber = ViewBag.currentPage + 1 }, new { @class = "label label-primary" })
+            @Html.ActionLink("Последняя", "Read", new { id = Model.Id, pageNumber = @ViewBag.lastPage }, new { @class = "label label-primary" })
+
 
         </div>
-    </div>
+    @*</div>*@
 }

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.Mvc;
 using Antlr.Runtime.Tree;
@@ -140,6 +142,12 @@ namespace eLibrary.Controllers
             else
                 return View();
 
+        }
+
+        [AllowAnonymous]
+        public ActionResult BooksByAuthor(int id)
+        {
+            return PartialView(db.author.Find(id).Books.ToList());
         }
     }
 

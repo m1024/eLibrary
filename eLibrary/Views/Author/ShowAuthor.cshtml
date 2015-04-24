@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "ShowAuthor";
 }
-<div class="row">
+
     <div class="col-md-10 col-md-offset-1">
         @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор")
             || HttpContext.Current.User.IsInRole("Пользователь"))
@@ -17,8 +17,8 @@
 
         }
     </div>
-</div>
-<div class="row">
+
+
     @if (Model != null)
     {
         <div class="col-md-6 col-md-offset-1">
@@ -47,5 +47,11 @@
         </div>
         
     }
-</div>
+    <div id="books">
+        @Ajax.ActionLink("Книги", "BooksByAuthor", "Author", new { id = @Model.Id }, new AjaxOptions { UpdateTargetId = "books" }, new{id="showBooks", @class="col-md-offset-1"})
+    </div>
 
+
+<script>
+    $('#showBooks').click();
+</script>

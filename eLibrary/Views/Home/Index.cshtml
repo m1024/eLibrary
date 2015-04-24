@@ -17,10 +17,6 @@
 </div>*@
 
 <div class="row">
-    <div class="dragon-left">
-        <img src="~/content/images/dragon-black.png" height="200" alt="dragon">
-    </div>
-
 
     <div class="wrapper col-md-offset-1">
         <h4 class="bold">Жанры</h4>
@@ -30,17 +26,59 @@
         </div>
     </div>
 
-    @using (Ajax.BeginForm("BookSearch", null, new AjaxOptions { UpdateTargetId = "searchresults" }, new { @class = "col-md-8 col-md-offset-0" }))
-    {
-        <input type="text" name="bookName" class="col-md-9 input-sm" placeholder="введите наименование книги" />
-        <input type="submit" value="Искать" class="btn btn-sm btn-success col-md-2 col-md-offset-0" />
-    }
+
+    <div class="col-md-8 col-md-offset-0">
+        @using (Html.BeginForm("RedirectToFind", "Home"))
+{
+    <input  type="text" name="searchText" class="col-md-9 input-sm" placeholder="введите слово для поиска" />
+    <input  type="submit" value="Искать" class="btn btn-sm btn-success col-md-2 col-md-offset-0"/>
+}
+    </div>
+    
+    <div id="results"></div>
     <div class="col-md-7 col-md-offset-0">
         @Html.Partial("BookSearch")
+    </div>
+
+    @using (Ajax.BeginForm("AuthorSearch", null, new AjaxOptions { UpdateTargetId = "searchAuthorsResults" }, new {hidden="hidden"}))
+    {
+        <input id="inputAuthor" type="text" name="authorName" />
+        <input id="submitAuthor" type="submit" value="Искать"/>
+    }
+    <div class="col-md-7 col-md-offset-0">
+        @Html.Partial("AuthorSearch")
     </div>
 </div>
 
 
 <script>
     $('#genresButton').click();
+
+    //$('#find').click(function() {
+    //    $('#inputAuthor').val($('#searchedText').val());
+    //    $('#submitAuthor').click();
+    //});
+
+    //$('#searchSubmit').click(function () {
+    //    //alert("/Home/FindBook?general=" + $('#searchText').val());
+    //    //window.location.href = "/Home/FindBook?general=" + $('#searchText').val();
+    //    var url = "google.com";
+    //    $(location).attr('href', url);
+    //});
+
+    //$('#find').submit(function() {
+    //    $.post('JsonSearch', { 'bookName': $('#searchedText').val() },
+    //        function(data) {
+    //            $('#results').html(data);
+    //        });
+    //});
+    //надо попробовать отправить в json
+    //$("#loginForm").submit(function (event) {
+    //    // Предотвращаем обычную отправку формы
+    //    event.preventDefault();
+    //    $.post('ajax.php', { 'login': $('#login').val(), 'password': $('#password').val() },
+    //            function (data) {
+    //                $('#result').html(data);
+    //            });
+    //});
 </script>

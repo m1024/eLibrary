@@ -62,16 +62,13 @@ namespace eLibrary.Controllers
             return new FileContentResult(book.Text_epub, "text");
         }
 
-        [Authorize(Roles = "Администратор, Модератор")]
+                [Authorize(Roles = "Администратор, Модератор")]
         public ActionResult Edit(int id = 0)
         {
             Book book = db.book.Find(id);
 
             SelectList genres = new SelectList(db.genre, "Id", "Name");
             ViewBag.Genres = genres;
-
-            SelectList series = new SelectList(db.serie, "Id", "Name");
-            ViewBag.Series = series;
 
             if (book == null)
             {
@@ -80,59 +77,164 @@ namespace eLibrary.Controllers
             return View(book);
         }
 
-        [Authorize(Roles = "Администратор, Модератор")]
         [HttpPost]
-        public ActionResult Edit(Book book, string[] selectedAuthors, HttpPostedFileBase uploadImage, HttpPostedFileBase uploadText_fb2)
+        [Authorize(Roles = "Администратор, Модератор")]
+        public ActionResult Edit(Book book, int[] selectAuthor, HttpPostedFileBase uploadImage,
+            HttpPostedFileBase uploadText_fb2, HttpPostedFileBase uploadText_txt, HttpPostedFileBase uploadText_epub, int? selectSerie)
         {
-            Book newBook = db.book.Find(book.Id);
+                book.Authors.Clear();
 
-            newBook.Name = book.Name;
-            newBook.GenreId = book.GenreId;
-            newBook.SerieId = book.SerieId;
-            newBook.ImprintYear = book.ImprintYear;
-            newBook.Annotation = book.Annotation;
+                Book newBook = db.book.Find(book.Id);
 
-            if (uploadImage != null)
-            {
-                byte[] imageData = null;
-                // считываем переданный файл в массив байтов
-                using (var binaryReader = new BinaryReader(uploadImage.InputStream))
+                newBook.Name = book.Name;
+                newBook.GenreId = book.GenreId;
+                newBook.SerieId = book.SerieId;
+                newBook.ImprintYear = book.ImprintYear;
+                newBook.Annotation = book.Annotation;
+
+                if (selectAuthor != null)
                 {
-                    imageData = binaryReader.ReadBytes(uploadImage.ContentLength);
+                    newBook.Authors.Clear();
+                    foreach (var c in db.author.Where(co => selectAuthor.Contains(co.Id)))
+                    {
+                        book.Authors.Add(c);
+                    }
+                    newBook.Authors = book.Authors;
                 }
-                // установка массива байтов
-                newBook.Image = imageData;
-            }
-            if (uploadText_fb2 != null)
-            {
-                byte[] uploadTextFb2 = null;
-                // считываем переданный файл в массив байтов
-                using (var binaryReader = new BinaryReader(uploadText_fb2.InputStream))
-                {
-                    uploadTextFb2 = binaryReader.ReadBytes(uploadText_fb2.ContentLength);
-                }
-                // установка массива байтов
-                newBook.Text_fb2 = uploadTextFb2;
-            }
 
-            newBook.Authors.Clear();
-            if (selectedAuthors != null)
-            {
-                //получаем выбранных авторов (потом может быть будем парсить из строки)
-                //foreach (var c in db.author.Where(co => selectedAuthors.Contains(co.Id)))
-                //{
-                //    newBook.Authors.Add(c);
-                //}
-                foreach (var c in db.author.Where(co => selectedAuthors.Contains(co.Family)))
+                if (uploadImage != null)
                 {
-                    newBook.Authors.Add(c);
+                    byte[] uploadImageNew = null;
+                    // считываем переданный файл в массив байтов
+                    using (var binaryReader = new BinaryReader(uploadImage.InputStream))
+                    {
+                        uploadImageNew = binaryReader.ReadBytes(uploadImage.ContentLength);
+                    }
+                    // установка массива байтов
+                    newBook.Image = uploadImageNew;
                 }
-            }
 
-            db.Entry(newBook).State = EntityState.Modified;
-            db.SaveChanges();
-            return RedirectToAction("Index");
+                if (uploadText_fb2 != null)
+                {
+                    byte[] uploadTextFb2 = null;
+                    // считываем переданный файл в массив байтов
+                    using (var binaryReader = new BinaryReader(uploadText_fb2.InputStream))
+                    {
+                        uploadTextFb2 = binaryReader.ReadBytes(uploadText_fb2.ContentLength);
+                    }
+                    // установка массива байтов
+                    newBook.Text_fb2 = uploadTextFb2;
+                }
+
+
+                if (uploadText_txt != null)
+                {
+                    byte[] uploadTextTxt = null;
+                    // считываем переданный файл в массив байтов
+                    using (var binaryReader = new BinaryReader(uploadText_txt.InputStream))
+                    {
+                        uploadTextTxt = binaryReader.ReadBytes(uploadText_txt.ContentLength);
+                    }
+                    // установка массива байтов
+                    newBook.Text_txt = uploadTextTxt;
+                }
+
+
+                if (uploadText_epub != null)
+                {
+                    byte[] uploadTextEpub = null;
+                    // считываем переданный файл в массив байтов
+                    using (var binaryReader = new BinaryReader(uploadText_epub.InputStream))
+                    {
+                        uploadTextEpub = binaryReader.ReadBytes(uploadText_epub.ContentLength);
+                    }
+                    // установка массива байтов
+                    newBook.Text_epub = uploadTextEpub;
+                }
+
+                if (selectSerie != null)
+                {
+                    newBook.SerieId = (int) selectSerie;
+                }
+                else newBook.SerieId = 1;
+
+
+                db.Entry(newBook).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
         }
+
+        //[Authorize(Roles = "Администратор, Модератор")]
+        //public ActionResult Edit(int id = 0)
+        //{
+        //    Book book = db.book.Find(id);
+
+        //    SelectList genres = new SelectList(db.genre, "Id", "Name");
+        //    ViewBag.Genres = genres;
+
+        //    SelectList series = new SelectList(db.serie, "Id", "Name");
+        //    ViewBag.Series = series;
+
+        //    if (book == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(book);
+        //}
+
+        //[Authorize(Roles = "Администратор, Модератор")]
+        //[HttpPost]
+        //public ActionResult Edit(Book book, string[] selectedAuthors, HttpPostedFileBase uploadImage, HttpPostedFileBase uploadText_fb2)
+        //{
+        //    Book newBook = db.book.Find(book.Id);
+
+        //    newBook.Name = book.Name;
+        //    newBook.GenreId = book.GenreId;
+        //    newBook.SerieId = book.SerieId;
+        //    newBook.ImprintYear = book.ImprintYear;
+        //    newBook.Annotation = book.Annotation;
+
+        //    if (uploadImage != null)
+        //    {
+        //        byte[] imageData = null;
+        //        // считываем переданный файл в массив байтов
+        //        using (var binaryReader = new BinaryReader(uploadImage.InputStream))
+        //        {
+        //            imageData = binaryReader.ReadBytes(uploadImage.ContentLength);
+        //        }
+        //        // установка массива байтов
+        //        newBook.Image = imageData;
+        //    }
+        //    if (uploadText_fb2 != null)
+        //    {
+        //        byte[] uploadTextFb2 = null;
+        //        // считываем переданный файл в массив байтов
+        //        using (var binaryReader = new BinaryReader(uploadText_fb2.InputStream))
+        //        {
+        //            uploadTextFb2 = binaryReader.ReadBytes(uploadText_fb2.ContentLength);
+        //        }
+        //        // установка массива байтов
+        //        newBook.Text_fb2 = uploadTextFb2;
+        //    }
+
+        //    newBook.Authors.Clear();
+        //    if (selectedAuthors != null)
+        //    {
+        //        //получаем выбранных авторов (потом может быть будем парсить из строки)
+        //        //foreach (var c in db.author.Where(co => selectedAuthors.Contains(co.Id)))
+        //        //{
+        //        //    newBook.Authors.Add(c);
+        //        //}
+        //        foreach (var c in db.author.Where(co => selectedAuthors.Contains(co.Family)))
+        //        {
+        //            newBook.Authors.Add(c);
+        //        }
+        //    }
+
+        //    db.Entry(newBook).State = EntityState.Modified;
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         [Authorize(Roles = "Администратор, Модератор")]
         public ActionResult Create()

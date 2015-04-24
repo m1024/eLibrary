@@ -103,6 +103,7 @@ textarea {
     padding: 10px;
     width: 100%;
     box-sizing: border-box;
+    color: #008cba;
 }
 .genre-li a {
     text-decoration: none;
@@ -146,4 +147,9 @@ textarea {
 }
 #dragon2 {
     left: 63%;
+}
+
+.search-field {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

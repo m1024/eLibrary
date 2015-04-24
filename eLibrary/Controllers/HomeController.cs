@@ -23,24 +23,39 @@ namespace eLibrary.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult FindBook()
+        public ActionResult FindBook(string general)
         {
+            ViewBag.general = general;
             return View();
         }
 
-        [AllowAnonymous]
-        [HttpPost]
-        public ActionResult FindBook(string bookName)
+        public ActionResult AuthorSearch(string authorName)
         {
-            IEnumerable<Book> findBook = null;
-            if (bookName != null)
+            //IEnumerable<Author> findAuthors = null;
+            List<Author> authorsList = new List<Author>();
+            if (authorName != null)
             {
-                findBook = from book in db.book.Include(u => u.Serie).Include(u=>u.Genre)
-                   where book.Name==bookName
-                   select book;
-            }
+                string[] words = authorName.Split(new char[] {' ', ','});
 
-            return View(findBook.ToList());
+                IEnumerable<Author> newAuthors = null;
+                foreach (var w in words)
+                {
+                    if (w.Trim() != "") 
+                    newAuthors = from author in db.author
+                                  where author.Family.Contains(w.Trim()) 
+                                  || author.Name.Contains(w.Trim()) || author.Patronymic.Contains(w.Trim())
+                                  select author;
+                    foreach (var author in newAuthors)
+                    {
+                        authorsList.Add(author);
+                    }
+                }
+            }
+            if (authorsList == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(authorsList);
         }
 
         public ActionResult BookSearch(string bookName)
@@ -80,6 +95,11 @@ namespace eLibrary.Controllers
         {
             var genres = db.genre.ToList();
             return PartialView(genres);
+        }
+
+        public RedirectToRouteResult RedirectToFind(string searchText)
+        {
+            return RedirectToAction("FindBook", "Home", new { general = searchText });
         }
     }
 }

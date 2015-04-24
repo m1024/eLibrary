@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using eLibrary.Models;
+using System.Data.Entity;
 
 namespace eLibrary.Controllers
 {
@@ -46,6 +47,25 @@ namespace eLibrary.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Books(int? id)
+        {
+            try
+            {
+                IEnumerable<Book> books = null;
+                books = from book in db.book.Include(u => u.Authors).Include(u => u.Serie)
+                    where id == book.GenreId
+                    select book;
+                return View(books);
+            }
+            catch
+            {
+                ViewBag.result = "не найдено";
+                return View();
+            }       
         }
     }
 }

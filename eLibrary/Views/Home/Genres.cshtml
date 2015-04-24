@@ -4,9 +4,9 @@
     @foreach (var item in Model)
     {
         <li>
-            <div class="btn btn-default genre-list">
-                <a class="">@item.Name</a>
-            </div>
+            @*<div class="btn btn-default genre-list">*@
+                <a class="btn btn-default genre-list" href="Genres/Books/@item.Id">@item.Name</a>
+            @*</div>*@
         </li>
     }
 </ul>

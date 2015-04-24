@@ -2,8 +2,9 @@
 
 <div id="">
 
-    @if (Model != null)
+    @if (@Model != null && @Model.Count()!=0)
     {
+        <h4>Найденные серии:</h4>
         <table class="table">
         @foreach (var item in Model)
         {

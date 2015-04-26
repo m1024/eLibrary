@@ -2,7 +2,6 @@
 @model IEnumerable<eLibrary.Models.Author>
 
 <div id="searchAuthorsResults">
-    <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <table class="table">
                 @if (@Model != null && @Model.Count() != 0)
@@ -48,7 +47,7 @@
                                 </td>
                             }
                             <td>
-                                @Html.ActionLink("Подробнее", "../Author/ShowBook", new { id = item.Id })
+                                @Html.ActionLink("Подробнее", "../Author/ShowAuthor", new { id = item.Id })
                             </td>
                         </tr>
                     }
@@ -56,5 +55,4 @@
 
             </table>
         </div>
-    </div>
 </div>

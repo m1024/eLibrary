@@ -89,7 +89,7 @@ namespace eLibrary.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Администратор, Модератор")]
-        public ActionResult Edit(Book book, int[] selectAuthor, HttpPostedFileBase uploadImage,
+        public RedirectToRouteResult Edit(Book book, int[] selectAuthor, HttpPostedFileBase uploadImage,
             HttpPostedFileBase uploadText_fb2, HttpPostedFileBase uploadText_txt, HttpPostedFileBase uploadText_epub, int? selectSerie)
         {
                 book.Authors.Clear();
@@ -171,7 +171,7 @@ namespace eLibrary.Controllers
 
                 db.Entry(newBook).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ShowBook", "Book", new { id = newBook.Id });
         }
 
         [Authorize(Roles = "Администратор, Модератор")]
@@ -188,7 +188,7 @@ namespace eLibrary.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Администратор, Модератор")]
-        public ActionResult Create(Book book,  int[] selectAuthor, HttpPostedFileBase uploadImage, HttpPostedFileBase uploadText_fb2,
+        public RedirectToRouteResult Create(Book book,  int[] selectAuthor, HttpPostedFileBase uploadImage, HttpPostedFileBase uploadText_fb2,
             HttpPostedFileBase uploadText_txt, HttpPostedFileBase uploadText_epub, int? selectSerie)
         {
             //if (ModelState.IsValid) //почему-то не проходит когда все хорошо
@@ -263,7 +263,12 @@ namespace eLibrary.Controllers
 
                 db.book.Add(book);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                IEnumerable<Book> findBook = from bookT in db.book.Include(u => u.Serie).Include(u => u.Genre)
+                           where bookT.Name == book.Name
+                           select bookT;
+
+                return RedirectToAction("ShowBook", "Book", new { id = findBook.Last().Id });
             }
 
 
@@ -274,7 +279,7 @@ namespace eLibrary.Controllers
             ViewBag.Series = series;
 
 
-            return View(book);
+            return RedirectToAction("Index");
         }
 
 

@@ -131,6 +131,9 @@ textarea {
 .pages {
     margin-bottom: 20px;
 }
+.left-margin {
+    margin-right: 10px;
+}
 /*.header {
     height: 50px;
     margin-top: 0;

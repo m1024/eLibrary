@@ -14,10 +14,10 @@
             </p>
             }
 
-            @Html.ActionLink("Первая", "Read", new { id = Model.Id, pageNumber = 0}, new { @class = "label label-primary" })
-            @Html.ActionLink("Предыдущая", "Read", new { id = Model.Id, pageNumber = ViewBag.currentPage - 1 }, new { @class = "label label-primary" })
-            @Html.ActionLink("Следующая", "Read", new { id = Model.Id, pageNumber = ViewBag.currentPage + 1 }, new { @class = "label label-primary" })
-            @Html.ActionLink("Последняя", "Read", new { id = Model.Id, pageNumber = @ViewBag.lastPage }, new { @class = "label label-primary" })
+            @Html.ActionLink("Первая", "Read", new { id = Model.Id, pageNumber = 0 }, new { @class = "btn btn-default btn-sm" })
+            @Html.ActionLink("Предыдущая", "Read", new { id = Model.Id, pageNumber = ViewBag.currentPage - 1 }, new { @class = "btn btn-default btn-sm" })
+            @Html.ActionLink("Следующая", "Read", new { id = Model.Id, pageNumber = ViewBag.currentPage + 1 }, new { @class = "btn btn-default btn-sm" })
+            @Html.ActionLink("Последняя", "Read", new { id = Model.Id, pageNumber = @ViewBag.lastPage }, new { @class = "btn btn-default btn-sm" })
 
 
         </div>

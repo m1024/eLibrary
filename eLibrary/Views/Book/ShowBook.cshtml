@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = "ShowBook";
 }
-    <div class="row">
         <div class="col-md-6 col-md-offset-1">
             <div class="">
                 <h2>@Model.Name</h2>
@@ -11,10 +10,8 @@
 
             @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
             {
-                <td>
-                    @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }, new { @class = "label label-primary" })
-                    @Html.ActionLink("Удалить", "Delete", new { id = Model.Id }, new { @class = "label label-primary" })
-                </td>
+                    @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm left-margin" })
+                    @Html.ActionLink("Удалить", "Delete", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm left-margin" })
             }
             
             @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор")
@@ -23,19 +20,19 @@
                 if (Model.Text_fb2 != null)
                 {
 
-                    @Html.ActionLink("Загрузить fb2", "GetFile_fb2", new { id = Model.Id }, new { @class = "label label-primary" })
+                    @Html.ActionLink("Загрузить fb2", "GetFile_fb2", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm left-margin" })
                 }
                 if (Model.Text_txt != null)
                 {
-                    @Html.ActionLink("Загрузить txt", "GetFile_txt", new { id = Model.Id }, new { @class = "label label-primary" })
+                    @Html.ActionLink("Загрузить txt", "GetFile_txt", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm left-margin" })
                 }
                 if (Model.Text_epub != null)
                 {
-                    @Html.ActionLink("Загрузить epub", "GetFile_epub", new { id = Model.Id }, new { @class = "label label-primary" })
+                    @Html.ActionLink("Загрузить epub", "GetFile_epub", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm left-margin" })
                 }
                 if (Model.Text_txt != null)
                 {
-                    @Html.ActionLink("Читать", "Read", new {id = Model.Id}, new {@class = "label label-primary"})
+                    @Html.ActionLink("Читать", "Read", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm left-margin" })
                 }
             }
 
@@ -72,7 +69,15 @@
                     </div>
                 </div>
             }
-
+            @if (@Model.ImprintYear != 0)
+            {
+                <div>
+                    <label class="bold">Год:</label>
+                    <div>
+                        <p>@Model.ImprintYear</p>
+                    </div>
+                </div>
+            }
             @if (@Model.Annotation != "")
             {
                 <div>
@@ -95,9 +100,8 @@
                 }
             }
         </div>
-    </div>
 
-<div class="row">
+
     <div class="col-md-7 col-md-offset-1">
 
 
@@ -121,7 +125,6 @@
             }
         }
     </div>
-</div>
 
 <script>
     //$('#showComments').click(function () {

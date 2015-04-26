@@ -4,15 +4,14 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Редактирование</h2>
 @using (Html.BeginForm("Create", "Author", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <form class="">
         @Html.ValidationSummary(true)
 
-        <div class="row">
 
             <div class="col-sm-7 col-sm-offset-1">
+                <h2>Добавление автора</h2>
                 <div class="form-group">
                     <label>Изображение</label>
                     <input type="file" name="uploadImage" class="form-control"/>
@@ -56,6 +55,6 @@
 
             <div class="col-sm-2">
             </div>
-        </div>
+
     </form>
 }

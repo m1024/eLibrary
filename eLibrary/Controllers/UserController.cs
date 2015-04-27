@@ -91,7 +91,7 @@ namespace HelpDeskTrain.Controllers
         {
             SelectList roles = new SelectList(db.role, "Id", "Name");
             ViewBag.Roles = roles;
-            return View("Create");
+            return View("CreateUser");
         } 
 
         [HttpPost]

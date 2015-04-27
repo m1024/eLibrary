@@ -278,6 +278,7 @@
     <Content Include="Views\Book\Edit.cshtml" />
     <Content Include="Views\Home\AuthorSearch.cshtml" />
     <Content Include="Views\Author\BooksByAuthor.cshtml" />
+    <Content Include="Views\User\CreateUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

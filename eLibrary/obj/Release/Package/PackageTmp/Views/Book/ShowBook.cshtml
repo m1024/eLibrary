@@ -1,0 +1,150 @@
+﻿@model eLibrary.Models.Book
+
+@{
+    ViewBag.Title = "ShowBook";
+}
+        <div class="col-md-6 col-md-offset-1">
+            <div class="">
+                <h2>@Model.Name</h2>
+            </div>
+
+            @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
+            {
+                    @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm left-margin" })
+                    @Html.ActionLink("Удалить", "Delete", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm left-margin" })
+            }
+            
+            @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор")
+             || HttpContext.Current.User.IsInRole("Пользователь"))
+            {
+                if (Model.Text_fb2 != null)
+                {
+
+                    @Html.ActionLink("Загрузить fb2", "GetFile_fb2", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm left-margin" })
+                }
+                if (Model.Text_txt != null)
+                {
+                    @Html.ActionLink("Загрузить txt", "GetFile_txt", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm left-margin" })
+                }
+                if (Model.Text_epub != null)
+                {
+                    @Html.ActionLink("Загрузить epub", "GetFile_epub", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm left-margin" })
+                }
+                if (Model.Text_txt != null)
+                {
+                    @Html.ActionLink("Читать", "Read", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm left-margin" })
+                }
+            }
+
+
+            <div>
+                <label class="bold">Автор:</label>
+                <div>
+                    @foreach (var c in Model.Authors)
+                    {
+                        <div>
+                            @c.Family
+                            <label> </label>
+                            @c.Name
+                            <label> </label>
+                            @c.Patronymic
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div>
+                <label class="bold">Жанр:</label>
+                <div>
+                    @Model.Genre.Name
+                </div>
+            </div>
+
+            @if (@Model.Serie.Name != "Без серии")
+            {
+                <div>
+                    <label class="bold">Серия:</label>
+                    <div>
+                        @Model.Serie.Name
+                    </div>
+                </div>
+            }
+            @if (@Model.ImprintYear != 0)
+            {
+                <div>
+                    <label class="bold">Год:</label>
+                    <div>
+                        <p>@Model.ImprintYear</p>
+                    </div>
+                </div>
+            }
+            @if (@Model.Annotation != "")
+            {
+                <div>
+                    <label class="bold">Аннотация:</label>
+                    <div>
+                        <p>@Model.Annotation</p>
+                    </div>
+                </div>
+            }
+        </div>
+
+
+        <div class="col-md-3 col-md-offset-1">
+            @if (Model != null)
+            {
+                if (Model.Image != null)
+                {
+                    @Html.Raw("<img style='width:80%' src=\"data:image/jpeg;base64,"
+                          + Convert.ToBase64String(Model.Image) + "\" />")
+                }
+            }
+        </div>
+
+
+    <div class="col-md-7 col-md-offset-1">
+
+
+        <div id="comments">
+            @Ajax.ActionLink("Комментарии", "ShowComments", "Comments", new { bookId = @Model.Id }, new AjaxOptions { UpdateTargetId = "comments" }, new { id = "showComments" })
+        </div>
+
+        @*<a href="~/Comments/ShowComments/@Model.Id">Войти</a>*@
+
+        @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор")
+             || HttpContext.Current.User.IsInRole("Пользователь"))
+        {
+            using (Ajax.BeginForm("addComment", "Comments", new AjaxOptions {UpdateTargetId = "comments"}))
+            {
+                <div class="comment">
+                    <input type="hidden" name="bookId" value="@Model.Id"/>
+                    @*<input type="hidden" name="userId" value="@HttpContext.User.Identity.Name"/>*@
+                    <textarea name="Text" placeholder="Оставьте комментарий" style="width: 100%;"></textarea>
+                    <button id="sendComment" type="submit" class="btn btn-success">Отправить</button>
+                </div>
+            }
+        }
+    </div>
+
+<script>
+    //$('#showComments').click(function () {
+    //    $(this).attr("hidden", "hidden");
+    //});
+    $('#showComments').click();
+    $('#sendComment').click(function () {
+        window.location.reload();
+
+        //alert.delay(1000)("1");
+        //$('#showComments').delay(1000).click();
+    });
+    //setTimeout(function () {
+    //    // Ваш скрипт
+    //}, 1000); // время в мс
+
+
+    //$('#sendComment').click(function () {
+    //    alert("1");
+    //    $('#showComments').click();
+    //    alert("1");
+    //});
+</script>

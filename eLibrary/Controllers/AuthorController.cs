@@ -149,6 +149,12 @@ namespace eLibrary.Controllers
         {
             return PartialView(db.author.Find(id).Books.ToList());
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
+        }
     }
 
 }

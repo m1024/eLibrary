@@ -1,0 +1,60 @@
+﻿@using eLibrary.Models
+@using Microsoft.Ajax.Utilities
+@model IEnumerable<Book>
+
+@{
+    ViewBag.Title = null;
+}
+
+<div>
+    @using (Ajax.BeginForm("BookSearch", null, new AjaxOptions {UpdateTargetId = "searchresults"}, new {@class = "col-md-10 col-md-offset-1 search-field"}))
+    {
+        <input id="generalSearchText" type="text" name="bookName" class="col-md-6 input-sm" placeholder="общий поиск" value="@ViewBag.general"/>
+        <input id="generalSearchSubmit" type="submit" value="Искать" class="btn btn-sm btn-success col-md-2"/>   
+    }
+    @using (Ajax.BeginForm("BookSearch", null, new AjaxOptions {UpdateTargetId = "searchresults"}, new {@class = "col-md-10 col-md-offset-1 search-field"}))
+    {
+        <input id="bookSearchText" type="text" name="bookName" class="col-md-6 input-sm" placeholder="введите наименование книги"/>
+        <input id="bookSearchSubmit" type="submit" value="Искать" class="btn btn-sm btn-success col-md-2"/>
+    }
+
+    @using (Ajax.BeginForm("AuthorSearch", null, new AjaxOptions {UpdateTargetId = "searchAuthorsResults"}, new {@class = "col-md-10 col-md-offset-1 search-field"}))
+    {
+        <input id="authorSearchText" type="text" name="authorName" class="col-md-6 input-sm" placeholder="введите имя автора"/>
+        <input id="authorSearchSubmit" type="submit" value="Искать" class="btn btn-sm btn-success col-md-2"/>
+    }
+
+    @using (Ajax.BeginForm("SerieSearch", "Series", null, new AjaxOptions {UpdateTargetId = "searchresultsSerie"}, new {@class = "col-md-10 col-md-offset-1 search-field"}))
+    {
+        <input id="serieSearchText" type="text" name="serieName" class="col-md-6 input-sm" placeholder="введите название серии"/>
+        <input id="serieSearchSubmit" type="submit" value="Искать" class="btn btn-sm btn-success col-md-2"/>
+    }
+    @Html.Partial("BookSearch")
+    @Html.Partial("AuthorSearch")
+    <div class="form-group">
+        <div class="col-md-10 col-md-offset-1">
+            <div id="searchresultsSerie"></div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/scripts/jquery-1.8.2.min.js")
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+</div>
+
+<script>
+    $('#generalSearchSubmit').click(function() {
+        //$('#bookSearchText').val($('#generalSearchText').val());
+        //$('#bookSearchSubmit').click();
+        $('#authorSearchText').val($('#generalSearchText').val());
+        $('#authorSearchSubmit').click();
+        $('#serieSearchText').val($('#generalSearchText').val());
+        $('#serieSearchSubmit').click();
+        $('#authorSearchText').val('');
+        $('#serieSearchText').val('');
+    });
+    $((function () {
+        if ($('#generalSearchText').val().length > 1) {
+            $('#generalSearchSubmit').click();
+        }
+    }));
+</script>

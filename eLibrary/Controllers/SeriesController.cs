@@ -104,5 +104,28 @@ namespace eLibrary.Controllers
             }
             return PartialView(findSerie.ToList());
         }
+
+        [AllowAnonymous]
+        public ActionResult ShowSerie(int? id)
+        {
+            if (id != null)
+            {
+                Series serie = db.serie.Find(id);
+                if (serie == null) return HttpNotFound();
+
+                return View(serie);
+            }
+            else
+                return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult BooksBySerie(int id)
+        {
+            IEnumerable<Book> findBooks = from books in db.book
+                                          where books.SerieId == id
+                                          select books;
+            return PartialView(findBooks.ToList());
+        }
     }
 }

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<eLibrary.Models.Genre>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+<div class="col-md-8 col-md-offset-2">
+    @if (Model != null)
+    {
+        <div class="row">
+            <form method="post" action="~/Genres/Create" class="form-inline padding-bottom">
+                <input type="text" name="genreName" class="input-sm col-md-5" placeholder="жанр">
+                <button type="submit" class="btn btn-sm btn-success col-md-2 col-md-offset-0">Добавить</button>
+            </form>
+        </div>
+
+        <div class="row">
+            <ul class="list-unstyled">
+                @foreach (var item in Model)
+                {
+                    <li>
+                        <div class="col-md-12 genre-li">
+                            <label class="col-md-4">@item.Name</label>
+                            @Html.ActionLink("Удалить", "Delete", new { id = item.Id }, new { @class = "col-md-2 col-md-offset-1" })
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+</div>
+</div>

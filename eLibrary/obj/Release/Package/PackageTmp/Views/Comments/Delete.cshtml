@@ -1,0 +1,19 @@
+﻿@using eLibrary.Models
+@model eLibrary.Models.Comment
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Удаление комментария</h2>
+<dl>
+    <dt>Комментарий</dt>
+    <dd>
+        @Html.DisplayFor(model => model.Text)
+    </dd>
+</dl>
+
+@using (Html.BeginForm())
+{
+    <input type="submit" value="Удалить" />
+}

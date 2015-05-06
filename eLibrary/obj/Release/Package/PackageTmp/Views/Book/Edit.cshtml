@@ -1,0 +1,113 @@
+﻿@model eLibrary.Models.Book
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="col-sm-offset-1 col-sm-10">
+    <div class="row">
+        <div class="col-sm-7">
+            <form method="post" action="" class="form-horizontal" role="form" id="addBookForm" enctype="multipart/form-data">
+                <legend>Редактирование книги</legend>
+
+                <div class="form-group">
+                    <label for="image" class="col-sm-3 control-label">Обложка</label>
+                    <div class="col-sm-9">
+                        <input type="file" class="form-control" name="uploadImage" id="image">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="textFb2" class="col-sm-3 control-label">Книга в fb2</label>
+                    <div class="col-sm-9">
+                        <input type="file" class="form-control" name="uploadText_fb2" id="textFb2">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="textTxt" class="col-sm-3 control-label">Книга в txt</label>
+                    <div class="col-sm-9">
+                        <input type="file" class="form-control" name="uploadText_txt" id="textTxt">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="textEpub" class="col-sm-3 control-label">Книга в epub</label>
+                    <div class="col-sm-9">
+                        <input type="file" class="form-control" name="uploadText_epub" id="textEpub">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="bookName" class="col-sm-3 control-label">Наименование</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="Name" id="bookName" value="@Model.Name">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="bookYear" class="col-sm-3 control-label">Год издания</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="ImprintYear" id="bookYear" value="@Model.ImprintYear">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="annotation" class="col-sm-3 control-label">Аннотация</label>
+                    <div class="col-sm-9">
+                        <textarea cols="36" id="annotation" name="Annotation" rows="9" class="form-control input-sm">@Model.Annotation</textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="genres" class="col-sm-3 control-label">Жанр</label>
+                    <div class="col-sm-9">
+                        @Html.DropDownListFor(model => model.GenreId, ViewBag.Genres as SelectList, new { @id = "genres" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="submit" class="col-sm-3 control-label"></label>
+                    <div class="col-sm-9">
+                        <input type="submit" value="Сохранить" class="btn btn-success btn-xs form-control" id="submit" />
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+        <div class="col-sm-5">
+            @using (Ajax.BeginForm("AuthorSearch", null, new AjaxOptions { UpdateTargetId = "searchresults", InsertionMode = InsertionMode.InsertAfter }, new { @class = "form-horizontal" }))
+            {
+                <legend>Автор</legend>
+                <div class="form-group">
+                    <input type="text" name="authorName" class="col-sm-7 col-sm-offset-1 input-sm" />
+                        <input type="submit" value="Выбрать" class="col-sm-4 btn btn-success btn-sm" />
+                </div>
+            }
+
+            <div class="form-group">
+                @*<label for="searchresults" class="col-sm-3 control-label">Автор</label>*@
+                <div class="col-sm-8">
+                    <div id="searchresults"></div>
+                </div>
+            </div>
+
+            @using (Ajax.BeginForm("SerieSearch", null, new AjaxOptions { UpdateTargetId = "searchresultsSerie" }, new { @class = "form-horizontal" }))
+            {
+                <legend>Серия</legend>
+                <div class="form-group">
+                    <input type="text" name="serieName" class="col-sm-7 col-sm-offset-1 input-sm" />
+                    <input type="submit" value="Выбрать" class="col-sm-4 btn btn-success btn-sm" />
+                </div>
+            }
+
+            <div class="form-group">
+                @*<label for="searchresultsSerie" class="col-sm-3 control-label">Серия</label>*@
+                <div class="col-sm-8">
+                    <div id="searchresultsSerie"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

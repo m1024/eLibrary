@@ -356,7 +356,6 @@ namespace eLibrary.Controllers
             if (pageNumber == null || pageNumber < 0) pageNumber = 0;
 
             byte[] page = new byte[10000]; //считываем по 10 Кбайт
-            //надо бы потом исправить и считывать до пробела, а то буквы разрывает
 
             int startIndex = 0;
             if ((int) pageNumber*10000 > book.Text_txt.Length)
@@ -366,6 +365,16 @@ namespace eLibrary.Controllers
             else
             {
                 startIndex = (int)pageNumber * 10000;
+                if (pageNumber > 0)
+                    //теперь скорректируем чтобы с абзаца начать
+                    for (int i = 0; i < 3000; i++)
+                    {
+                        if (book.Text_txt[startIndex - i] == 10 || book.Text_txt[startIndex - i] == 13)
+                        {
+                            startIndex -= i;
+                            break;
+                        }
+                    }
             }
             
             if (startIndex + 10000 < book.Text_txt.Length)
@@ -377,7 +386,8 @@ namespace eLibrary.Controllers
 
             //оборачиваем в теги <p> вместо символов /r
             string newPage = System.Text.Encoding.UTF8.GetString(page);
-            string[] split = newPage.Split(new Char[] { '\r' }); //делим на абзацы
+            string[] split = newPage.Split(new Char[] { '\r' }); //делим на абзацы 
+            Array.Clear(split,split.Length-1,1); //выкидываем последний неполный абзац
 
             ViewBag.split = split.ToList();
             ViewBag.currentPage = pageNumber;

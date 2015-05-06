@@ -1,0 +1,25 @@
+﻿@using System.Text
+@model eLibrary.Models.Book
+
+@if (Model.Text_txt != null)
+{
+    @*<div class="row">*@
+        
+        <div class="col-md-9 col-md-offset-1" style="margin-bottom: 30px;">
+
+            @foreach (var p in @ViewBag.split)
+            {
+                <p align=" justify">
+            @p
+            </p>
+            }
+
+            @Html.ActionLink("Первая", "Read", new { id = Model.Id, pageNumber = 0 }, new { @class = "btn btn-default btn-sm" })
+            @Html.ActionLink("Предыдущая", "Read", new { id = Model.Id, pageNumber = ViewBag.currentPage - 1 }, new { @class = "btn btn-default btn-sm" })
+            @Html.ActionLink("Следующая", "Read", new { id = Model.Id, pageNumber = ViewBag.currentPage + 1 }, new { @class = "btn btn-default btn-sm" })
+            @Html.ActionLink("Последняя", "Read", new { id = Model.Id, pageNumber = @ViewBag.lastPage }, new { @class = "btn btn-default btn-sm" })
+
+
+        </div>
+    @*</div>*@
+}

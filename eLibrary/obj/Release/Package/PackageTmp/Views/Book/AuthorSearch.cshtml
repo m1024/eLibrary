@@ -1,0 +1,17 @@
+﻿@model IEnumerable<eLibrary.Models.Author>
+
+<div id="searchresults">
+
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <div>
+                <input type="checkbox" name="selectAuthor" value="@item.Id" form="addBookForm"/>
+                    <label>@item.Name @item.Family @item.Patronymic</label>
+                </div>
+            }
+        }
+
+
+</div>

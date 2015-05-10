@@ -42,6 +42,7 @@
                 <div>
                     @foreach (var c in Model.Authors)
                     {
+                        <a href="@Url.Action("ShowAuthor", "Author", new { id = c.Id })">
                         <div>
                             @c.Family
                             <label> </label>
@@ -49,6 +50,7 @@
                             <label> </label>
                             @c.Patronymic
                         </div>
+                    </a>
                     }
                 </div>
             </div>
@@ -56,7 +58,7 @@
             <div>
                 <label class="bold">Жанр:</label>
                 <div>
-                    @Model.Genre.Name
+                    <a href="@Url.Action("Books", "Genres", new { id = Model.Genre.Id })">@Model.Genre.Name</a>
                 </div>
             </div>
 
@@ -65,7 +67,7 @@
                 <div>
                     <label class="bold">Серия:</label>
                     <div>
-                        @Model.Serie.Name
+                        <a href="@Url.Action("ShowSerie", "Series", new { id = Model.Serie.Id })">@Model.Serie.Name</a>
                     </div>
                 </div>
             }
@@ -106,10 +108,9 @@
 
 
         <div id="comments">
-            @Ajax.ActionLink("Комментарии", "ShowComments", "Comments", new { bookId = @Model.Id }, new AjaxOptions { UpdateTargetId = "comments" }, new { id = "showComments" })
+            @{ Html.RenderAction("ShowComments", "Comments", new {bookId = @Model.Id}); }
+            @*@Ajax.ActionLink("Комментарии", "ShowComments", "Comments", new {bookId = @Model.Id}, new AjaxOptions {UpdateTargetId = "comments"}, new {id = "showComments"})*@
         </div>
-
-        @*<a href="~/Comments/ShowComments/@Model.Id">Войти</a>*@
 
         @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор")
              || HttpContext.Current.User.IsInRole("Пользователь"))
@@ -127,24 +128,7 @@
     </div>
 
 <script>
-    //$('#showComments').click(function () {
-    //    $(this).attr("hidden", "hidden");
-    //});
-    $('#showComments').click();
     $('#sendComment').click(function () {
         window.location.reload();
-
-        //alert.delay(1000)("1");
-        //$('#showComments').delay(1000).click();
     });
-    //setTimeout(function () {
-    //    // Ваш скрипт
-    //}, 1000); // время в мс
-
-
-    //$('#sendComment').click(function () {
-    //    alert("1");
-    //    $('#showComments').click();
-    //    alert("1");
-    //});
 </script>

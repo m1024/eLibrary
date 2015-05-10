@@ -1,0 +1,18 @@
+﻿@model eLibrary.Models.Author
+
+@{
+    ViewBag.Title = "Delete";
+}
+    <h2>Удаление автора</h2>
+    <dl>
+        <dt>Фамилия</dt>
+        <dd>
+            @Html.DisplayFor(model => model.Family)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        <input type="submit" value="Удалить" />
+    }

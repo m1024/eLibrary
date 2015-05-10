@@ -150,6 +150,20 @@ namespace eLibrary.Controllers
             return PartialView(db.author.Find(id).Books.ToList());
         }
 
+
+
+        // Просмотр подробных сведений о книге
+        public ActionResult Details(int id)
+        {
+            Author author = db.author.Find(id);
+            if (author != null)
+            {
+                return PartialView("_Delete", author);
+            }
+            return View("Index");
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

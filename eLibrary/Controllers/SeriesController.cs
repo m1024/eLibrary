@@ -13,6 +13,14 @@ namespace eLibrary.Controllers
     {
         private eLibraryContext db = new eLibraryContext();
 
+        [AllowAnonymous]
+        public ActionResult Index()
+        {
+            var series = db.serie.ToList();
+            return View(series);
+        }
+
+
         [Authorize(Roles = "Администратор, Модератор")]
         public ActionResult Main()
         {
@@ -56,6 +64,7 @@ namespace eLibrary.Controllers
         [Authorize(Roles = "Администратор, Модератор")]
         public ActionResult Edit(Series serie)
         {
+            int serieId = serie.Id;
             if (serie == null)
             {
                 return HttpNotFound();
@@ -65,7 +74,7 @@ namespace eLibrary.Controllers
                 db.Entry(serie).State = EntityState.Modified;
                 db.SaveChanges();
             }
-            return RedirectToAction("Main");
+            return RedirectToAction("ShowSerie", new { id = serieId});
         }
 
         [HttpGet]

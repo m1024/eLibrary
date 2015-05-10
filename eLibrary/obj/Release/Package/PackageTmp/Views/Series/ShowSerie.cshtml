@@ -9,14 +9,15 @@
             || HttpContext.Current.User.IsInRole("Пользователь"))
     {
 
-        @Html.ActionLink("Добавить серию", "Main", new { id = Model.Id }, new { @class = "label label-primary" })
-
-        @Html.ActionLink("Редактировать", "Main", new { id = Model.Id }, new { @class = "label label-primary" })
-
-        @Html.ActionLink("Удалить", "Delete", new { id = Model.Id }, new { @class = "label label-primary" })
-
         @Ajax.ActionLink("Редактировать", "Edit", "Series", new {id = Model.Id},
-                        new AjaxOptions {UpdateTargetId = "editForm"}, new {@class = "col-md-2 col-md-offset-1"})
+                             new AjaxOptions { UpdateTargetId = "editForm" }, new { @class = "btn btn-primary btn-sm left-margin" })
+        
+        @Html.ActionLink("Добавить серию", "Main", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm left-margin" })
+
+        @*@Html.ActionLink("Редактировать", "Main", new { id = Model.Id }, new { @class = "label label-primary" })*@
+
+        @Html.ActionLink("Удалить", "Delete", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm" })
+
         <div id="editForm">
 
         </div>

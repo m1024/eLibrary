@@ -1,36 +1,41 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
-@*@Html.Partial("Genres")*@
 
     <div class="header">
         <img src="~/content/images/2.png" height="60" alt="dragon" >
     </div>
 
-
-
-    <div class="wrapper col-md-offset-1">
-        <h4 class="bold">Жанры</h4>
-        <div id="genres" class="col-md-3">
-            @Ajax.ActionLink("Жанры", "Genres", null, null,
-                new AjaxOptions {UpdateTargetId = "genres"}, new {@class = "", id = "genresButton"})
-        </div>
+<div class="wrapper col-md-offset-1">
+    <h4 class="bold">Жанры</h4>
+    <div id="genres" class="col-md-3">
+        @{ Html.RenderAction("Genres"); }
     </div>
+
+    </div>
+
+    @*<div class="wrapper col-md-offset-1">
+            <h4 class="bold">Жанры</h4>
+            <div id="genres" class="col-md-3">
+                @Ajax.ActionLink("Жанры", "Genres", null, null,
+                    new AjaxOptions {UpdateTargetId = "genres"}, new {@class = "", id = "genresButton"})
+            </div>
+        </div>*@
 
 
     <div class="col-md-8 col-md-offset-0">
         @using (Html.BeginForm("RedirectToFind", "Home"))
-{
-    <input  type="text" name="searchText" class="col-md-9 input-sm" placeholder="введите слово для поиска"/>
-        <input type="submit" value="Искать" class="btn btn-sm btn-success col-md-2 col-md-offset-0" style="margin-left: -1px;" />
-}
+        {
+            <input type="text" name="searchText" class="col-md-9 input-sm" placeholder="введите слово для поиска" />
+            <input type="submit" value="Искать" class="btn btn-sm btn-success col-md-2 col-md-offset-0" style="margin-left: -1px;" />
+        }
     </div>
-    
+
     <div id="results"></div>
     <div class="col-md-7 col-md-offset-0">
         @Html.Partial("BookSearch")
     </div>
 
-<script>
-    $('#genresButton').click();
-</script>
+    <script>
+        $('#genresButton').click();
+    </script>

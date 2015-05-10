@@ -17,6 +17,10 @@
                     @Ajax.ActionLink("Редактировать", "Edit", "Series", new {id = @item.Id},
                         new AjaxOptions {UpdateTargetId = "editForm"}, new {@class = "col-md-2 col-md-offset-1"})
                 </td>
+
+                <td>
+                    @Html.ActionLink("Подробнее", "ShowSerie", new { id = item.Id }, new { @class = "col-md-2 col-md-offset-1" })
+                </td>
             </tr>
         }
         </table>

@@ -13,11 +13,21 @@
             @p
             </p>
             }
+            
+            <ul class="pagination">
+                <li>@Html.ActionLink("<<", "Read", new { id = Model.Id, pageNumber = ViewBag.currentPage - 1 })</li>
+                <li>@Html.ActionLink("1", "Read", new { id = Model.Id, pageNumber = 0 })</li>
+                <li>@Html.ActionLink("2", "Read", new { id = Model.Id, pageNumber = 1 })</li>
+                <li><a> . . . </a> </li>
+                <li><a href="@Url.Action("Read", "Book", new { id = Model.Id, pageNumber = ViewBag.lastPage - 1 })">@(ViewBag.lastPage - 1)</a></li>
+                <li><a href="@Url.Action("Read", "Book", new { id = Model.Id, pageNumber = ViewBag.lastPage })">@ViewBag.lastPage</a></li>
+                <li>@Html.ActionLink(">>", "Read", new { id = Model.Id, pageNumber = ViewBag.currentPage + 1 })</li>
+            </ul>
 
-            @Html.ActionLink("Первая", "Read", new { id = Model.Id, pageNumber = 0 }, new { @class = "btn btn-default btn-sm" })
+            @*@Html.ActionLink("Первая", "Read", new { id = Model.Id, pageNumber = 0 }, new { @class = "btn btn-default btn-sm" })
             @Html.ActionLink("Предыдущая", "Read", new { id = Model.Id, pageNumber = ViewBag.currentPage - 1 }, new { @class = "btn btn-default btn-sm" })
             @Html.ActionLink("Следующая", "Read", new { id = Model.Id, pageNumber = ViewBag.currentPage + 1 }, new { @class = "btn btn-default btn-sm" })
-            @Html.ActionLink("Последняя", "Read", new { id = Model.Id, pageNumber = @ViewBag.lastPage }, new { @class = "btn btn-default btn-sm" })
+            @Html.ActionLink("Последняя", "Read", new { id = Model.Id, pageNumber = @ViewBag.lastPage }, new { @class = "btn btn-default btn-sm" })*@
 
 
         </div>

@@ -12,7 +12,7 @@
     {
         <a href="Create" class="btn btn-primary btn-sm">Добавить книгу</a>
     }
-    <table class="table">
+    <table class="table table-hover">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
@@ -39,69 +39,76 @@
         </tr>
 
         @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
+{
+    <tbody style="border: 1px;">
+        <tr>
+            <td>
+                <a href="@Url.Action("ShowBook", "Book", new {id = item.Id})">@item.Name</a>
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Serie.Name)
-                </td>
+            <td>
+                <a href="@Url.Action("ShowSerie", "Series", new { id = item.Serie.Id })">@item.Serie.Name</a>
+            </td>
 
-                @*<td>
-                    @if (item.Annotation != null && item.Annotation.Length > 100)
+            <td>
+                <a href="@Url.Action("Books", "Genres", new { id = item.Genre.Id })">@item.Genre.Name</a>
+                @*@Html.DisplayFor(modelItem => item.Genre.Name)*@
+            </td>
+
+            <td>
+                @foreach (Author c in item.Authors)
+            {
+                <a href="@Url.Action("ShowAuthor", "Author", new { id = c.Id })">
+                    @c.Family
+                    @if (c.Name != null)
                     {
-                        <label for="Annotation">
-                            @item.Annotation.Remove(100)
-                            ...
-                        </label>
+                    <label>@c.Name.Remove(1).</label>
                     }
-                </td>*@
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.Genre.Name)
-                </td>
-
-                <td>
-                    @foreach (Author c in item.Authors)
+                    @if (c.Patronymic != null)
                     {
-                        @c.Name
-                        @c.Family
-                        @c.Patronymic
+                    <label>@c.Patronymic.Remove(1).</label>
                     }
+                </a>
+            }
 
-                </td>
-                @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор")
+            </td>
+            @*@if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор")
                      || HttpContext.Current.User.IsInRole("Пользователь"))
-                {
-                    <td>
-                        @if (item.Text_fb2 != null)
-                        {
-
-                            @Html.ActionLink("Загрузить fb2", "GetFile_fb2", new {id = item.Id})
-
-                        }
-                    </td>
-                }
-                @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
-                {
-                    <td>
-                        @Html.ActionLink("Редактировать", "Edit", new {id = item.Id})
-                        @Html.ActionLink("Удалить", "Delete", new {id = item.Id})
-                    </td>
-                }
+            {
                 <td>
-                    @Html.ActionLink("Подробнее", "ShowBook", new {id = item.Id})
+                    @if (item.Text_fb2 != null)
+                    {
+
+                        @Html.ActionLink("Загрузить fb2", "GetFile_fb2", new { id = item.Id })
+
+                    }
                 </td>
-            </tr>
-        }
+            }*@
+            @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
+            {
+                <td>
+                    @Html.ActionLink("Редактировать", "Edit", new {id = item.Id})</td>
+                <td>   @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+                </td>
+            }
+        </tr>
+    </tbody>
+}
     </table>
 </div>
 <div class="col-md-10 col-md-offset-1">
-    @Html.ActionLink("Первая", "Index", new {id = 0}, new {@class = "btn btn-default btn-sm pages"})
+
+    <ul class="pagination">
+        <li>@Html.ActionLink("<<", "Index", new {id  = ViewBag.page - 1})</li>
+        <li>@Html.ActionLink("1", "Index", new {id = 0})</li>
+        <li><a> . . . </a> </li>
+        <li><a href="@Url.Action("Index", "Book", new { id = ViewBag.lastPage + 1 })">@(ViewBag.lastPage+1)</a></li>
+        <li>@Html.ActionLink(">>", "Index", new {id = ViewBag.page + 1})</li>
+    </ul>
+
+    @*@Html.ActionLink("Первая", "Index", new {id = 0}, new {@class = "btn btn-default btn-sm pages"})
     @Html.ActionLink("Предыдущая", "Index", new {id = ViewBag.page - 1}, new {@class = "btn btn-default btn-sm pages"})
     @Html.ActionLink("Следующая", "Index", new {id = ViewBag.page + 1}, new {@class = "btn btn-default btn-sm pages"})
-    @Html.ActionLink("Последняя", "Index", new {id = ViewBag.lastPage + 1}, new {@class = "btn btn-default btn-sm pages"})
+    @Html.ActionLink("Последняя", "Index", new {id = ViewBag.lastPage + 1}, new {@class = "btn btn-default btn-sm pages"})*@
 </div>
 

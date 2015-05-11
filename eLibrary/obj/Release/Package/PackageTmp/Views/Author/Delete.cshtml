@@ -4,17 +4,18 @@
 @{
     ViewBag.Title = "Delete";
 }
+<div class="col-md-offset-1">
+    <h2>Удаление автора</h2>
+    <dl>
+        <dt>Фамилия</dt>
+        <dd>
+            @Html.DisplayFor(model => model.Family)
+        </dd>
 
-<h2>Удаление автора</h2>
-<dl>
-    <dt>Фамилия</dt>
-    <dd>
-        @Html.DisplayFor(model => model.Family)
-    </dd>
+    </dl>
 
-</dl>
-
-@using (Html.BeginForm())
-{
-    <input type="submit" value="Удалить" />
-}
+    @using (Html.BeginForm())
+    {
+        <input type="submit" value="Удалить" />
+    }
+</div>

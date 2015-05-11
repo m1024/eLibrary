@@ -74,12 +74,14 @@
             @if (@Model.ImprintYear != 0)
             {
                 <div>
-                    <label class="bold">Год:</label>
-                    <div>
-                        <p>@Model.ImprintYear</p>
-                    </div>
+                    <label class="bold">Год:  </label>  @Model.ImprintYear
                 </div>
             }
+
+            <div>
+                <label class="bold">Скачиваний:</label>  @Model.Downloads
+            </div>
+
             @if (@Model.Annotation != "")
             {
                 <div>

@@ -17,7 +17,11 @@ namespace eLibrary.Models
         [MaxLength(50, ErrorMessage = "Превышена максимальная длина записи")]
         public string Name { get; set; }
 
+        public float Rating { get; set; }
 
+        public int Votes { get; set; }
+
+        public int Downloads { get; set; }
         [Display(Name = "Год создания")]
         public int ImprintYear { get; set; }
 

@@ -15,46 +15,80 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-default my-navbar">
-        <ul class="nav navbar-nav">
-            <li><a href="~/Home/Index">Главная</a></li>
+<div id="wrap" class="">
+    <div id="main" class="col-md-12">
+        <nav class="navbar navbar-default my-navbar">
+            <ul class="nav navbar-nav">
+                <li><a href="~/Home/Index">Главная</a></li>
 
-            <li><a href="~/Home/FindBook">Поиск</a></li>
+                <li><a href="~/Home/FindBook">Поиск</a></li>
 
-            <li><a href="~/Author/Index">Авторы</a></li>
-            <li><a href="~/Book/Index">Книги</a></li>
+                <li><a href="~/Author/Index">Авторы</a></li>
+                <li><a href="~/Book/Index">Книги</a></li>
 
-            @if (ViewContext.HttpContext.User.IsInRole("Администратор"))
-            {
-                <li><a href="~/User/Index">Список пользователей</a></li>
-                <li><a href="~/Genres/Index">Жанры</a></li>
-            }
+                @if (ViewContext.HttpContext.User.IsInRole("Администратор"))
+                {
+                    <li><a href="~/User/Index">Список пользователей</a></li>
+                    <li><a href="~/Genres/Index">Жанры</a></li>
+                }
 
-            @if (ViewContext.HttpContext.User.IsInRole("Администратор") || ViewContext.HttpContext.User.IsInRole("Модератор"))
-            {
-                <li><a href="~/Series/Main">Серии</a></li>
-            }
-            else
-            {
-                <li><a href="~/Series/Index">Серии</a></li>
-            }
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            @if (!(ViewContext.HttpContext.User.IsInRole("Администратор") || ViewContext.HttpContext.User.IsInRole("Модератор")
+                @if (ViewContext.HttpContext.User.IsInRole("Администратор") || ViewContext.HttpContext.User.IsInRole("Модератор"))
+                {
+                    <li><a href="~/Series/Main">Серии</a></li>
+                }
+                else
+                {
+                    <li><a href="~/Series/Index">Серии</a></li>
+                }
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                @if (!(ViewContext.HttpContext.User.IsInRole("Администратор") || ViewContext.HttpContext.User.IsInRole("Модератор")
                    || ViewContext.HttpContext.User.IsInRole("Пользователь")))
-            {
-                <li class=""><a href="~/User/CreateUser">Регистрация</a></li>
-                <li class=""><a href="~/Account/Login">Войти</a></li>
-            }
-            @if (ViewContext.HttpContext.User.IsInRole("Администратор") || ViewContext.HttpContext.User.IsInRole("Модератор")
+                {
+                    <li class=""><a href="~/User/CreateUser">Регистрация</a></li>
+                    <li class=""><a href="~/Account/Login">Войти</a></li>
+                }
+                @if (ViewContext.HttpContext.User.IsInRole("Администратор") || ViewContext.HttpContext.User.IsInRole("Модератор")
                  || ViewContext.HttpContext.User.IsInRole("Пользователь"))
-            {
-                <li><a href="~/Account/LogOff">Выйти</a></li>
-            }
-        </ul>
-    </nav>
-    @RenderBody()
-    @Scripts.Render("~/bundles/jquery")
-    @RenderSection("scripts", required: false)
+                {
+                    <li><a href="~/Account/LogOff">Выйти</a></li>
+                }
+            </ul>
+        </nav>
+        @RenderBody()
+
+    </div>
+</div>
+
+
+
+        @*<div id="wrap">
+            <div id="main" class="container clear-top">
+                <p>Your content here</p>
+            </div>
+        </div>*@
+<footer class="footer text-center">
+    © Электронная библиотека "Книжный червь", 2015. Контактный e-mail: book.worm.ru@gmail.com
+</footer>
+
+        @*<nav class="navbar navbar-default navbar-collapse">
+                <div class="container">
+                    Футер
+                </div>
+            </nav>*@
+        @*<div class="clearfix"></div>
+                <div class="footer-push col-xs-12"></div>
+            </div>
+            <div class="footer col-xs-12">
+                <div>
+                    © Электронная библиотека "Книжный червь", 2015. Контактный e-mail: book.worm.ru@gmail.com |
+                    <a href="">Авторам и правообладателям</a>
+                </div>
+            </div>*@
+
+
+
+        @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
 </body>
 </html>

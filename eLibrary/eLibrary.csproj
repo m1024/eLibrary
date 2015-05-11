@@ -156,6 +156,11 @@
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\cover %2811%29.jpg" />
+    <Content Include="Content\images\cover %2813%29.jpg" />
+    <Content Include="Content\images\cover %282%29.jpg" />
+    <Content Include="Content\images\cover %289%29.jpg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\images\1.png" />
     <Content Include="Content\images\2.png" />
     <Content Include="Content\images\5.png" />
@@ -196,6 +201,10 @@
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Properties\PublishProfiles\NOTEBOOK.pubxml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -267,6 +276,7 @@
     <Content Include="Views\Series\BooksBySerie.cshtml" />
     <Content Include="Views\Author\_Delete.cshtml" />
     <Content Include="Views\Series\Index.cshtml" />
+    <Content Include="Views\Home\MostDownloaded.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

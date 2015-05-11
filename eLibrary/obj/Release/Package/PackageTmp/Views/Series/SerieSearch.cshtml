@@ -5,23 +5,24 @@
     @if (@Model != null && @Model.Count()!=0)
     {
         <h4>Найденные серии:</h4>
-        <table class="table">
+        
+        <table class="table table-hover">
         @foreach (var item in Model)
         {
-            <tr>
-                <td class="col-md-4">@item.Name</td>
-                <td>
-                    @Html.ActionLink("Удалить", "Delete", new {id = item.Id}, new {@class = "col-md-2 col-md-offset-1"})
-                </td>
-                <td>
-                    @Ajax.ActionLink("Редактировать", "Edit", "Series", new {id = @item.Id},
-                        new AjaxOptions {UpdateTargetId = "editForm"}, new {@class = "col-md-2 col-md-offset-1"})
-                </td>
+            <tbody style="border: 1px">
+            <tr><td>
+                <a href="@Url.Action("ShowSerie", "Series", new {id = item.Id})" class="">@item.Name</a>
+            </td>
+            <td>
+                @Html.ActionLink("Удалить", "Delete", new {id = item.Id}, new {@class = ""})
+            </td>
+            <td>
+                @Ajax.ActionLink("Редактировать", "Edit", "Series", new {id = @item.Id},
+                    new AjaxOptions {UpdateTargetId = "createForm"}, new {@class = ""})
+            </td>
 
-                <td>
-                    @Html.ActionLink("Подробнее", "ShowSerie", new { id = item.Id }, new { @class = "col-md-2 col-md-offset-1" })
-                </td>
-            </tr>
+        </tr>
+        </tbody>
         }
         </table>
     }

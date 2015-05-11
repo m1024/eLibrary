@@ -1,10 +1,13 @@
 ﻿@model  IEnumerable<eLibrary.Models.Genre>
 
-<ul class="list-unstyled">
-    @foreach (var item in Model)
-    {
-        <li>
-                @Html.ActionLink(@item.Name, "Books", "Genres", new { id = item.Id }, new { @class = "btn btn-default genre-list" })
-        </li>
-    }
-</ul>
+<div class="genres ">
+    <ul class="list-unstyled" style="color: gray;">
+        @foreach (var item in Model)
+        {
+            <li>
+                @Html.ActionLink(@item.Name, "Books", "Genres", new { id = item.Id }, 
+                new { @class = "btn btn-default genre-list",style="color: #333;" })
+            </li>
+        }
+    </ul>
+</div>

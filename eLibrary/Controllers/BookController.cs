@@ -55,6 +55,9 @@ namespace eLibrary.Controllers
         public FileContentResult GetFile_fb2(int id = 0)
         {
             Book book = db.book.Find(id);
+            book.Downloads += 1;
+            db.Entry(book).State = EntityState.Modified;
+            db.SaveChanges();
             return new FileContentResult(book.Text_fb2,"text");
         }
 
@@ -62,6 +65,9 @@ namespace eLibrary.Controllers
         public FileContentResult GetFile_txt(int id = 0)
         {
             Book book = db.book.Find(id);
+            book.Downloads += 1;
+            db.Entry(book).State = EntityState.Modified;
+            db.SaveChanges();
             return new FileContentResult(book.Text_txt, "text");
         }
 
@@ -69,6 +75,9 @@ namespace eLibrary.Controllers
         public FileContentResult GetFile_epub(int id = 0)
         {
             Book book = db.book.Find(id);
+            book.Downloads += 1;
+            db.Entry(book).State = EntityState.Modified;
+            db.SaveChanges();
             return new FileContentResult(book.Text_epub, "text");
         }
 
@@ -259,7 +268,7 @@ namespace eLibrary.Controllers
                     book.SerieId = (int) selectSerie;
                 }
                 else book.SerieId = 1;
-
+                book.Downloads = 0;
 
                 db.book.Add(book);
                 db.SaveChanges();

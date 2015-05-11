@@ -97,6 +97,13 @@ namespace eLibrary.Controllers
             return PartialView(genres);
         }
 
+
+        public ActionResult MostDownloaded()
+        {
+            var books = db.book.OrderByDescending(i => i.Downloads).ToList().Take(10);
+            return PartialView(books);
+        }
+
         public RedirectToRouteResult RedirectToFind(string searchText)
         {
             return RedirectToAction("FindBook", "Home", new { general = searchText });

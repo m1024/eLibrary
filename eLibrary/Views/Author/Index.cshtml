@@ -87,7 +87,16 @@
             </tr>
         }
     </table>
+</div>
+<div class="col-md-10 col-md-offset-1">
 
-    </div>
+    <ul class="pagination">
+        <li>@Html.ActionLink("<<", "Index", new { id = ViewBag.page - 1 })</li>
+        <li>@Html.ActionLink("1", "Index", new { id = 0 })</li>
+        <li><a> . . . </a> </li>
+        <li><a href="@Url.Action("Index", "Author", new { id = ViewBag.lastPage + 1 })">@(ViewBag.lastPage + 1)</a></li>
+        <li>@Html.ActionLink(">>", "Index", new { id = ViewBag.page + 1 })</li>
+    </ul>
 
+</div>
 

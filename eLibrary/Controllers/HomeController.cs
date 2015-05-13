@@ -45,13 +45,14 @@ namespace eLibrary.Controllers
                                   where author.Family.Contains(w.Trim()) 
                                   || author.Name.Contains(w.Trim()) || author.Patronymic.Contains(w.Trim())
                                   select author;
+                    if (newAuthors != null)
                     foreach (var author in newAuthors)
                     {
                         authorsList.Add(author);
                     }
                 }
             }
-            if (authorsList == null)
+            if (!authorsList.Any())
             {
                 return HttpNotFound();
             }
@@ -60,6 +61,8 @@ namespace eLibrary.Controllers
 
         public ActionResult BookSearch(string bookName)
         {
+
+
             IEnumerable<Book> findBook = null;
             if (bookName != null)
             {

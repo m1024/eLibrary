@@ -23,7 +23,7 @@ namespace eLibrary.Controllers
         public ActionResult Index(int? id)
         {
             if (id < 0) id = 0;
-            else if (id > db.author.Count() / 20) id = db.author.Count() / 20;
+            else if (id > db.author.Count() / 10) id = db.author.Count() / 10;
             var authors = new object();
             if (id == null)
                 authors = db.author.OrderBy(i => i.Id).Take(10).ToList();
@@ -32,7 +32,7 @@ namespace eLibrary.Controllers
                 authors = db.author.OrderBy(i => i.Id).Skip((int)id * 10).Take(10).ToList();
             }
             ViewBag.page = id == null ? 0 : id;
-            ViewBag.lastPage = db.author.Count() / 20;
+            ViewBag.lastPage = db.author.Count() / 10;
             return View(authors);
 
         }

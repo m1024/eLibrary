@@ -59,8 +59,11 @@
                 @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
                 {
                     <td>
-                        @Html.ActionLink("Редактировать", "Edit", new { id = item.Id })
-                        @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+                        @Html.ActionLink("Редактировать", "Edit", new {id = item.Id})
+                    </td>
+                    <td>
+                        @*<a data-toggle="modal" href="@Url.Action("Delete", "Book", new {id = item.Id})" data-target="#myModal" class="btn btn-primary btn-sm left-margin">Удалить</a>*@
+                        @Html.ActionLink("Удалить", "Delete", "Book", new {id = item.Id}, null)
                     </td>
                 }
                 <td>

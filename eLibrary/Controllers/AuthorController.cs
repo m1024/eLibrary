@@ -108,7 +108,7 @@ namespace eLibrary.Controllers
             {
                 return HttpNotFound();
             }
-            return View(b);
+            return PartialView(b);
         }
 
         [HttpPost, ActionName("Delete")]

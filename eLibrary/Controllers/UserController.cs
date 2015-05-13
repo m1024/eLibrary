@@ -98,18 +98,24 @@ namespace HelpDeskTrain.Controllers
         [AllowAnonymous]
         public ActionResult CreateUser(User user)
         {
-            user.RoleId = 2;
-            if (ModelState.IsValid)
+            	
+            User user1 = db.user.FirstOrDefault(u => u.Login == user.Login);
+            if (user1 == null)
             {
-                db.user.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                user.RoleId = 2;
+                if (ModelState.IsValid)
+                {
+                    db.user.Add(user);
+                    db.SaveChanges();
+                    ViewBag.Message = "Вы успешно зарегистрировались";
+                    return RedirectToAction("Index","Home");
+                }
 
-            SelectList roles = new SelectList(db.role, "Id", "Name");
-            ViewBag.Roles = roles;
-
-            return View("Index");
+                SelectList roles = new SelectList(db.role, "Id", "Name");
+                ViewBag.Roles = roles;
+            }   
+            else ModelState.AddModelError("Login", "Пользователь с таким логином уже существует");
+            return View("CreateUser");
         }
     }
 }

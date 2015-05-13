@@ -226,6 +226,7 @@
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Author\Delete.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -251,7 +252,6 @@
     <Content Include="Views\Author\Index.cshtml" />
     <Content Include="Views\Author\Edit.cshtml" />
     <Content Include="Views\Author\Create.cshtml" />
-    <Content Include="Views\Author\Delete.cshtml" />
     <Content Include="Views\Book\ShowBook.cshtml" />
     <Content Include="Views\Home\BookSearch.cshtml" />
     <Content Include="Views\Book\AuthorSearch.cshtml" />
@@ -277,6 +277,7 @@
     <Content Include="Views\Author\_Delete.cshtml" />
     <Content Include="Views\Series\Index.cshtml" />
     <Content Include="Views\Home\MostDownloaded.cshtml" />
+    <Content Include="Views\Author\_DeleteAuthor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

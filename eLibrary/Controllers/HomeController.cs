@@ -54,27 +54,26 @@ namespace eLibrary.Controllers
             }
             if (!authorsList.Any())
             {
-                return HttpNotFound();
+                ViewBag.Result = "Авторы не найдены";
             }
             return PartialView(authorsList);
         }
 
         public ActionResult BookSearch(string bookName)
         {
-
-
             IEnumerable<Book> findBook = null;
             if (bookName != null)
             {
                 findBook = from book in db.book.Include(u => u.Serie).Include(u => u.Genre)
                            where book.Name.Contains(bookName)
                            select book;
+                findBook = findBook.ToList();
             }
-            if (findBook == null)
+            if (!findBook.Any())
             {
-                return HttpNotFound();
+                ViewBag.Result = "Книги не найдены";
             }
-            return PartialView(findBook.ToList());
+            return PartialView(findBook);
         }
 
         public ActionResult SelectGenre(int? genreId)

@@ -6,7 +6,7 @@
             <table class="table">
                 @if (@Model != null && @Model.Count() != 0)
                 {
-                            <h4>Найденные авторы:</h4>
+                    <h4>Найденные авторы:</h4>
                     <tr>
                         <th>
                             @Html.DisplayNameFor(model => model.Family)
@@ -52,7 +52,10 @@
                         </tr>
                     }
                 }
-
+                else
+                {
+                    <h4>@ViewBag.Result</h4>
+                }
             </table>
         </div>
 </div>

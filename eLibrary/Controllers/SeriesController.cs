@@ -96,22 +96,23 @@ namespace eLibrary.Controllers
         public ActionResult SerieSearch(string serieName)
         {
             IEnumerable<Series> findSerie = null;
-            if (serieName != "")
-            {
-                if (serieName == "all")
-                {
-                    findSerie = db.serie.ToList();
-                }
-                else
+            //if (serieName != "")
+            //{
+            //    if (serieName == "all")
+            //    {
+            //        findSerie = db.serie.ToList();
+            //    }
+            //    else
                 findSerie = from series in db.serie
                             where series.Name.Contains(serieName)
                             select series;
-            }
-            if (findSerie == null)
+                findSerie = findSerie.ToList();
+            //}
+            if (!findSerie.Any())
             {
-                return HttpNotFound();
+                ViewBag.Result = "Серии не найдены";
             }
-            return PartialView(findSerie.ToList());
+            return PartialView(findSerie);
         }
 
         [AllowAnonymous]

@@ -156,6 +156,7 @@
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\ajax-loader.gif" />
     <Content Include="Content\images\cover %2811%29.jpg" />
     <Content Include="Content\images\cover %2813%29.jpg" />
     <Content Include="Content\images\cover %282%29.jpg" />

@@ -10,8 +10,7 @@
 </div>
 
     <div class="col-md-10 col-md-offset-1">
-        @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор")
-            || HttpContext.Current.User.IsInRole("Пользователь"))
+        @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
         {
 
             @Html.ActionLink("Добавить автора", "Create", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm left-margin" })

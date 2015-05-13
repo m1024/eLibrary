@@ -21,7 +21,7 @@ namespace eLibrary.Controllers
         public ActionResult Index(int? id)
         {
             if (id < 0) id = 0;
-
+            else if (id > db.book.Count() / 10) id = db.book.Count() / 10;
             var books = new object();
             if (id == null)
                 books = db.book.Include(u => u.Genre).Include(u => u.Serie).OrderBy(i => i.Id).Take(10).ToList();
@@ -30,7 +30,7 @@ namespace eLibrary.Controllers
                 books = db.book.Include(u => u.Genre).Include(u => u.Serie).OrderBy(i => i.Id).Skip((int)id * 10).Take(10).ToList();
             }
             ViewBag.page = id == null ? 0 : id;
-            ViewBag.lastPage = db.book.Count()/20;
+            ViewBag.lastPage = db.book.Count()/10;
             return View(books);
         }
 

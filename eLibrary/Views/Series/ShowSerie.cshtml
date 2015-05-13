@@ -5,8 +5,7 @@
 }
 
 <div class="col-md-10 col-md-offset-1">
-    @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор")
-            || HttpContext.Current.User.IsInRole("Пользователь"))
+    @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
     {
 
         @Ajax.ActionLink("Редактировать", "Edit", "Series", new {id = Model.Id},
@@ -31,7 +30,7 @@
         <div class="">
             <h2>@Model.Name</h2>
         </div>
-        @if (@Model.Description != "")
+        @*@if (@Model.Description != "")
         {
             <div>
                 <label class="bold">Описание:</label>
@@ -39,6 +38,24 @@
                     <p>@Model.Description</p>
                 </div>
             </div>
+        }*@
+        @if (@Model.Description != null)
+        {
+            if (Model.Description != "")
+            {
+                <label class="bold">Описание:</label>
+                <div style="background-color: #f5f5f5; padding: 30px; border: 1px solid #ccc; text-indent: 40px; margin-bottom: 20px;">
+                    @{
+                string newPage = Model.Description;
+                string[] split = newPage.Split(new Char[] { '\r' }); //делим на абзацы
+
+                foreach (var p in split)
+                {
+                    <p align="justify">@p</p>
+                }
+                    }
+                </div>
+            }
         }
     </div>
 }

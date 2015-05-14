@@ -62,11 +62,4 @@
         </div>
         
     }
-    <div id="books">
-        @Ajax.ActionLink("Книги", "BooksByAuthor", "Author", new { id = @Model.Id }, new AjaxOptions { UpdateTargetId = "books" }, new{id="showBooks", @class="col-md-offset-1"})
-    </div>
-
-
-<script>
-    $('#showBooks').click();
-</script>
+    @{@Html.Action("BooksByAuthor", "Author", new { id = @Model.Id})}

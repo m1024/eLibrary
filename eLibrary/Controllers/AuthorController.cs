@@ -158,7 +158,17 @@ namespace eLibrary.Controllers
         [AllowAnonymous]
         public ActionResult BooksByAuthor(int id)
         {
-            return PartialView(db.author.Find(id).Books.ToList());
+            IEnumerable<Book> books = db.author.Find(id).Books;
+            int i = 0;
+            Book[] rezBooks = new Book[books.Count()];
+            foreach (var b in books)
+            {
+                rezBooks[i] = db.book.Include(u=>u.Genre).Include(u=>u.Serie).FirstOrDefault(u => u.Id == b.Id);
+                i++;
+            }
+            ViewBag.rez = rezBooks;
+
+            return PartialView();
         }
 
 

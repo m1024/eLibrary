@@ -4,15 +4,31 @@
     ViewBag.Title = "Index";
 }
 
-    <div class="col-md-8 col-md-offset-2">
+@*Модальное окно удаления*@
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div id="dialogContent" class="modal-content"></div>
+    </div>
+</div>
+
+<script>
+    $('body').on('hidden.bs.modal', '.modal', function() {
+        //    $(this).removeData('bs.modal');
+        location.reload();
+    });
+</script>
+
+<div class="col-md-8 col-md-offset-2">
         @if (Model != null)
 {           
             
         @Ajax.ActionLink("Добавить серию", "Create", "Series", null,  
-            new AjaxOptions { UpdateTargetId = "createForm" }, new {@class = "btn btn-default btn-xs margin-bottom"})    
+            new AjaxOptions { UpdateTargetId = "createForm" }, new {@class = "btn btn-default btn-sm margin-bottom"})    
+            
+        @Html.ActionLink("Просмотреть все", "Index", "Series", new { @class = "btn btn-default btn-sm margin-bottom" })
          
-        @Ajax.ActionLink("Просмотреть все", "SerieSearch", "Series", new {serieName = "all"},
-             new AjaxOptions { UpdateTargetId = "searchresultsSerie" }, new { @class = "btn btn-default btn-xs margin-bottom" })        
+        @*@Ajax.ActionLink("Просмотреть все", "SerieSearch", "Series", new {serieName = "all"},
+             new AjaxOptions { UpdateTargetId = "searchresultsSerie" }, new { @class = "btn btn-default btn-xs margin-bottom" })*@        
 
          <div id="createForm"></div>
             

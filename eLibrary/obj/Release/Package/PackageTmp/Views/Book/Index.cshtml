@@ -5,9 +5,20 @@
     ViewBag.Title = "Список книг";
 }
 
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div id="dialogContent" class="modal-content"></div>
+    </div>
+</div>
+
+<script>
+    $('body').on('hidden.bs.modal', '.modal', function() {
+        //    $(this).removeData('bs.modal');
+        location.reload();
+    });
+</script>
 
 <div class="col-md-10 col-md-offset-1">
-
     @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
     {
         <a href="Create" class="btn btn-primary btn-sm">Добавить книгу</a>
@@ -88,7 +99,8 @@
             {
                 <td>
                     @Html.ActionLink("Редактировать", "Edit", new {id = item.Id})</td>
-                <td>   @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+                <td> @*@Html.ActionLink("Удалить", "Delete", new { id = item.Id })*@
+                    <a data-toggle="modal" href="@Url.Action("Delete", "Book", new {id = item.Id})" data-target="#deleteModal">Удалить</a>
                 </td>
             }
         </tr>

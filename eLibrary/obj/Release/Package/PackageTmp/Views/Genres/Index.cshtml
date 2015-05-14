@@ -4,6 +4,19 @@
     ViewBag.Title = "Index";
 }
 
+@*Модальное окно удаления*@
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div id="dialogContent" class="modal-content"></div>
+    </div>
+</div>
+
+<script>
+    $('body').on('hidden.bs.modal', '.modal', function() {
+        //    $(this).removeData('bs.modal');
+        location.reload();
+    });
+</script>
 
 <div class="col-md-8 col-md-offset-2">
     @if (Model != null)
@@ -22,7 +35,8 @@
                     <li>
                         <div class="col-md-12 genre-li">
                             <label class="col-md-4">@item.Name</label>
-                            @Html.ActionLink("Удалить", "Delete", new { id = item.Id }, new { @class = "col-md-2 col-md-offset-1" })
+                            @*@Html.ActionLink("Удалить", "Delete", new { id = item.Id }, new { @class = "col-md-2 col-md-offset-1" })*@
+                            <a data-toggle="modal" href="@Url.Action("Delete", "Genres", new {id = item.Id})" data-target="#deleteModal">Удалить</a>
                         </div>
                     </li>
                 }

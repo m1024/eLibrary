@@ -26,7 +26,7 @@
             {
                     @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm left-margin" })
                     @*@Html.ActionLink("Удалить", "Delete", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm left-margin" })*@
-                     <a data-toggle="modal" href="@Url.Action("Delete", "Book", new {id = Model.Id})" data-target="#deleteModal">Удалить</a>
+    <a data-toggle="modal" class="btn btn-primary btn-sm left-margin" href="@Url.Action("Delete", "Book", new {id = Model.Id})" data-target="#deleteModal">Удалить</a>
             }
             
             @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор")
@@ -157,7 +157,7 @@
                 <div class="comment">
                     <input type="hidden" name="bookId" value="@Model.Id"/>
                     @*<input type="hidden" name="userId" value="@HttpContext.User.Identity.Name"/>*@
-                    <textarea name="Text" placeholder="Оставьте комментарий" style="width: 100%;"></textarea>
+                    <textarea  name="Text" placeholder="Оставьте комментарий" style="width: 100%; resize: none;"></textarea>
                     <button id="sendComment" type="submit" class="btn btn-success">Отправить</button>
                 </div>
             }

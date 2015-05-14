@@ -2,69 +2,82 @@
 @using eLibrary.Models
 @model IEnumerable<eLibrary.Models.Book>
 
-<div id="searchresults">
-        <div class="col-md-10 col-md-offset-1">
-            <table class="table">
-                @if (Model != null)
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div id="dialogContent" class="modal-content"></div>
+    </div>
+</div>
+
+<script>
+    $('body').on('hidden.bs.modal', '.modal', function() {
+        //    $(this).removeData('bs.modal');
+        location.reload();
+    });
+</script>
+
+    <div class="col-md-10 col-md-offset-1">
+        <table class="table">
+            @if (Model != null)
+            {
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SerieId)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Authors)
+                    </th>
+                    <th></th>
+                    @*<th></th>*@
+                    <th></th>
+                </tr>
+                foreach (var item in Model)
                 {
                     <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Name)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.SerieId)
-                        </th>
+                        <td>
+                            <a href="@Url.Action("ShowBook", "Book", new {id = item.Id})">@item.Name</a>
+                        </td>
 
-                        <th>
-                            @Html.DisplayNameFor(model => model.Authors)
-                        </th>
-                        <th></th>
-                        @*<th></th>*@
-                        <th></th>
-                    </tr>
-                    foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Name)
-                            </td>
+                        <td>
+                            <a href="@Url.Action("ShowSerie", "Series", new {id = item.Serie.Id})">@item.Serie.Name</a>
+                        </td>
 
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Serie.Name)
-                            </td>
-
-                            <td>
-                                @foreach (Author c in item.Authors)
-                                {
-                                    @c.Name
+                        <td>
+                            @foreach (Author c in item.Authors)
+                            {
+                                <a href="@Url.Action("ShowAuthor", "Author", new {id = c.Id})">
                                     @c.Family
-                                    @c.Patronymic
-                                }
-
-                            </td>
-
-                            @*@if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор") ||
-                         HttpContext.Current.User.IsInRole("Пользователь"))
-                            {
-                                <td>
-                                    @Html.ActionLink("Загрузить fb2", "../Book/GetFile_fb2", new { id = item.Id }) |
-                                </td>
-                            }*@
-
-                            @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
-                            {
-                                <td>
-                                    @Html.ActionLink("Редактировать", "Edit","Book", new { id = item.Id },null) |
-                                    @Html.ActionLink("Удалить", "Delete","Book", new { id = item.Id },null)
-                                </td>
+                                    @if (c.Name != null)
+                                    {
+                                        <label>@c.Name.Remove(1).</label>
+                                    }
+                                    @if (c.Patronymic != null)
+                                    {
+                                        <label>@c.Patronymic.Remove(1).</label>
+                                    }
+                                </a>
                             }
-                            <td>
-                                @Html.ActionLink("Подробнее", "ShowBook", "Book", new { id = item.Id },null)
-                            </td>
-                        </tr>
-                    }
-                }
 
-            </table>
-        </div>
+                        </td>
+
+                        @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
+                        {
+                            <td>
+                                <a href="@Url.Action("Edit", "Book", new {id = item.Id})">Редактировать</a>
+                            </td>
+                            <td>
+                                <a data-toggle="modal" href="@Url.Action("Delete", "Book", new {id = item.Id})" data-target="#deleteModal">Удалить</a>
+                            </td>
+                        }
+                    </tr>
+                }
+            }
+
+        </table>
     </div>
+
+

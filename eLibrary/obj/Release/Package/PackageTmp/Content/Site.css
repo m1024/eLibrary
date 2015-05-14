@@ -150,7 +150,7 @@ textarea {
 }
 .header img {
     position: absolute;
-    left: 21%;
+    left: 23%;
     top: -15px;
 }
 .search-field {
@@ -367,4 +367,7 @@ footer {
         color: #777; 
         font-size: 0.9em; 
         padding-top: 0px;
+}
+body p {
+    text-indent: 40px;
 }

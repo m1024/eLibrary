@@ -1,23 +1,30 @@
 ﻿@model eLibrary.Models.Series
+<div id="create">
+    <form method="post" action="Create" class="form-horizontal" role="form">
+        <legend>Добавление серии</legend>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="name">Наименование серии:</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" id="name" name="Name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="description">Описание:</label>
+            <div class="col-sm-7">
+                <textarea cols="36" id="description" name="Description" rows="7" class="form-control input-sm" style="resize: none;"></textarea>
+            </div>
+        </div>
 
-<form method="post" action="Create" class="form-horizontal" role="form">
-    <legend>Добавление серии</legend>
-    <div class="form-group">
-        <label class="control-label col-sm-2" for="name">Наименование серии:</label>
-        <div class="col-sm-7">
-            <input type="text" class="form-control" id="name" name="Name">
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-7">
+                <button type="submit" class="btn btn-success col-sm-3">Сохранить</button>
+                <button type="" id="cancel" class="btn btn-default col-sm-3 col-md-offset-6">Отмена</button>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-sm-2" for="description">Описание:</label>
-        <div class="col-sm-7">
-            <textarea cols="36" id="description" name="Description" rows="7" class="form-control input-sm"></textarea>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-7">
-            <button type="submit" class="btn btn-default">Сохранить</button>
-        </div>
-    </div>
-</form>
+    </form>
+</div>
+<script>
+    $("cancel").click(function () {
+        $("create").empty();
+    });
+</script>

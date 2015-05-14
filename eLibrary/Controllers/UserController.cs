@@ -76,14 +76,40 @@ namespace HelpDeskTrain.Controllers
         }
 
 
+        [HttpGet]
         [Authorize(Roles = "Администратор")]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
-            User user = db.user.Find(id);
-            db.user.Remove(user);
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            User b = db.user.Find(id);
+            if (b == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(b);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Администратор")]
+        public ActionResult DeleteConfirmed(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            User b = db.user.Find(id);
+            if (b == null)
+            {
+                return HttpNotFound();
+            }
+            db.user.Remove(b);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
 
         [HttpGet]
         [AllowAnonymous]

@@ -3,6 +3,18 @@
 @{
     ViewBag.Title = "ShowBook";
 }
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div id="dialogContent" class="modal-content"></div>
+    </div>
+</div>
+
+<script>
+    $('body').on('hidden.bs.modal', '.modal', function() {
+        //    $(this).removeData('bs.modal');
+        location.reload();
+    });
+</script>
 
     <div class="col-md-10 col-md-offset-1">
         <h2>@Model.Name</h2>
@@ -13,7 +25,8 @@
             @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
             {
                     @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm left-margin" })
-                    @Html.ActionLink("Удалить", "Delete", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm left-margin" })
+                    @*@Html.ActionLink("Удалить", "Delete", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm left-margin" })*@
+                     <a data-toggle="modal" href="@Url.Action("Delete", "Book", new {id = Model.Id})" data-target="#deleteModal">Удалить</a>
             }
             
             @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор")

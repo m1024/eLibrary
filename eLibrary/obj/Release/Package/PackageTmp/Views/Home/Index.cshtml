@@ -7,126 +7,125 @@
         <img src="~/content/images/2.png" height="60" alt="dragon">
     </div>
 
-    <div class="wrapper  col-md-offset-0" style="margin-left: 5%; ">
+    <div class="wrapper  col-md-offset-0" style="margin-left: 5%;">
         <h4 class="bold">Жанры</h4>
         <div id="genres" class="col-md-2">
             @{ Html.RenderAction("Genres"); }
         </div>
 
-    </div>
+        @*<div class="wrapper col-md-offset-1">
+                    <h4 class="bold">Жанры</h4>
+                    <div id="genres" class="col-md-3">
+                        @Ajax.ActionLink("Жанры", "Genres", null, null,
+                            new AjaxOptions {UpdateTargetId = "genres"}, new {@class = "", id = "genresButton"})
+                    </div>
+                </div>*@
 
-    @*<div class="wrapper col-md-offset-1">
-            <h4 class="bold">Жанры</h4>
-            <div id="genres" class="col-md-3">
-                @Ajax.ActionLink("Жанры", "Genres", null, null,
-                    new AjaxOptions {UpdateTargetId = "genres"}, new {@class = "", id = "genresButton"})
-            </div>
-        </div>*@
-
-    <div class="col-md-7 col-md-offset-0" style=" padding-bottom: 30px;">
-        <div class="col-md-12" style="">
-            @using (Html.BeginForm("RedirectToFind", "Home"))
-            {
-                <input type="text" name="searchText" class="col-md-9 input-sm" placeholder="введите слово для поиска" />
-                <input type="submit" value="Искать" class="btn btn-sm btn-success col-md-3 col-md-offset-0" style="margin-left: -1px;" />
-            }
-        </div>
-
-        <div class="col-md-12" style="text-align: justify; margin-top: 30px; ">
-            <p>
-                Электронные книги в библиотеке разбиты по разделам с удобной навигацией. С помощью поиска по библиотеке вы можете легко найти по автору, названию, жанру или серии и скачать книгу.
-            </p>
-            <p>Зарегистрированные и авторизованные пользователи получают доступ к дополнительным возможностям и могут:</p>
-            <ul>
-                <li>оставлять комментарии к книгам</li>
-                <li>скачивать книги в различных форматах</li>
-                <li>читать книги онлайн</li>
-            </ul>
-
-            <h3 class="">Авторам и владельцам авторских прав</h3>
-            <p> Если вы считаете, что ваши произведения не должны быть размещены на данном сайте - напишите нам и они может быть когда-нибудь будут удалены.</p>
-
-            <h3 class="">Читателям</h3>
-            <p>
-                Все произведения в нашей библиотеке используются для некоммерческих целей. Все имущественные и неимущественные права на книги с данного сайта принадлежат их авторам. Коммерческое использование любой книги без согласия автора или правообладателя запрещено. Копирование произведений осуществляется пользователями сайта исключительно по собственной инициаливе с целью ознакомления перед покупкой физической копии книги. Если вы не согласны с изложенным выше, просьба покинуть сайт.
-            </p>
-        </div>
-    </div>
-
-    @*<div class="col-md-2">@{ Html.RenderAction("MostDownloaded"); }</div>*@
-
-    <div class="col-md-2" style="margin: 0px; margin-top: -40px; margin-right: 20px; ">
-        <h4>Скачиваемые:</h4>
-        <div id="myCarousel" class="carousel slide" data-ride="carousel" style="position: relative;">
-            <!-- Indicators -->
-            @*<ol class=" carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-            <li data-target="#myCarousel" data-slide-to="3"></li>
-            </ol>*@
-
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner" role="listbox" style="text-align: center; ">
-
-                @{ Html.RenderAction("MostDownloaded"); }
-
+        <div class="col-md-7 col-md-offset-0" style="padding-bottom: 30px;">
+            <div class="col-md-12" style="">
+                @using (Html.BeginForm("RedirectToFind", "Home"))
+                {
+                    <input type="text" name="searchText" class="col-md-9 input-sm" placeholder="введите слово для поиска"/>
+                    <input type="submit" value="Искать" class="btn btn-sm btn-success col-md-3 col-md-offset-0" style="margin-left: -1px;"/>
+                }
             </div>
 
-            <!-- Left and right controls -->
-            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"> @*&lsaquo;*@ </span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next" style="position: absolute; right: 0; top: 0;">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"> @*&rsaquo;*@ </span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-    </div>
+            <div class="col-md-12" style="text-align: justify; margin-top: 30px;">
+                <p>
+                    Электронные книги в библиотеке разбиты по разделам с удобной навигацией. С помощью поиска по библиотеке вы можете легко найти по автору, названию, жанру или серии и скачать книгу.
+                </p>
+                <p>Зарегистрированные и авторизованные пользователи получают доступ к дополнительным возможностям и могут:</p>
+                <ul>
+                    <li>оставлять комментарии к книгам</li>
+                    <li>скачивать книги в различных форматах</li>
+                    <li>читать книги онлайн</li>
+                </ul>
 
+                <h3 class="">Авторам и владельцам авторских прав</h3>
+                <p> Если вы считаете, что ваши произведения не должны быть размещены на данном сайте - напишите нам и они может быть когда-нибудь будут удалены.</p>
 
-    <div class="col-md-2" style="margin: 0px; margin-bottom: 30px;">
-        <h4>Рекомендации:</h4>
-        <div id="myCarousel2" class="carousel slide" data-ride="carousel" style="position: relative;">
-            <!-- Indicators -->
-            @*<ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
-                <li data-target="#myCarousel" data-slide-to="3"></li>
-            </ol>*@
-
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner" role="listbox" style="text-align: center;">
-                <div class="item active">
-                    <img style="height: 250px; display: inline-block;" src="~/content/images/cover (2).jpg" >
-                </div>
-
-                <div class="item">
-                    <img style="height: 250px; display: inline-block;" src="~/content/images/cover (13).jpg" >
-                </div>
-
-                <div class="item">
-                    <img style="height: 250px; display: inline-block;" src="~/content/images/cover (9).jpg">
-                </div>
+                <h3 class="">Читателям</h3>
+                <p>
+                    Все произведения в нашей библиотеке используются для некоммерческих целей. Все имущественные и неимущественные права на книги с данного сайта принадлежат их авторам. Коммерческое использование любой книги без согласия автора или правообладателя запрещено. Копирование произведений осуществляется пользователями сайта исключительно по собственной инициаливе с целью ознакомления перед покупкой физической копии книги. Если вы не согласны с изложенным выше, просьба покинуть сайт.
+                </p>
             </div>
-
-            <!-- Left and right controls -->
-            <a class="right carousel-control" href="#myCarousel2" role="button" data-slide="next" 
-               style="position: absolute; right: 0; top: 0; height: 100%; margin-top: 0px; ">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"> @*&rsaquo;*@ </span>
-                <span class="sr-only">Next</span>
-            </a>
-            <a class="left carousel-control" href="#myCarousel2" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"> @*&lsaquo;*@ </span>
-                <span class="sr-only">Previous</span>
-            </a>
-
         </div>
-    </div>
 
-    @*<script>
-        $('#genresButton').click();
-    </script>*@
+        @*<div class="col-md-2">@{ Html.RenderAction("MostDownloaded"); }</div>*@
+
+        <div class="col-md-2" style="margin: 0px; margin-top: -40px; margin-right: 20px;">
+            <h4>Скачиваемые:</h4>
+            <div id="myCarousel" class="carousel slide" data-ride="carousel" style="position: relative;">
+                <!-- Indicators -->
+                @*<ol class=" carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                        <li data-target="#myCarousel" data-slide-to="3"></li>
+                        </ol>*@
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox" style="text-align: center;">
+
+                    @{ Html.RenderAction("MostDownloaded"); }
+
+                </div>
+
+                <!-- Left and right controls -->
+                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"> @*&lsaquo;*@ </span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next" style="position: absolute; right: 0; top: 0;">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"> @*&rsaquo;*@ </span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+
+
+        <div class="col-md-2" style="margin: 0px; margin-bottom: 30px;">
+            <h4>Рекомендации:</h4>
+            <div id="myCarousel2" class="carousel slide" data-ride="carousel" style="position: relative;">
+                <!-- Indicators -->
+                @*<ol class="carousel-indicators">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                            <li data-target="#myCarousel" data-slide-to="2"></li>
+                            <li data-target="#myCarousel" data-slide-to="3"></li>
+                        </ol>*@
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox" style="text-align: center;">
+                    <div class="item active">
+                        <img style="height: 250px; display: inline-block;" src="~/content/images/cover (2).jpg">
+                    </div>
+
+                    <div class="item">
+                        <img style="height: 250px; display: inline-block;" src="~/content/images/cover (13).jpg">
+                    </div>
+
+                    <div class="item">
+                        <img style="height: 250px; display: inline-block;" src="~/content/images/cover (9).jpg">
+                    </div>
+                </div>
+
+                <!-- Left and right controls -->
+                <a class="right carousel-control" href="#myCarousel2" role="button" data-slide="next"
+                   style="position: absolute; right: 0; top: 0; height: 100%; margin-top: 0px;">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"> @*&rsaquo;*@ </span>
+                    <span class="sr-only">Next</span>
+                </a>
+                <a class="left carousel-control" href="#myCarousel2" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"> @*&lsaquo;*@ </span>
+                    <span class="sr-only">Previous</span>
+                </a>
+
+            </div>
+        </div>
+
+        @*<script>
+                    $('#genresButton').click();
+                </script>*@
+    </div>
 </div>

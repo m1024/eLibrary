@@ -3,38 +3,55 @@
 @{
     ViewBag.Title = "Index";
 }
-<div class="col-md-offset-1 col-md-4">
+
+@*Модальное окно удаления*@
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div id="dialogContent" class="modal-content"></div>
+    </div>
+</div>
+
+<script>
+    $('body').on('hidden.bs.modal', '.modal', function() {
+        //    $(this).removeData('bs.modal');
+        location.reload();
+    });
+</script>
+
+<div id="createForm" class="col-md-offset-2 col-md-7"></div>
+<div class="col-md-offset-2 col-md-4">
     <h4>Все серии</h4>
 
     @if (@Model != null && @Model.Count() != 0)
-{
-    <table class="table table-hover">
-                @foreach (var item in Model)
-        {
-            <tbody style="border: 1px">
-            <tr><td>
-                    <a href="@Url.Action("ShowSerie", "Series", new {id = item.Id})" class="">@item.Name</a>
-                </td>
-                @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
-                {
-                    <td>
-                        @Html.ActionLink("Удалить", "Delete", new {id = item.Id}, new {@class = ""})
-
+    {
+        <table class="table table-hover">
+            @foreach (var item in Model)
+            {
+                <tbody style="border: 1px">
+                <tr><td>
+                        <a href="@Url.Action("ShowSerie", "Series", new {id = item.Id})" class="">@item.Name</a>
                     </td>
-                }
-                @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
-                {
-                    <td>
+                    @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
+                    {
+                        <td>
+                            @*@Html.ActionLink("Удалить", "Delete", new {id = item.Id}, new {@class = ""})*@
+                            <a data-toggle="modal" href="@Url.Action("Delete", "Series", new {id = item.Id})" data-target="#deleteModal">Удалить</a>
 
-                        @Ajax.ActionLink("Редактировать", "Edit", "Series", new {id = @item.Id},
-                            new AjaxOptions {UpdateTargetId = "createForm"}, new {@class = ""})
+                        </td>
+                    }
+                    @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
+                    {
+                        <td>
 
-                    </td>
-                }
+                            @Ajax.ActionLink("Редактировать", "Edit", "Series", new {id = @item.Id},
+                                new AjaxOptions {UpdateTargetId = "createForm"}, new {@class = ""})
 
-        </tr>
-        </tbody>
-        }
-    </table>
-}
+                        </td>
+                    }
+
+                </tr>
+                </tbody>
+            }
+        </table>
+    }
 </div>

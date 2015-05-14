@@ -247,7 +247,6 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\Book\Index.cshtml" />
     <Content Include="Views\Book\Create.cshtml" />
-    <Content Include="Views\Book\Delete.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\FindBook.cshtml" />
     <Content Include="Views\Author\Index.cshtml" />
@@ -275,10 +274,12 @@
     <Content Include="Views\User\CreateUser.cshtml" />
     <Content Include="Views\Series\ShowSerie.cshtml" />
     <Content Include="Views\Series\BooksBySerie.cshtml" />
-    <Content Include="Views\Author\_Delete.cshtml" />
     <Content Include="Views\Series\Index.cshtml" />
     <Content Include="Views\Home\MostDownloaded.cshtml" />
-    <Content Include="Views\Author\_DeleteAuthor.cshtml" />
+    <Content Include="Views\Book\Delete.cshtml" />
+    <Content Include="Views\Series\Delete.cshtml" />
+    <Content Include="Views\Genres\Delete.cshtml" />
+    <Content Include="Views\User\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

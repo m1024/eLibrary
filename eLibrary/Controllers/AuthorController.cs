@@ -99,7 +99,8 @@ namespace eLibrary.Controllers
             {
                 db.author.Add(author);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ShowAuthor", "Author", 
+                    new { id = db.author.Where(u => u.Name == author.Name).FirstOrDefault().Id });
             }
 
             return View(author);
@@ -107,7 +108,7 @@ namespace eLibrary.Controllers
 
 
         [HttpGet]
-        [Authorize(Roles = "Администратор")]
+        [Authorize(Roles = "Администратор, Модератор")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -123,7 +124,7 @@ namespace eLibrary.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        [Authorize(Roles = "Администратор")]
+        [Authorize(Roles = "Администратор, Модератор")]
         public ActionResult DeleteConfirmed(int? id)
         {
             if (id == null)

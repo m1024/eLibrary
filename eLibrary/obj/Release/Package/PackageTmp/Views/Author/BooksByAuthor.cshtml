@@ -1,32 +1,112 @@
 ﻿@using eLibrary.Models
-@model IEnumerable<eLibrary.Models.Book>
+@*@using eLibrary.Models
+@model IEnumerable<eLibrary.Models.Book>*@
 
 <div class="col-md-10 col-md-offset-1">
 
     <h3>Книги автора:</h3>
-    <table class="table">
+
+
+        @*@foreach (Book b in ViewBag.rez)
+        {
+            <div>
+                @b.Name
+                @if (b.Genre.Name != null)
+                {
+                    @b.Genre.Name
+                }
+                @b.Serie.Name
+            </div>
+        }*@
+
+    <table class="table table-hover">
         <tr>
+            <th>
+                Наименование
+            </th>
+
+            <th>
+                Серия
+            </th>
+
             @*<th>
+                @Html.DisplayNameFor(model => model.Annotation)
+            </th>*@
+
+            <th>
+                Жанр
+            </th>
+@if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
+{
+    <th></th>
+    <th></th>
+}
+
+        </tr>
+        @foreach (Book item in ViewBag.rez)
+        {
+            <tbody style="border: 1px;">
+            <tr>
+                <td>
+                    <a href="@Url.Action("ShowBook", "Book", new {id = item.Id})">@item.Name</a>
+                </td>
+
+                <td>
+                    <a href="@Url.Action("ShowSerie", "Series", new {id = item.Serie.Id})">@item.Serie.Name</a>
+                </td>
+
+                <td>
+                    <a href="@Url.Action("Books", "Genres", new {id = item.Genre.Id})">@item.Genre.Name</a>
+                    @*@Html.DisplayFor(modelItem => item.Genre.Name)*@
+                </td>
+
+                @*@if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор")
+                                 || HttpContext.Current.User.IsInRole("Пользователь"))
+                        {
+                            <td>
+                                @if (item.Text_fb2 != null)
+                                {
+
+                                    @Html.ActionLink("Загрузить fb2", "GetFile_fb2", new { id = item.Id })
+
+                                }
+                            </td>
+                        }*@
+                @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
+                {
+                    <td>
+                        @Html.ActionLink("Редактировать", "Edit", new {id = item.Id})
+                    </td>
+                    <td>
+                        @Html.ActionLink("Удалить", "Delete", new {id = item.Id})
+                    </td>
+                }
+            </tr>
+            </tbody>
+        }
+
+        @*<tr>
+            <th>
                 @Html.DisplayNameFor(model => model.Name)
-            </th>*@
+            </th>
 
-            @*<th>
+            <th>
                 @Html.DisplayNameFor(model => model.SerieId)
-            </th>*@
+            </th>
 
-            @*<th>
+            <th>
                     @Html.DisplayNameFor(model => model.Annotation)
-                </th>*@
+                </th>
 
-            @*<th>
+            <th>
                 @Html.DisplayNameFor(model => model.GenreId)
-            </th>*@
+            </th>
 
-            @*<th>
+            <th>
                 @Html.DisplayNameFor(model => model.Authors)
-            </th>*@
-            @*<th></th>
-            <th></th>*@
+            </th>
+            <th></th>
+            <th></th>
 
         </tr>
 
@@ -36,12 +116,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
-                @*
+                
                 <td>
                     @Html.DisplayFor(modelItem => item.Serie.Name)
-                </td>*@
+                </td>
 
-                @*<td>
+                <td>
                         @if (item.Annotation != null && item.Annotation.Length > 100)
                         {
                             <label for="Annotation">
@@ -49,7 +129,7 @@
                                 ...
                             </label>
                         }
-                    </td>*@
+                    </td>
 
                 <td>
                     @Html.DisplayFor(modelItem => item.Genre.Name)
@@ -59,14 +139,16 @@
                 @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
                 {
                     <td>
-                        @Html.ActionLink("Редактировать", "Edit", new { id = item.Id })
-                        @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+                        @Html.ActionLink("Редактировать", "Edit", new {id = item.Id})
+                    </td>
+                    <td>
+                        @*<a data-toggle="modal" href="@Url.Action("Delete", "Book", new {id = item.Id})" data-target="#myModal" class="btn btn-primary btn-sm left-margin">Удалить</a>*@
+        @*@Html.ActionLink("Удалить", "Delete", "Book", new {id = item.Id}, null)
                     </td>
                 }
                 <td>
                     @Html.ActionLink("Подробнее", "ShowBook","Book", new { id = item.Id },null)
                 </td>
-            </tr>
-        }
+            </tr>}*@
     </table>
 </div>

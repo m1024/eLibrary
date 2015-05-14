@@ -34,22 +34,6 @@ namespace eLibrary.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Администратор")]
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return HttpNotFound();
-            }
-
-            Genre g = db.genre.Find(id);
-            db.genre.Remove(g);
-            db.SaveChanges();
-
-            return RedirectToAction("Index");
-        }
-
-        [HttpGet]
         [AllowAnonymous]
         public ActionResult Books(int? id)
         {
@@ -66,6 +50,40 @@ namespace eLibrary.Controllers
                 ViewBag.result = "не найдено";
                 return View();
             }       
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Администратор")]
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Genre b = db.genre.Find(id);
+            if (b == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(b);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Администратор")]
+        public ActionResult DeleteConfirmed(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Genre b = db.genre.Find(id);
+            if (b == null)
+            {
+                return HttpNotFound();
+            }
+            db.genre.Remove(b);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

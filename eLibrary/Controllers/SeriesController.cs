@@ -39,7 +39,7 @@ namespace eLibrary.Controllers
         [Authorize(Roles = "Администратор, Модератор")]
         public ActionResult Create(Series serie)
         {
-            if (serie.Name != "")
+            if (ModelState.IsValid)
             {
                 db.serie.Add(serie);
                 db.SaveChanges();
@@ -77,6 +77,7 @@ namespace eLibrary.Controllers
             return RedirectToAction("ShowSerie", new { id = serieId});
         }
 
+
         [HttpGet]
         [Authorize(Roles = "Администратор, Модератор")]
         public ActionResult Delete(int? id)
@@ -85,28 +86,54 @@ namespace eLibrary.Controllers
             {
                 return HttpNotFound();
             }
-
             Series s = db.serie.Find(id);
-            db.serie.Remove(s);
-            db.SaveChanges();
-
-            return RedirectToAction("Main");
+            if (s == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(s);
         }
+
+        [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Администратор, Модератор")]
+        public ActionResult DeleteConfirmed(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Series b = db.serie.Find(id);
+            if (b == null)
+            {
+                return HttpNotFound();
+            }
+            db.serie.Remove(b);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+
+
+
+
+
 
         public ActionResult SerieSearch(string serieName)
         {
             IEnumerable<Series> findSerie = null;
             //if (serieName != "")
             //{
-            //    if (serieName == "all")
-            //    {
-            //        findSerie = db.serie.ToList();
-            //    }
-            //    else
+                if (serieName == "all")
+                {
+                    findSerie = db.serie.ToList();
+                }
+                else
+                { 
                 findSerie = from series in db.serie
                             where series.Name.Contains(serieName)
                             select series;
                 findSerie = findSerie.ToList();
+                }
             //}
             if (!findSerie.Any())
             {

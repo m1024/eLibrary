@@ -14,7 +14,8 @@
                 <a href="@Url.Action("ShowSerie", "Series", new {id = item.Id})" class="">@item.Name</a>
             </td>
             <td>
-                @Html.ActionLink("Удалить", "Delete", new {id = item.Id}, new {@class = ""})
+                @*@Html.ActionLink("Удалить", "Delete", new {id = item.Id}, new {@class = ""})*@
+                <a data-toggle="modal" href="@Url.Action("Delete", "Series", new {id = item.Id})" data-target="#deleteModal">Удалить</a>
             </td>
             <td>
                 @Ajax.ActionLink("Редактировать", "Edit", "Series", new {id = @item.Id},

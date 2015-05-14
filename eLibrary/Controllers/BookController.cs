@@ -277,7 +277,7 @@ namespace eLibrary.Controllers
                            where bookT.Name == book.Name
                            select bookT;
 
-                return RedirectToAction("ShowBook", "Book", new { id = findBook.Last().Id });
+                return RedirectToAction("ShowBook", "Book", new { id = db.book.Where(u => u.Name == book.Name).FirstOrDefault().Id});
             }
 
 
@@ -305,7 +305,7 @@ namespace eLibrary.Controllers
             {
                 return HttpNotFound();
             }
-            return View(b);
+            return PartialView(b);
         }
 
         [HttpPost, ActionName("Delete")]

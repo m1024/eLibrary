@@ -10,16 +10,16 @@
   </PropertyGroup>
   <ItemGroup>
     <File Include="App_Data/eLib2.mdf">
-      <publishTime>05/12/2015 01:50:59</publishTime>
+      <publishTime>05/14/2015 21:48:18</publishTime>
     </File>
     <File Include="App_Data/eLib2_log.ldf">
-      <publishTime>05/12/2015 01:50:59</publishTime>
+      <publishTime>05/14/2015 21:48:18</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>05/11/2015 14:48:42</publishTime>
     </File>
     <File Include="bin/eLibrary.dll">
-      <publishTime>05/12/2015 01:50:58</publishTime>
+      <publishTime>05/14/2015 21:52:16</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>05/11/2015 14:48:40</publishTime>
@@ -113,6 +113,9 @@
     </File>
     <File Include="Content/images/5.png">
       <publishTime>05/11/2015 14:48:37</publishTime>
+    </File>
+    <File Include="Content/images/ajax-loader.gif">
+      <publishTime>05/14/2015 01:35:05</publishTime>
     </File>
     <File Include="Content/images/cover %2811%29.jpg">
       <publishTime>05/11/2015 23:26:21</publishTime>
@@ -448,31 +451,34 @@
       <publishTime>05/11/2015 14:48:38</publishTime>
     </File>
     <File Include="Views/Author/BooksByAuthor.cshtml">
-      <publishTime>05/11/2015 14:48:38</publishTime>
+      <publishTime>05/14/2015 21:25:26</publishTime>
     </File>
     <File Include="Views/Author/Create.cshtml">
-      <publishTime>05/11/2015 14:48:38</publishTime>
+      <publishTime>05/13/2015 13:11:03</publishTime>
     </File>
     <File Include="Views/Author/Delete.cshtml">
-      <publishTime>05/11/2015 14:48:38</publishTime>
+      <publishTime>05/13/2015 04:05:51</publishTime>
     </File>
     <File Include="Views/Author/Edit.cshtml">
-      <publishTime>05/11/2015 14:48:38</publishTime>
+      <publishTime>05/13/2015 13:12:14</publishTime>
     </File>
     <File Include="Views/Author/Index.cshtml">
-      <publishTime>05/12/2015 01:37:51</publishTime>
+      <publishTime>05/14/2015 00:44:35</publishTime>
     </File>
     <File Include="Views/Author/ShowAuthor.cshtml">
-      <publishTime>05/11/2015 14:48:38</publishTime>
+      <publishTime>05/14/2015 21:30:47</publishTime>
     </File>
     <File Include="Views/Author/_Delete.cshtml">
       <publishTime>05/11/2015 14:48:38</publishTime>
+    </File>
+    <File Include="Views/Author/_DeleteAuthor.cshtml">
+      <publishTime>05/13/2015 03:37:24</publishTime>
     </File>
     <File Include="Views/Book/AuthorSearch.cshtml">
       <publishTime>05/11/2015 14:48:38</publishTime>
     </File>
     <File Include="Views/Book/Create.cshtml">
-      <publishTime>05/11/2015 14:48:38</publishTime>
+      <publishTime>05/13/2015 13:08:25</publishTime>
     </File>
     <File Include="Views/Book/Delete.cshtml">
       <publishTime>05/11/2015 14:48:38</publishTime>
@@ -484,19 +490,19 @@
       <publishTime>05/11/2015 14:48:38</publishTime>
     </File>
     <File Include="Views/Book/Read.cshtml">
-      <publishTime>05/11/2015 14:48:38</publishTime>
+      <publishTime>05/13/2015 13:04:01</publishTime>
     </File>
     <File Include="Views/Book/SerieSearch.cshtml">
       <publishTime>05/11/2015 14:48:38</publishTime>
     </File>
     <File Include="Views/Book/ShowBook.cshtml">
-      <publishTime>05/12/2015 00:49:26</publishTime>
+      <publishTime>05/13/2015 12:41:26</publishTime>
     </File>
     <File Include="Views/Comments/Delete.cshtml">
       <publishTime>05/11/2015 14:48:38</publishTime>
     </File>
     <File Include="Views/Comments/ShowComments.cshtml">
-      <publishTime>05/11/2015 14:48:38</publishTime>
+      <publishTime>05/13/2015 12:30:59</publishTime>
     </File>
     <File Include="Views/Genres/Books.cshtml">
       <publishTime>05/12/2015 01:39:05</publishTime>
@@ -505,19 +511,19 @@
       <publishTime>05/12/2015 01:41:19</publishTime>
     </File>
     <File Include="Views/Home/AuthorSearch.cshtml">
-      <publishTime>05/11/2015 14:48:38</publishTime>
+      <publishTime>05/14/2015 02:01:54</publishTime>
     </File>
     <File Include="Views/Home/BookSearch.cshtml">
-      <publishTime>05/11/2015 14:48:38</publishTime>
+      <publishTime>05/14/2015 08:58:11</publishTime>
     </File>
     <File Include="Views/Home/FindBook.cshtml">
-      <publishTime>05/11/2015 14:48:38</publishTime>
+      <publishTime>05/14/2015 09:03:32</publishTime>
     </File>
     <File Include="Views/Home/Genres.cshtml">
-      <publishTime>05/12/2015 00:02:25</publishTime>
+      <publishTime>05/14/2015 19:27:52</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>05/12/2015 01:32:51</publishTime>
+      <publishTime>05/14/2015 09:03:54</publishTime>
     </File>
     <File Include="Views/Home/MostDownloaded.cshtml">
       <publishTime>05/12/2015 01:23:09</publishTime>
@@ -541,16 +547,16 @@
       <publishTime>05/11/2015 14:48:38</publishTime>
     </File>
     <File Include="Views/Series/SerieSearch.cshtml">
-      <publishTime>05/11/2015 14:48:38</publishTime>
+      <publishTime>05/14/2015 02:01:47</publishTime>
     </File>
     <File Include="Views/Series/ShowSerie.cshtml">
-      <publishTime>05/11/2015 14:48:38</publishTime>
+      <publishTime>05/13/2015 13:02:01</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>05/11/2015 14:48:38</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>05/11/2015 22:37:00</publishTime>
+      <publishTime>05/13/2015 02:28:03</publishTime>
     </File>
     <File Include="Views/User/Create.cshtml">
       <publishTime>05/11/2015 14:48:38</publishTime>
@@ -571,7 +577,7 @@
       <publishTime>05/11/2015 14:48:38</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/12/2015 01:51:00</publishTime>
+      <publishTime>05/14/2015 21:52:17</publishTime>
     </File>
   </ItemGroup>
 </Project>

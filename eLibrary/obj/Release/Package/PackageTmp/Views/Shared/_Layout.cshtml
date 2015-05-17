@@ -2,7 +2,8 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="shortcut icon" href="~/Content/images/bw.png" type="image/x-icon" />
     <title>@ViewBag.Title</title>
     @*@Styles.Render("~/Content/css")*@
     @Scripts.Render("~/bundles/modernizr")
@@ -51,6 +52,12 @@
                 @if (ViewContext.HttpContext.User.IsInRole("Администратор") || ViewContext.HttpContext.User.IsInRole("Модератор")
                  || ViewContext.HttpContext.User.IsInRole("Пользователь"))
                 {
+                    <li>
+                        <span class="navbar-text">
+                            Добро пожаловвать,
+                                @ViewContext.HttpContext.User.Identity.Name
+                        </span>
+</li>
                     <li><a href="~/Account/LogOff">Выйти</a></li>
                 }
             </ul>
@@ -69,7 +76,7 @@
         </div>*@
 <footer class="footer text-center">
     © Электронная библиотека "Книжный червь", 2015. Контактный e-mail: lib.book.worm@gmail.com
-
+    </footer>
         @*<nav class="navbar navbar-default navbar-collapse">
                 <div class="container">
                     Футер

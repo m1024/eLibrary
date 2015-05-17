@@ -3,8 +3,20 @@
 @model IEnumerable<Book>
 
 @{
-    ViewBag.Title = null;
+    ViewBag.Title = "Поиск";
 }
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div id="dialogContent" class="modal-content"></div>
+    </div>
+</div>
+
+<script>
+    $('body').on('hidden.bs.modal', '.modal', function () {
+        location.reload();
+    });
+</script>
 
 <div>
     @using (Ajax.BeginForm("BookSearch", null, new AjaxOptions
@@ -16,19 +28,19 @@
         <input id="generalSearchText" type="text" name="bookName" class="col-md-6 input-sm" placeholder="общий поиск" value="@ViewBag.general"/>
         <input id="generalSearchSubmit" type="submit" value="Искать" class="btn btn-sm btn-success col-md-2"/>
     }
-    @using (Ajax.BeginForm("BookSearch", null, new AjaxOptions { UpdateTargetId = "searchresults", LoadingElementId = "loading" }, new { @class = "col-md-10 col-md-offset-1 search-field" }))
+    @using (Ajax.BeginForm("BookSearch", null, new AjaxOptions {UpdateTargetId = "searchresults", LoadingElementId = "loading"}, new {@class = "col-md-10 col-md-offset-1 search-field"}))
     {
         <input id="bookSearchText" type="text" name="bookName" class="col-md-6 input-sm" placeholder="введите наименование книги"/>
         <input id="bookSearchSubmit" type="submit" value="Искать" class="btn btn-sm btn-success col-md-2"/>
     }
 
-    @using (Ajax.BeginForm("AuthorSearch", null, new AjaxOptions { UpdateTargetId = "searchAuthorsResults", LoadingElementId = "loading" }, new { @class = "col-md-10 col-md-offset-1 search-field" }))
+    @using (Ajax.BeginForm("AuthorSearch", null, new AjaxOptions {UpdateTargetId = "searchAuthorsResults", LoadingElementId = "loading"}, new {@class = "col-md-10 col-md-offset-1 search-field"}))
     {
         <input id="authorSearchText" type="text" name="authorName" class="col-md-6 input-sm" placeholder="введите имя автора"/>
         <input id="authorSearchSubmit" type="submit" value="Искать" class="btn btn-sm btn-success col-md-2"/>
     }
 
-    @using (Ajax.BeginForm("SerieSearch", "Series", null, new AjaxOptions { UpdateTargetId = "searchresultsSerie", LoadingElementId = "loading" }, new { @class = "col-md-10 col-md-offset-1 search-field" }))
+    @using (Ajax.BeginForm("SerieSearch", "Series", null, new AjaxOptions {UpdateTargetId = "searchresultsSerie", LoadingElementId = "loading"}, new {@class = "col-md-10 col-md-offset-1 search-field"}))
     {
         <input id="serieSearchText" type="text" name="serieName" class="col-md-6 input-sm" placeholder="введите название серии"/>
         <input id="serieSearchSubmit" type="submit" value="Искать" class="btn btn-sm btn-success col-md-2"/>

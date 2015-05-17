@@ -74,25 +74,5 @@ namespace eLibrary.Controllers
 
             return RedirectToAction("ShowBook", "Book", new { id = bookId });
         }
-
-        //[HttpPost, ActionName("Delete")]
-        //[Authorize(Roles = "Администратор, Модератор")]
-        //public ActionResult DeleteConfirmed(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    Comment b = db.comments.Find(id);
-        //    if (b == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    db.comments.Remove(b);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index", "Home");
-        //}
- 
-    
     }
 }

@@ -2,7 +2,7 @@
 @model IEnumerable<eLibrary.Models.Book>
 
 @{
-    ViewBag.Title = "Список книг";
+    ViewBag.Title = "Книги";
 }
 
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -13,7 +13,6 @@
 
 <script>
     $('body').on('hidden.bs.modal', '.modal', function() {
-        //    $(this).removeData('bs.modal');
         location.reload();
     });
 </script>
@@ -83,23 +82,12 @@
             }
 
             </td>
-            @*@if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор")
-                     || HttpContext.Current.User.IsInRole("Пользователь"))
-            {
-                <td>
-                    @if (item.Text_fb2 != null)
-                    {
 
-                        @Html.ActionLink("Загрузить fb2", "GetFile_fb2", new { id = item.Id })
-
-                    }
-                </td>
-            }*@
             @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
             {
                 <td>
-                    @Html.ActionLink("Редактировать", "Edit", new {id = item.Id})</td>
-                <td> @*@Html.ActionLink("Удалить", "Delete", new { id = item.Id })*@
+                    @Html.ActionLink("Редактировать", "Edit", new {id = item.Id}, new{@class=""} )</td>
+                <td> 
                     <a data-toggle="modal" href="@Url.Action("Delete", "Book", new {id = item.Id})" data-target="#deleteModal">Удалить</a>
                 </td>
             }
@@ -117,10 +105,5 @@
         <li><a href="@Url.Action("Index", "Book", new { id = ViewBag.lastPage + 1 })">@(ViewBag.lastPage+1)</a></li>
         <li>@Html.ActionLink(">>", "Index", new {id = ViewBag.page + 1})</li>
     </ul>
-
-    @*@Html.ActionLink("Первая", "Index", new {id = 0}, new {@class = "btn btn-default btn-sm pages"})
-    @Html.ActionLink("Предыдущая", "Index", new {id = ViewBag.page - 1}, new {@class = "btn btn-default btn-sm pages"})
-    @Html.ActionLink("Следующая", "Index", new {id = ViewBag.page + 1}, new {@class = "btn btn-default btn-sm pages"})
-    @Html.ActionLink("Последняя", "Index", new {id = ViewBag.lastPage + 1}, new {@class = "btn btn-default btn-sm pages"})*@
 </div>
 

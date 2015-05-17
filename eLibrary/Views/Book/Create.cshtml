@@ -1,7 +1,7 @@
 ﻿@model eLibrary.Models.Book
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Добавление книги";
 }
 
 <div class="col-sm-offset-1 col-sm-10">
@@ -41,7 +41,7 @@
                 <div class="form-group">
                     <label for="bookName" class="col-sm-3 control-label">Наименование</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="Name" id="bookName">
+                        <input type="text" class="form-control" name="Name" id="bookName" required="required">
                     </div>
                 </div>
 
@@ -62,7 +62,7 @@
                 <div class="form-group">
                     <label for="genres" class="col-sm-3 control-label">Жанр</label>
                     <div class="col-sm-9">
-                        @Html.DropDownListFor(model => model.GenreId, ViewBag.Genres as SelectList, new { @id = "genres" })
+                        @Html.DropDownListFor(model => model.GenreId, ViewBag.Genres as SelectList, new { @id = "genres", @class="form-control" })
                     </div>
                 </div>
 

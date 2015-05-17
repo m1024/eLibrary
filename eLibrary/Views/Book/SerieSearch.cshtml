@@ -7,8 +7,11 @@
         foreach (var item in Model)
         {
             <div>
-            <input type="radio" name="selectSerie" value="@item.Id" form="addBookForm" />
-                <label>@item.Name</label>
+                <input type="radio" name="selectSerie" value="@item.Id" form="addBookForm"/>
+                <a href="@Url.Action("ShowSerie", "Series", new {id = item.Id})">
+                    @item.Name
+                </a>
+
             </div>
         }
     }

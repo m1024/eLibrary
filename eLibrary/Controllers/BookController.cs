@@ -15,8 +15,12 @@ namespace eLibrary.Controllers
     public class BookController : Controller
     {
         private eLibraryContext db = new eLibraryContext();
-        //
-        // GET: /BookAuthor/
+
+        /// <summary>
+        /// Отображает список всех книг из бд
+        /// </summary>
+        /// <param name="id">id книги</param>
+        /// <returns>html страница</returns>
         [AllowAnonymous]
         public ActionResult Index(int? id)
         {
@@ -34,6 +38,11 @@ namespace eLibrary.Controllers
             return View(books);
         }
 
+        /// <summary>
+        /// Отображает страницу для книги
+        /// </summary>
+        /// <param name="id">id книги</param>
+        /// <returns>html страница</returns>
         [AllowAnonymous]
         public ActionResult ShowBook(int? id)
         {

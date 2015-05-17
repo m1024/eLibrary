@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<eLibrary.Models.Author>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Авторы";
 }
 
 @*<a data-toggle="modal" href="../Author/Delete/16" data-target="#myModal">Click me</a>
@@ -59,9 +59,9 @@
                     <a href="@Url.Action("ShowAuthor", "Author", new {id = item.Id})">
                         @item.Family
                         @if (item.Name != null)
-                        {@item.Name.Remove(1)}
-                        @if (item.Family != null)
-                        {@item.Family.Remove(1)}
+                        {@item.Name.Remove(1)<label>.</label>}
+                        @if (item.Patronymic != null)
+                        {@item.Patronymic.Remove(1)<label>.</label>}
                     </a>
                     @*@Html.DisplayFor(modelItem => item.Family)*@
                 </td>

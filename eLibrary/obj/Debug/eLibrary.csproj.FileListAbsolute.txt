@@ -127,4 +127,3 @@ G:\eLibrary2\eLibrary\bin\ru\System.Web.WebPages.Deployment.resources.dll
 G:\eLibrary2\eLibrary\bin\ru\System.Web.WebPages.Razor.resources.dll
 G:\eLibrary2\eLibrary\obj\Debug\eLibrary.dll
 G:\eLibrary2\eLibrary\obj\Debug\eLibrary.pdb
-G:\eLibrary2\eLibrary\obj\Debug\eLibrary.csprojResolveAssemblyReference.cache

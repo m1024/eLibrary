@@ -4,6 +4,19 @@
     ViewBag.Title = "ShowSerie";
 }
 
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div id="dialogContent" class="modal-content"></div>
+    </div>
+</div>
+
+<script>
+    $('body').on('hidden.bs.modal', '.modal', function() {
+        //    $(this).removeData('bs.modal');
+        location.reload();
+    });
+</script>
+
 <div class="col-md-10 col-md-offset-1">
     @if (HttpContext.Current.User.IsInRole("Администратор") || HttpContext.Current.User.IsInRole("Модератор"))
     {
@@ -15,7 +28,8 @@
 
         @*@Html.ActionLink("Редактировать", "Main", new { id = Model.Id }, new { @class = "label label-primary" })*@
 
-        @Html.ActionLink("Удалить", "Delete", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm" })
+        @*@Html.ActionLink("Удалить", "Delete", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm" })*@
+    <a data-toggle="modal" class="btn btn-primary btn-sm left-margin" href="@Url.Action("Delete", "Series", new {id = Model.Id})" data-target="#deleteModal">Удалить</a>
 
         <div id="editForm">
 
@@ -30,15 +44,6 @@
         <div class="">
             <h2>@Model.Name</h2>
         </div>
-        @*@if (@Model.Description != "")
-        {
-            <div>
-                <label class="bold">Описание:</label>
-                <div>
-                    <p>@Model.Description</p>
-                </div>
-            </div>
-        }*@
         @if (@Model.Description != null)
         {
             if (Model.Description != "")
@@ -46,24 +51,18 @@
                 <label class="bold">Описание:</label>
                 <div style="background-color: #f5f5f5; padding: 30px; border: 1px solid #ccc; text-indent: 40px; margin-bottom: 20px;">
                     @{
-                string newPage = Model.Description;
-                string[] split = newPage.Split(new Char[] { '\r' }); //делим на абзацы
+                        string newPage = Model.Description;
+                        string[] split = newPage.Split(new Char[] {'\r'}); //делим на абзацы
 
-                foreach (var p in split)
-                {
-                    <p align="justify">@p</p>
-                }
+                        foreach (var p in split)
+                        {
+                            <p align="justify">@p</p>
+                        }
                     }
                 </div>
             }
         }
     </div>
 }
-<div id="books">
-    @Ajax.ActionLink("Книги", "BooksBySerie", "Series", new { id = @Model.Id }, new AjaxOptions { UpdateTargetId = "books" }, new { id = "showBooks", @class = "col-md-offset-1" })
-</div>
 
-
-<script>
-    $('#showBooks').click();
-</script>
+@{ Html.RenderAction("BooksBySerie"); }

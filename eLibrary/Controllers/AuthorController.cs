@@ -100,7 +100,7 @@ namespace eLibrary.Controllers
                 db.author.Add(author);
                 db.SaveChanges();
                 return RedirectToAction("ShowAuthor", "Author", 
-                    new { id = db.author.Where(u => u.Name == author.Name).FirstOrDefault().Id });
+                    new { id = db.author.Where(u => u.Family == author.Family).FirstOrDefault().Id });
             }
 
             return View(author);

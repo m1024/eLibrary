@@ -157,6 +157,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\images\ajax-loader.gif" />
+    <Content Include="Content\images\book.png" />
+    <Content Include="Content\images\bw.png" />
     <Content Include="Content\images\cover %2811%29.jpg" />
     <Content Include="Content\images\cover %2813%29.jpg" />
     <Content Include="Content\images\cover %282%29.jpg" />
@@ -257,7 +259,6 @@
     <Content Include="Views\Book\AuthorSearch.cshtml" />
     <Content Include="Views\Book\SerieSearch.cshtml" />
     <Content Include="Views\Comments\ShowComments.cshtml" />
-    <Content Include="Views\Comments\Delete.cshtml" />
     <Content Include="Views\Book\Read.cshtml" />
     <Content Include="Views\Genres\Index.cshtml" />
     <Content Include="Views\Series\Main.cshtml" />

@@ -7,8 +7,10 @@
             foreach (var item in Model)
             {
                 <div>
-                <input type="checkbox" name="selectAuthor" value="@item.Id" form="addBookForm"/>
-                    <label>@item.Name @item.Family @item.Patronymic</label>
+                    <input type="checkbox" name="selectAuthor" value="@item.Id" form="addBookForm"/>
+                    <a href="@Url.Action("ShowAuthor", "Author", new {id = item.Id})">
+                        @item.Name @item.Family @item.Patronymic
+                    </a>
                 </div>
             }
         }

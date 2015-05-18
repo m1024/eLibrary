@@ -16,11 +16,20 @@ namespace eLibrary.Controllers
     {
         private eLibraryContext db = new eLibraryContext();
 
+        /// <summary>
+        /// Вывод главной страницы приложения
+        /// </summary>
+        /// <returns>Главная страница</returns>
         public ActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// Поиск
+        /// </summary>
+        /// <param name="general">Слово для поиска</param>
+        /// <returns>Страница расширенного поиска</returns>
         [HttpGet]
         [AllowAnonymous]
         public ActionResult FindBook(string general)
@@ -29,9 +38,13 @@ namespace eLibrary.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Поиск по автору
+        /// </summary>
+        /// <param name="authorName">Имя, Фамилия или Отчество автора</param>
+        /// <returns>Частичное представление с результатом поиска</returns>
         public ActionResult AuthorSearch(string authorName)
         {
-            //IEnumerable<Author> findAuthors = null;
             List<Author> authorsList = new List<Author>();
             if (authorName != null)
             {
@@ -59,6 +72,11 @@ namespace eLibrary.Controllers
             return PartialView(authorsList);
         }
 
+        /// <summary>
+        /// Поиск по книге
+        /// </summary>
+        /// <param name="bookName">Наименование книги</param>
+        /// <returns>Частичное представление с результатом поиска</returns>
         public ActionResult BookSearch(string bookName)
         {
             IEnumerable<Book> findBook = null;
@@ -76,6 +94,11 @@ namespace eLibrary.Controllers
             return PartialView(findBook);
         }
 
+        /// <summary>
+        /// Выборка книг по жанру
+        /// </summary>
+        /// <param name="genreId">Id жанра в бд</param>
+        /// <returns>Частичное представление с результатом поиска</returns>
         public ActionResult SelectGenre(int? genreId)
         {
             IEnumerable<Book> findBook = null;
@@ -92,6 +115,10 @@ namespace eLibrary.Controllers
             return View(findBook.ToList());
         }
 
+        /// <summary>
+        /// Выборка всех жанров
+        /// </summary>
+        /// <returns>Частичное представление со всеми жанрами</returns>
         [AllowAnonymous]
         public ActionResult Genres()
         {
@@ -100,12 +127,21 @@ namespace eLibrary.Controllers
         }
 
 
+        /// <summary>
+        /// Выборка 10 наиболее скачиваемых книг
+        /// </summary>
+        /// <returns>Частичное представление с результатом выборки</returns>
         public ActionResult MostDownloaded()
         {
             var books = db.book.OrderByDescending(i => i.Downloads).ToList().Take(10);
             return PartialView(books);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="searchText"></param>
+        /// <returns></returns>
         public RedirectToRouteResult RedirectToFind(string searchText)
         {
             return RedirectToAction("FindBook", "Home", new { general = searchText });

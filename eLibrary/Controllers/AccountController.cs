@@ -11,11 +11,21 @@ namespace eLibrary.Controllers
     [AllowAnonymous]
     public class AccountController : Controller
     {
-
+        /// <summary>
+        /// Возвращает форму авторизации
+        /// </summary>
+        /// <returns>Форма авторизации</returns>
         public ActionResult Login()
         {
             return View();
         }
+
+        /// <summary>
+        /// Обработка формы авторизации
+        /// </summary>
+        /// <param name="model">Введенные пользователем авторизационные данные</param>
+        /// <param name="returnUrl">url адрес</param>
+        /// <returns>Перенаправление на главную или на форму авторизации</returns>
         [HttpPost]
         public ActionResult Login(LogViewModel model, string returnUrl)
         {
@@ -24,19 +34,20 @@ namespace eLibrary.Controllers
                 if (ValidateUser(model.UserName, model.Password))
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
-                   // if (Url.IsLocalUrl(returnUrl))
-                   // {
                     return RedirectToAction("Index", "Home");
-                   // }
                 }
                 else
                 {
                     ModelState.AddModelError("", "Неправильный пароль или логин");
                 }
             }
-            //return System.Web.UI.WebControls.View(model);
             return View(model);
         }
+
+        /// <summary>
+        /// Осуществляет выход пользователя из системы
+        /// </summary>
+        /// <returns>Перенаправление на главную</returns>
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
@@ -44,6 +55,12 @@ namespace eLibrary.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        /// <summary>
+        /// Валидация пользователя
+        /// </summary>
+        /// <param name="login">Логин</param>
+        /// <param name="password">Пароль</param>
+        /// <returns>true - валидация пройдена, false - нет</returns>
         private bool ValidateUser(string login, string password)
         {
             bool isValid = false;

@@ -19,6 +19,11 @@ namespace eLibrary.Controllers
 
         private eLibraryContext db = new eLibraryContext();
 
+        /// <summary>
+        /// Вывод списка всех авторов, постранично
+        /// </summary>
+        /// <param name="id">Номер страницы</param>
+        /// <returns>Страница со списком всех авторов</returns>
         [AllowAnonymous]
         public ActionResult Index(int? id)
         {
@@ -37,7 +42,11 @@ namespace eLibrary.Controllers
 
         }
 
-
+        /// <summary>
+        /// Редактирование автора
+        /// </summary>
+        /// <param name="id">Id записи в бд</param>
+        /// <returns>Страница редактирования автора</returns>
         [Authorize(Roles = "Администратор, Модератор")]
         public ActionResult Edit(int id = 0)
         {
@@ -50,6 +59,12 @@ namespace eLibrary.Controllers
             return View(author);
         }
 
+        /// <summary>
+        /// Редактирование автора
+        /// </summary>
+        /// <param name="author">Измененные пользователем данные об авторе</param>
+        /// <param name="uploadImage">Прикрепленное изображение автора</param>
+        /// <returns>Перенаправление на страницу всех авторов</returns>
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpPost]
         public ActionResult Edit(Author author, HttpPostedFileBase uploadImage)
@@ -72,12 +87,22 @@ namespace eLibrary.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Создание автора
+        /// </summary>
+        /// <returns>Страница создания автора</returns>
         [Authorize(Roles = "Администратор, Модератор")]
         public ActionResult Create()
         {
             return View();
         }
 
+        /// <summary>
+        /// Создание автора
+        /// </summary>
+        /// <param name="author">Введенные пользователем данные об авторе</param>
+        /// <param name="uploadImage">Изображение автора</param>
+        /// <returns>Страница добавленного автора</returns>
         [HttpPost]
         [Authorize(Roles = "Администратор, Модератор")]
         public ActionResult Create(Author author, HttpPostedFileBase uploadImage)
@@ -106,7 +131,11 @@ namespace eLibrary.Controllers
             return View(author);
         }
 
-
+        /// <summary>
+        /// Удаление автора
+        /// </summary>
+        /// <param name="id">Id записи автора в бд</param>
+        /// <returns>Частичное представление для подтверждения</returns>
         [HttpGet]
         [Authorize(Roles = "Администратор, Модератор")]
         public ActionResult Delete(int? id)
@@ -123,6 +152,11 @@ namespace eLibrary.Controllers
             return PartialView(b);
         }
 
+        /// <summary>
+        /// Подтверждение удаления автора
+        /// </summary>
+        /// <param name="id">Id записи автора в бд</param>
+        /// <returns>Страница всех авторов</returns>
         [HttpPost, ActionName("Delete")]
         [Authorize(Roles = "Администратор, Модератор")]
         public ActionResult DeleteConfirmed(int? id)
@@ -141,6 +175,11 @@ namespace eLibrary.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Отображение подробной информации об авторе
+        /// </summary>
+        /// <param name="id">Id автора в бд</param>
+        /// <returns>Страница автора</returns>
         [AllowAnonymous]
         public ActionResult ShowAuthor(int? id)
         {
@@ -156,6 +195,11 @@ namespace eLibrary.Controllers
 
         }
 
+        /// <summary>
+        /// Выборка книг заданного автора
+        /// </summary>
+        /// <param name="id">Id автора в бд</param>
+        /// <returns>Частичное представление - список книг автора</returns>
         [AllowAnonymous]
         public ActionResult BooksByAuthor(int id)
         {
@@ -171,20 +215,6 @@ namespace eLibrary.Controllers
 
             return PartialView();
         }
-
-
-
-        // Просмотр подробных сведений о книге
-        public ActionResult Details(int id)
-        {
-            Author author = db.author.Find(id);
-            if (author != null)
-            {
-                return PartialView("_Delete", author);
-            }
-            return View("Index");
-        }
-
 
         protected override void Dispose(bool disposing)
         {

@@ -19,8 +19,8 @@ namespace eLibrary.Controllers
         /// <summary>
         /// Отображает список всех книг из бд
         /// </summary>
-        /// <param name="id">id книги</param>
-        /// <returns>html страница</returns>
+        /// <param name="id">Id книги в бд</param>
+        /// <returns>Страница со списком всех книг</returns>
         [AllowAnonymous]
         public ActionResult Index(int? id)
         {
@@ -39,10 +39,10 @@ namespace eLibrary.Controllers
         }
 
         /// <summary>
-        /// Отображает страницу для книги
+        /// Отображение подробной информации о книге
         /// </summary>
-        /// <param name="id">id книги</param>
-        /// <returns>html страница</returns>
+        /// <param name="id">Id книги в бд</param>
+        /// <returns>Страница книги</returns>
         [AllowAnonymous]
         public ActionResult ShowBook(int? id)
         {
@@ -60,6 +60,11 @@ namespace eLibrary.Controllers
 
         }
 
+        /// <summary>
+        /// Извлечение файла книги из бд
+        /// </summary>
+        /// <param name="id">Id книги в бд</param>
+        /// <returns>Файл книги в формате fb2</returns>
         [Authorize]
         public FileContentResult GetFile_fb2(int id = 0)
         {
@@ -70,6 +75,11 @@ namespace eLibrary.Controllers
             return new FileContentResult(book.Text_fb2,"text");
         }
 
+        /// <summary>
+        /// Извлечение файла книги из бд
+        /// </summary>
+        /// <param name="id">Id книги в бд</param>
+        /// <returns>Файл книги в формате txt</returns>
         [Authorize]
         public FileContentResult GetFile_txt(int id = 0)
         {
@@ -77,9 +87,14 @@ namespace eLibrary.Controllers
             book.Downloads += 1;
             db.Entry(book).State = EntityState.Modified;
             db.SaveChanges();
-            return new FileContentResult(book.Text_txt, "text");
+            return new FileContentResult(book.Text_txt, "file");
         }
 
+        /// <summary>
+        /// Извлечение файла книги из бд
+        /// </summary>
+        /// <param name="id">Id книги в бд</param>
+        /// <returns>Файл книги в формате epub</returns>
         [Authorize]
         public FileContentResult GetFile_epub(int id = 0)
         {
@@ -90,7 +105,12 @@ namespace eLibrary.Controllers
             return new FileContentResult(book.Text_epub, "text");
         }
 
-                [Authorize(Roles = "Администратор, Модератор")]
+        /// <summary>
+        /// Редактирование книги
+        /// </summary>
+        /// <param name="id">Id книги в бд</param>
+        /// <returns>Страница редактирования книги</returns>
+        [Authorize(Roles = "Администратор, Модератор")]
         public ActionResult Edit(int id = 0)
         {
             Book book = db.book.Find(id);
@@ -105,6 +125,17 @@ namespace eLibrary.Controllers
             return View(book);
         }
 
+        /// <summary>
+        /// Редактирование книги
+        /// </summary>
+        /// <param name="book">Измененные пользователем данные книги</param>
+        /// <param name="selectAuthor">Автор указанный для книги</param>
+        /// <param name="uploadImage">Изображение книги</param>
+        /// <param name="uploadText_fb2">Файл книги в fb2</param>
+        /// <param name="uploadText_txt">Файл книги в txt</param>
+        /// <param name="uploadText_epub">Файл книги в epub</param>
+        /// <param name="selectSerie">Серия книги</param>
+        /// <returns></returns>
         [HttpPost]
         [Authorize(Roles = "Администратор, Модератор")]
         public RedirectToRouteResult Edit(Book book, int[] selectAuthor, HttpPostedFileBase uploadImage,
@@ -192,6 +223,11 @@ namespace eLibrary.Controllers
                 return RedirectToAction("ShowBook", "Book", new { id = newBook.Id });
         }
 
+
+        /// <summary>
+        /// Создание книги
+        /// </summary>
+        /// <returns>Страница создания книги</returns>
         [Authorize(Roles = "Администратор, Модератор")]
         public ActionResult Create()
         {
@@ -204,6 +240,17 @@ namespace eLibrary.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Создание книги
+        /// </summary>
+        /// <param name="book">Введенные пользователем данные о книге</param>
+        /// <param name="selectAuthor">Автор книги</param>
+        /// <param name="uploadImage">Обложка книги</param>
+        /// <param name="uploadText_fb2">Файл книги в fb2</param>
+        /// <param name="uploadText_txt">Файл книги в txt</param>
+        /// <param name="uploadText_epub">Файл книги в epub</param>
+        /// <param name="selectSerie">Серия книги</param>
+        /// <returns>Страница созданной книги</returns>
         [HttpPost]
         [Authorize(Roles = "Администратор, Модератор")]
         public RedirectToRouteResult Create(Book book,  int[] selectAuthor, HttpPostedFileBase uploadImage, HttpPostedFileBase uploadText_fb2,
@@ -300,7 +347,11 @@ namespace eLibrary.Controllers
             return RedirectToAction("Index");
         }
 
-
+        /// <summary>
+        /// Удаление книги
+        /// </summary>
+        /// <param name="id">Id книги в бд</param>
+        /// <returns>Частичное представление для подтверждения</returns>
         [HttpGet]
         [Authorize(Roles = "Администратор, Модератор")]
         public ActionResult Delete(int? id)
@@ -317,6 +368,11 @@ namespace eLibrary.Controllers
             return PartialView(b);
         }
 
+        /// <summary>
+        /// Подтверждение удаления книги
+        /// </summary>
+        /// <param name="id">Id записи книги в бд</param>
+        /// <returns>Страница всех книг</returns>
         [HttpPost, ActionName("Delete")]
         [Authorize(Roles = "Администратор, Модератор")]
         public ActionResult DeleteConfirmed(int? id)
@@ -335,6 +391,11 @@ namespace eLibrary.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Поиск автора по фамилии
+        /// </summary>
+        /// <param name="authorName">Фамилия автора</param>
+        /// <returns>Частичное представление результатов поиска</returns>
         public ActionResult AuthorSearch(string authorName)
         {
             IEnumerable<Author> findAuthor = null;
@@ -351,6 +412,11 @@ namespace eLibrary.Controllers
             return PartialView(findAuthor.ToList());
         }
 
+        /// <summary>
+        /// Поиск серии по наименования
+        /// </summary>
+        /// <param name="serieName">Наименование серии</param>
+        /// <returns>Частичное представление результатов поиска</returns>
         public ActionResult SerieSearch(string serieName)
         {
             IEnumerable<Series> findSerie = null;
@@ -367,6 +433,12 @@ namespace eLibrary.Controllers
             return PartialView(findSerie.ToList());
         }
 
+        /// <summary>
+        /// Чтение книги
+        /// </summary>
+        /// <param name="id">Id книги в бд</param>
+        /// <param name="pageNumber">Номер страницы</param>
+        /// <returns>Страница с текстом книги</returns>
         public ActionResult Read(int id, int? pageNumber) //pageNumber с нуля
         {
             Book book = db.book.Find(id);
@@ -402,7 +474,7 @@ namespace eLibrary.Controllers
                 Array.Copy(book.Text_txt, startIndex, page, 0, book.Text_txt.Length - startIndex);
             }
 
-            //оборачиваем в теги <p> вместо символов /r
+            //делим на абзацы
             string newPage = System.Text.Encoding.UTF8.GetString(page);
             string[] split = newPage.Split(new Char[] { '\r' }); //делим на абзацы 
             Array.Clear(split,split.Length-1,1); //выкидываем последний неполный абзац

@@ -10,10 +10,13 @@ namespace eLibrary.Controllers
 {
     public class CommentsController : Controller
     {
-        //комментарии к конкретной книге будем искать по id книги и передавать в частичное представление
-        //которое будет отображаться на странице с книгой
         private eLibraryContext db = new eLibraryContext();
 
+        /// <summary>
+        /// Поиск и возвращение найденных комментариев
+        /// </summary>
+        /// <param name="bookId">Id книги в бд</param>
+        /// <returns>Частичное представление с результатами поиска</returns>
         [AllowAnonymous]
         public ActionResult ShowComments(int? bookId)
         {
@@ -25,7 +28,7 @@ namespace eLibrary.Controllers
                                select comments;
             }
 
-            //находим пользователей для комментариев чтобы отобразить их имен во view
+            //находим пользователей для комментариев чтобы отобразить их имена во view
             if (findComments != null)
             for (int i = 0; i < findComments.Count(); i++)
                 findComments.ElementAt(i).User = db.user.Find(findComments.ElementAt(i).UserId);
@@ -38,7 +41,11 @@ namespace eLibrary.Controllers
             return PartialView(findComments.ToList());
         }
 
-
+        /// <summary>
+        /// Добавление комментария
+        /// </summary>
+        /// <param name="comment">Комментарий пользователя</param>
+        /// <returns>Перенаправление на метод отображения комментариев</returns>
         [HttpPost]
         [Authorize]
         public ActionResult addComment(Comment comment)
@@ -57,7 +64,11 @@ namespace eLibrary.Controllers
             return RedirectToAction("ShowComments");
         }
 
-
+        /// <summary>
+        /// Удаление комментария
+        /// </summary>
+        /// <param name="id">Id книги к которой относится комментарий</param>
+        /// <returns>Страница книги к которой относился комментарий</returns>
         [HttpGet]
         [Authorize(Roles = "Администратор, Модератор, Пользователь")]
         public RedirectToRouteResult Delete(int? id)

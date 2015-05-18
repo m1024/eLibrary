@@ -12,6 +12,10 @@ namespace eLibrary.Controllers
     {
         private eLibraryContext db = new eLibraryContext();
 
+        /// <summary>
+        /// Извлекает все жанры из бд
+        /// </summary>
+        /// <returns>Страница со всеми жанрами</returns>
         [Authorize(Roles = "Администратор")]
         public ActionResult Index()
         {
@@ -19,6 +23,12 @@ namespace eLibrary.Controllers
             return View(genres);
         }
 
+        
+        /// <summary>
+        /// Создание жанра
+        /// </summary>
+        /// <param name="genreName">Наименование жанра</param>
+        /// <returns>Страница со всеми жанрами</returns>
         [HttpPost]
         [Authorize(Roles = "Администратор")]
         public ActionResult Create(string genreName)
@@ -33,6 +43,11 @@ namespace eLibrary.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Выборка книг одного жанра
+        /// </summary>
+        /// <param name="id">Id жанра в бд</param>
+        /// <returns>Сраница книг жанра</returns>
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Books(int? id)
@@ -52,6 +67,11 @@ namespace eLibrary.Controllers
             }       
         }
 
+        /// <summary>
+        /// Удаление жанра
+        /// </summary>
+        /// <param name="id">Id жанра в бд</param>
+        /// <returns>Частичное представление для подтверждения</returns>
         [HttpGet]
         [Authorize(Roles = "Администратор")]
         public ActionResult Delete(int? id)
@@ -68,6 +88,11 @@ namespace eLibrary.Controllers
             return PartialView(b);
         }
 
+        /// <summary>
+        /// Подтверждение удаления жанра
+        /// </summary>
+        /// <param name="id">Id жанра в бд</param>
+        /// <returns>Страница всех жанров</returns>
         [HttpPost, ActionName("Delete")]
         [Authorize(Roles = "Администратор")]
         public ActionResult DeleteConfirmed(int? id)

@@ -17,7 +17,7 @@ namespace eLibrary.Controllers
         private eLibraryContext db = new eLibraryContext();
 
         /// <summary>
-        /// Отображает список всех книг из бд
+        /// Отображает список всех книг из бд, постранично
         /// </summary>
         /// <param name="id">Id книги в бд</param>
         /// <returns>Страница со списком всех книг</returns>
@@ -484,6 +484,11 @@ namespace eLibrary.Controllers
             ViewBag.lastPage = book.Text_txt.Length/10000;
 
             return View(book);
+        }
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

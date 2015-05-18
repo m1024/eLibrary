@@ -13,6 +13,10 @@ namespace eLibrary.Controllers
     {
         private eLibraryContext db = new eLibraryContext();
 
+        /// <summary>
+        /// Выборка всех серий
+        /// </summary>
+        /// <returns>Страница со списком всех серий</returns>
         [AllowAnonymous]
         public ActionResult Index()
         {
@@ -20,7 +24,10 @@ namespace eLibrary.Controllers
             return View(series);
         }
 
-
+        /// <summary>
+        /// Выборка всех серий
+        /// </summary>
+        /// <returns>Страница для работы с сериями модератору и администратору</returns>
         [Authorize(Roles = "Администратор, Модератор")]
         public ActionResult Main()
         {
@@ -28,6 +35,10 @@ namespace eLibrary.Controllers
             return View(series);
         }
 
+        /// <summary>
+        /// Создание серии
+        /// </summary>
+        /// <returns>Страница создания серии</returns>
         [HttpGet]
         [Authorize(Roles = "Администратор, Модератор")]
         public ActionResult Create()
@@ -35,6 +46,11 @@ namespace eLibrary.Controllers
             return PartialView();
         }
 
+        /// <summary>
+        /// Создание серии
+        /// </summary>
+        /// <param name="serie">Введенны пользователем данные о добавляемой серии</param>
+        /// <returns>Страница работы с сериями</returns>
         [HttpPost]
         [Authorize(Roles = "Администратор, Модератор")]
         public ActionResult Create(Series serie)
@@ -47,6 +63,11 @@ namespace eLibrary.Controllers
             return RedirectToAction("Main");
         }
 
+        /// <summary>
+        /// Редактирование серии
+        /// </summary>
+        /// <param name="id">Id серии в бд</param>
+        /// <returns>Частичное представление для редактирования серии</returns>
         [HttpGet]
         [Authorize(Roles = "Администратор, Модератор")]
         public ActionResult Edit(int id = 0)
@@ -59,7 +80,11 @@ namespace eLibrary.Controllers
             return PartialView(serie);
         }
 
-
+        /// <summary>
+        /// Редактирование серии
+        /// </summary>
+        /// <param name="serie">Измененные пользователем данные о серии</param>
+        /// <returns>Страница новой серии</returns>
         [HttpPost]
         [Authorize(Roles = "Администратор, Модератор")]
         public ActionResult Edit(Series serie)
@@ -77,7 +102,11 @@ namespace eLibrary.Controllers
             return RedirectToAction("ShowSerie", new { id = serieId});
         }
 
-
+        /// <summary>
+        /// Удаление серии
+        /// </summary>
+        /// <param name="id">Id серии в бд</param>
+        /// <returns>Частичное представление для подтверждения удаления</returns>
         [HttpGet]
         [Authorize(Roles = "Администратор, Модератор")]
         public ActionResult Delete(int? id)
@@ -94,6 +123,11 @@ namespace eLibrary.Controllers
             return PartialView(s);
         }
 
+        /// <summary>
+        /// Подтверждение удаления
+        /// </summary>
+        /// <param name="id">Id серии в бд</param>
+        /// <returns>Страница серий</returns>
         [HttpPost, ActionName("Delete")]
         [Authorize(Roles = "Администратор, Модератор")]
         public ActionResult DeleteConfirmed(int? id)
@@ -112,12 +146,11 @@ namespace eLibrary.Controllers
             return RedirectToAction("Index");
         }
 
-
-
-
-
-
-
+        /// <summary>
+        /// Поиск серии
+        /// </summary>
+        /// <param name="serieName">Наименование серии</param>
+        /// <returns>Частичное представление с результатами поиска</returns>
         public ActionResult SerieSearch(string serieName)
         {
             IEnumerable<Series> findSerie = null;
@@ -142,6 +175,11 @@ namespace eLibrary.Controllers
             return PartialView(findSerie);
         }
 
+        /// <summary>
+        /// Отображение подробной информации о серии
+        /// </summary>
+        /// <param name="id">Id серии в бд</param>
+        /// <returns>Страница серии</returns>
         [AllowAnonymous]
         public ActionResult ShowSerie(int? id)
         {
@@ -156,6 +194,11 @@ namespace eLibrary.Controllers
                 return View();
         }
 
+        /// <summary>
+        /// Выбрка книг серии
+        /// </summary>
+        /// <param name="id">Id серии в бд</param>
+        /// <returns>Частичное представление с результатами выборки</returns>
         [AllowAnonymous]
         public ActionResult BooksBySerie(int id)
         {
@@ -163,6 +206,12 @@ namespace eLibrary.Controllers
                                           where books.SerieId == id
                                           select books;
             return PartialView(findBooks.ToList());
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

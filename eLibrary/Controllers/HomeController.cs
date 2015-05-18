@@ -138,13 +138,19 @@ namespace eLibrary.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Перенаправление с поиска на главной странице
         /// </summary>
-        /// <param name="searchText"></param>
-        /// <returns></returns>
+        /// <param name="searchText">Тект для поска</param>
+        /// <returns>Перенаправление на поиск</returns>
         public RedirectToRouteResult RedirectToFind(string searchText)
         {
             return RedirectToAction("FindBook", "Home", new { general = searchText });
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

@@ -4,20 +4,9 @@
     ViewBag.Title = "Добавление автора";
 }
 
-@*@using (Html.BeginForm("Create", "Author", FormMethod.Post, new { enctype = "multipart/form-data" }))
-
-    <form class="">
-        @Html.ValidationSummary(true)
-
-
-        <div class="col-sm-6 col-sm-offset-1">*@
 <div class="col-sm-offset-1 col-sm-6">
     <form method="post" action="Create" class="form-horizontal" role="form" id="addAuthorForm" enctype="multipart/form-data">
         <legend>Добавление автора</legend>
-        @*<div class="form-group">
-                <label>Изображение</label>
-                <input type="file" name="uploadImage" class="form-control"/>
-            </div>*@
 
         <div class="form-group">
             <label for="image" class="col-sm-3 control-label">Изображение</label>

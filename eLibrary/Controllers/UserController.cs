@@ -14,6 +14,12 @@ namespace HelpDeskTrain.Controllers
     {
         private eLibraryContext db = new eLibraryContext();
 
+
+        /// <summary>
+        /// Отображает список всех пользователей
+        /// </summary>
+        /// <returns>Страница пользователей</returns>
+        [Authorize(Roles = "Администратор")]
         [HttpGet]
         public ActionResult Index()
         {
@@ -21,6 +27,10 @@ namespace HelpDeskTrain.Controllers
             return View(users);
         }
 
+        /// <summary>
+        /// Создание нового пользователя
+        /// </summary>
+        /// <returns>Страница добавления пользователя</returns>
         [HttpGet]
         [Authorize(Roles = "Администратор")]
         public ActionResult Create()
@@ -30,6 +40,11 @@ namespace HelpDeskTrain.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Создание нового пользователя
+        /// </summary>
+        /// <param name="user">Данные пользователя</param>
+        /// <returns>Страница пользователей</returns>
         [HttpPost]
         [Authorize(Roles = "Администратор")]
         public ActionResult Create(User user)
@@ -47,6 +62,11 @@ namespace HelpDeskTrain.Controllers
             return View(user);
         }
 
+        /// <summary>
+        /// Редактирование пользователя
+        /// </summary>
+        /// <param name="id">Id пользователя в бд</param>
+        /// <returns>Страница редактирования пользователя</returns>
         [HttpGet]
         [Authorize(Roles = "Администратор")]
         public ActionResult Edit(int id)
@@ -58,6 +78,11 @@ namespace HelpDeskTrain.Controllers
             return View(user);
         }
 
+        /// <summary>
+        /// Редактирование пользователя
+        /// </summary>
+        /// <param name="user">Отредактированные данные о пользователе</param>
+        /// <returns>Страница пользователей</returns>
         [HttpPost]
         [Authorize(Roles = "Администратор")]
         public ActionResult Edit(User user)
@@ -75,7 +100,11 @@ namespace HelpDeskTrain.Controllers
             return View(user);
         }
 
-
+        /// <summary>
+        /// Удаление пользователя
+        /// </summary>
+        /// <param name="id">Id пользователя в бд</param>
+        /// <returns>Частичное представления для подтверждения удаления</returns>
         [HttpGet]
         [Authorize(Roles = "Администратор")]
         public ActionResult Delete(int? id)
@@ -92,6 +121,11 @@ namespace HelpDeskTrain.Controllers
             return PartialView(b);
         }
 
+        /// <summary>
+        /// Удаление пользователя
+        /// </summary>
+        /// <param name="id">Id пользователя в бд</param>
+        /// <returns>Страница пользователей</returns>
         [HttpPost, ActionName("Delete")]
         [Authorize(Roles = "Администратор")]
         public ActionResult DeleteConfirmed(int? id)
@@ -110,7 +144,10 @@ namespace HelpDeskTrain.Controllers
             return RedirectToAction("Index");
         }
 
-
+        /// <summary>
+        /// Регистрация (только с ролью пользователь)
+        /// </summary>
+        /// <returns>Страница регистрации</returns>
         [HttpGet]
         [AllowAnonymous]
         public ActionResult CreateUser()
@@ -120,6 +157,11 @@ namespace HelpDeskTrain.Controllers
             return View("CreateUser");
         } 
 
+        /// <summary>
+        /// Регистрация пользователя
+        /// </summary>
+        /// <param name="user">Данные о пользователе</param>
+        /// <returns>Главная страница в случае успешной регистрации, страница регистрации в случе ошибки</returns>
         [HttpPost]
         [AllowAnonymous]
         public ActionResult CreateUser(User user)
@@ -142,6 +184,12 @@ namespace HelpDeskTrain.Controllers
             }   
             else ModelState.AddModelError("Login", "Пользователь с таким логином уже существует");
             return View("CreateUser");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

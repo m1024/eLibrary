@@ -8,34 +8,50 @@ namespace eLibrary.Models
 {
     public class User
     {
-        // ID 
+        /// <summary>
+        /// Id пользователя
+        /// </summary>
         public int Id { get; set; }
 
-        // Логин
+        /// <summary>
+        /// Логин
+        /// </summary>
         [Required]
         [Display(Name = "Логин")]
         [MaxLength(50, ErrorMessage = "Превышена максимальная длина записи")]
         public string Login { get; set; }
 
-        // Пароль
+        /// <summary>
+        /// Пароль
+        /// </summary>
         [Required]
         [Display(Name = "Пароль")]
         [MaxLength(50, ErrorMessage = "Превышена максимальная длина записи")]
         public string Password { get; set; }
 
-        // Фамилия Имя Отчество
+        /// <summary>
+        /// Фамилия Имя Отчество
+        /// </summary>
         [Display(Name = "Фамилия Имя Отчество")]
         [MaxLength(50, ErrorMessage = "Превышена максимальная длина записи")]
         public string Name { get; set; }
 
-        // Информация
+        /// <summary>
+        /// Информация
+        /// </summary>
         [Display(Name = "Информация")]
         public string Information { get; set; }
 
-        // Роль
+        /// <summary>
+        /// Роль
+        /// </summary>
         [Required]
         [Display(Name = "Статус")]
         public int RoleId { get; set; }
+
+        /// <summary>
+        /// Роль
+        /// </summary>
         public Role Role { get; set; }
 
     }

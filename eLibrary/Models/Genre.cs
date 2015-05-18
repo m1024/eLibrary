@@ -8,10 +8,14 @@ namespace eLibrary.Models
 {
     public class Genre
     {
-        // ID 
+        /// <summary>
+        /// Id жанр
+        /// </summary>
         public int Id { get; set; }
 
-
+        /// <summary>
+        /// Жанр
+        /// </summary>
         [Required]
         [Display(Name = "Жанр")]
         [MaxLength(50, ErrorMessage = "Превышена максимальная длина записи")]

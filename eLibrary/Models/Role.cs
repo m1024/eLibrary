@@ -8,9 +8,14 @@ namespace eLibrary.Models
 {
     public class Role
     {
-        // ID 
+        /// <summary>
+        /// Id роли
+        /// </summary>
         public int Id { get; set; }
 
+        /// <summary>
+        /// Статус
+        /// </summary>
         [Required]
         [Display(Name = "Статус")]
         [MaxLength(50, ErrorMessage = "Превышена максимальная длина записи")]

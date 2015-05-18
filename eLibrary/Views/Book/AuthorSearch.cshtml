@@ -9,7 +9,7 @@
                 <div>
                     <input type="checkbox" name="selectAuthor" value="@item.Id" form="addBookForm"/>
                     <a href="@Url.Action("ShowAuthor", "Author", new {id = item.Id})">
-                        @item.Name @item.Family @item.Patronymic
+                         @item.Family @item.Name @item.Patronymic
                     </a>
                 </div>
             }

@@ -163,6 +163,7 @@
     <Content Include="Content\images\cover %2813%29.jpg" />
     <Content Include="Content\images\cover %282%29.jpg" />
     <Content Include="Content\images\cover %289%29.jpg" />
+    <Content Include="Content\images\coverHem.jpg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\images\1.png" />
     <Content Include="Content\images\2.png" />

@@ -7,9 +7,9 @@
     foreach (var item in Model)
     {
         <div class="comment" style="">
-            @if (item.User.Name != null)
+            @if (item.User.Login != null)
             {
-                <label class="bold">@item.User.Name</label>
+                <label class="bold">@item.User.Login</label>
             }
             <label class="bold">@item.Time</label>
 

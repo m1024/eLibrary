@@ -54,7 +54,7 @@ namespace eLibrary.Controllers
             {
                 foreach (var c in db.user)
                 {
-                    if (HttpContext.User.Identity.Name == c.Name)
+                    if (HttpContext.User.Identity.Name == c.Login)
                         comment.UserId = c.Id;
                 }
                 comment.Time = System.DateTime.Now;

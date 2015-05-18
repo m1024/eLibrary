@@ -13,14 +13,6 @@
             @{ Html.RenderAction("Genres"); }
         </div>
 
-        @*<div class="wrapper col-md-offset-1">
-                    <h4 class="bold">Жанры</h4>
-                    <div id="genres" class="col-md-3">
-                        @Ajax.ActionLink("Жанры", "Genres", null, null,
-                            new AjaxOptions {UpdateTargetId = "genres"}, new {@class = "", id = "genresButton"})
-                    </div>
-                </div>*@
-
         <div class="col-md-7 col-md-offset-0" style="padding-bottom: 30px;">
             <div class="col-md-12" style="">
                 @using (Html.BeginForm("RedirectToFind", "Home"))
@@ -52,20 +44,9 @@
             </div>
         </div>
 
-        @*<div class="col-md-2">@{ Html.RenderAction("MostDownloaded"); }</div>*@
-
         <div class="col-md-2" style="margin: 0px; margin-top: -40px; margin-right: 20px;">
             <h4>Скачиваемые:</h4>
             <div id="myCarousel" class="carousel slide" data-ride="carousel" style="position: relative;">
-                <!-- Indicators -->
-                @*<ol class=" carousel-indicators">
-                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#myCarousel" data-slide-to="1"></li>
-                        <li data-target="#myCarousel" data-slide-to="2"></li>
-                        <li data-target="#myCarousel" data-slide-to="3"></li>
-                        </ol>*@
-
-                <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox" style="text-align: center;">
 
                     @{ Html.RenderAction("MostDownloaded"); }
@@ -88,26 +69,24 @@
         <div class="col-md-2" style="margin: 0px; margin-bottom: 30px;">
             <h4>Рекомендации:</h4>
             <div id="myCarousel2" class="carousel slide" data-ride="carousel" style="position: relative;">
-                <!-- Indicators -->
-                @*<ol class="carousel-indicators">
-                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                            <li data-target="#myCarousel" data-slide-to="1"></li>
-                            <li data-target="#myCarousel" data-slide-to="2"></li>
-                            <li data-target="#myCarousel" data-slide-to="3"></li>
-                        </ol>*@
 
-                <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox" style="text-align: center;">
                     <div class="item active">
-                        <img style="height: 250px; display: inline-block; opacity: 0.9;" src="~/content/images/cover (2).jpg">
+                        <a href="@Url.Action("ShowBook", "Book", new {id = 56})" style="display: inline-block;">
+                            <img style="height: 250px; display: inline-block; opacity: 0.9;" src="~/content/images/coverHem.jpg">
+                        </a>
                     </div>
 
                     <div class="item">
-                        <img style="height: 250px; display: inline-block; opacity: 0.9;" src="~/content/images/cover (13).jpg">
+                        <a href="@Url.Action("ShowBook", "Book", new {id = 64})" style="display: inline-block;">
+                            <img style="height: 250px; display: inline-block; opacity: 0.9;" src="~/content/images/cover (13).jpg">
+                        </a>
                     </div>
 
                     <div class="item">
-                        <img style="height: 250px; display: inline-block; opacity: 0.9;" src="~/content/images/cover (9).jpg">
+                        <a href="@Url.Action("ShowBook", "Book", new {id = 6})" style="display: inline-block;">
+                            <img style="height: 250px; display: inline-block; opacity: 0.9;" src="~/content/images/cover (9).jpg">
+                        </a>
                     </div>
                 </div>
 
@@ -125,8 +104,6 @@
             </div>
         </div>
 
-        @*<script>
-                    $('#genresButton').click();
-                </script>*@
+
     </div>
 </div>
